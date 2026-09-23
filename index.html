@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Voice Studio – Free Text to Speech</title>
-  <meta name="description" content="100% Free AI Text to Speech. Urdu, Hindi, English voices. No signup required." />
+  <meta name="description" content="100% Free AI Text to Speech. Urdu, Hindi, English voices." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -33,29 +33,29 @@
           rows="7"
         ></textarea>
         <div class="char-count">
-          <span id="charCount">0</span> characters
+          <span id="charCount">0</span> / 5000 characters
         </div>
       </div>
 
       <!-- Controls -->
       <div class="controls">
         <div class="control-group">
-          <label for="voiceSelect">Voice</label>
+          <label for="voiceSelect">🎤 Voice</label>
           <select id="voiceSelect"></select>
         </div>
 
         <div class="control-group">
-          <label for="rateRange">Speed <span id="rateValue">1.0x</span></label>
+          <label for="rateRange">⚡ Speed: <span id="rateValue">1.0x</span></label>
           <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" />
         </div>
 
         <div class="control-group">
-          <label for="pitchRange">Pitch <span id="pitchValue">1.0</span></label>
+          <label for="pitchRange">🎵 Pitch: <span id="pitchValue">1.0</span></label>
           <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1" />
         </div>
 
         <div class="control-group">
-          <label for="volumeRange">Volume <span id="volumeValue">100%</span></label>
+          <label for="volumeRange">🔊 Volume: <span id="volumeValue">100%</span></label>
           <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1" />
         </div>
       </div>
@@ -81,17 +81,16 @@
 
       <!-- Note -->
       <div class="note">
-        <strong>Note:</strong> Browser ke Text-to-Speech se direct MP3 download possible nahi hota (security limit). 
-        Aap text sun sakte ho. High quality download ke liye Edge / Chrome recommended.
+        <strong>💡 Tip:</strong> Aapka browser text ko audio mein convert kar raha hai. Internet nahi chahiye ek baar load hone ke baad!
       </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Made with ❤️ • 100% Free • Works offline after first load</p>
+      <p>Made with ❤️ • 100% Free • Open Source</p>
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
