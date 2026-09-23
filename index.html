@@ -1,93 +1,219 @@
 <!DOCTYPE html>
 <html lang="ur">
 <head>
+  <!-- SEO Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Voice Studio – Free Text to Speech</title>
-  <meta name="description" content="100% Free AI Text to Speech. Urdu, Hindi, English voices." />
+  <meta name="theme-color" content="#667eea" />
+  
+  <!-- Primary Meta Tags -->
+  <title>AI Voice Studio - Free Text to Speech | Urdu Hindi English</title>
+  <meta name="title" content="AI Voice Studio - Free Text to Speech Converter" />
+  <meta name="description" content="100% Free AI Text-to-Speech converter. Support Urdu, Hindi, English voices. No signup needed. Browser-based. Works offline. High-quality audio." />
+  <meta name="keywords" content="text to speech, urdu text to speech, hindi tts, free tts, voice converter, AI voice, browser based tts" />
+  <meta name="author" content="Nauman AI" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="Urdu" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nauman-ai-786.github.io/text-to-speech/" />
+  <meta property="og:title" content="AI Voice Studio - Free Text to Speech" />
+  <meta property="og:description" content="100% Free AI Text-to-Speech converter with Urdu, Hindi, English voices" />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect fill='%23667eea' width='1200' height='630'/%3E%3Ctext x='50%' y='50%' font-size='60' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold'%3EAI Voice Studio%3C/text%3E%3C/svg%3E" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://nauman-ai-786.github.io/text-to-speech/" />
+  <meta property="twitter:title" content="AI Voice Studio - Free Text to Speech" />
+  <meta property="twitter:description" content="100% Free AI Text-to-Speech converter" />
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://nauman-ai-786.github.io/text-to-speech/" />
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='60' font-size='70' text-anchor='middle'%3E🎙️%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
   <div class="app">
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="bg-blur"></div>
+
     <!-- Header -->
     <header class="header">
-      <div class="logo">
-        <span class="logo-icon">🎙️</span>
-        <div>
-          <h1>AI Voice Studio</h1>
-          <p class="tagline">Free • Browser-based • No signup</p>
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">🎙️</div>
+          <div class="logo-text">
+            <h1>AI Voice Studio</h1>
+            <p class="tagline">Free • Browser-based • No signup</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggle" class="btn-icon theme-btn" title="Toggle dark/light mode">🌙</button>
+          <button id="infoBtn" class="btn-icon info-btn" title="How to use">ℹ️</button>
         </div>
       </div>
-      <button id="themeToggle" class="theme-btn" title="Toggle theme">🌙</button>
     </header>
 
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>📖 How to Use?</h2>
+        <div class="modal-body">
+          <div class="info-step">
+            <h3>✍️ Step 1: Write Text</h3>
+            <p>Type or paste any text in Urdu, Hindi, or English</p>
+          </div>
+          <div class="info-step">
+            <h3>🎤 Step 2: Choose Voice</h3>
+            <p>Select your preferred voice from the dropdown</p>
+          </div>
+          <div class="info-step">
+            <h3>⚙️ Step 3: Adjust Settings</h3>
+            <p>Change speed, pitch, and volume as needed</p>
+          </div>
+          <div class="info-step">
+            <h3>🔊 Step 4: Listen</h3>
+            <p>Click Speak and enjoy! Use Pause/Resume/Stop as needed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Main Card -->
-    <main class="card">
-      <div class="textarea-wrap">
+    <main class="card fade-in">
+      <!-- Textarea Section -->
+      <div class="textarea-section">
+        <div class="section-header">
+          <h2>📝 Your Text</h2>
+          <span class="char-limit-badge"><span id="charCount">0</span>/5000</span>
+        </div>
         <textarea 
           id="textInput" 
-          placeholder="Yahan text likhein... (Urdu, Hindi ya English)"
+          placeholder="Yahan text likhein... ✨ (Urdu, Hindi ya English)"
           rows="7"
+          maxlength="5000"
         ></textarea>
-        <div class="char-count">
-          <span id="charCount">0</span> / 5000 characters
+        <div class="textarea-hints">
+          <span id="charCount2">0</span> characters • <span id="wordCount">0</span> words
         </div>
       </div>
 
-      <!-- Controls -->
-      <div class="controls">
-        <div class="control-group">
-          <label for="voiceSelect">🎤 Voice</label>
-          <select id="voiceSelect"></select>
-        </div>
+      <!-- Controls Section -->
+      <div class="controls-section">
+        <h2>🎛️ Controls</h2>
+        <div class="controls">
+          <div class="control-group">
+            <label for="voiceSelect">🎤 Voice</label>
+            <select id="voiceSelect">
+              <option>Loading voices...</option>
+            </select>
+          </div>
 
-        <div class="control-group">
-          <label for="rateRange">⚡ Speed: <span id="rateValue">1.0x</span></label>
-          <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" />
-        </div>
+          <div class="control-group">
+            <label for="rateRange">⚡ Speed</label>
+            <div class="range-container">
+              <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" />
+              <span class="range-value" id="rateValue">1.0x</span>
+            </div>
+          </div>
 
-        <div class="control-group">
-          <label for="pitchRange">🎵 Pitch: <span id="pitchValue">1.0</span></label>
-          <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1" />
-        </div>
+          <div class="control-group">
+            <label for="pitchRange">🎵 Pitch</label>
+            <div class="range-container">
+              <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1" />
+              <span class="range-value" id="pitchValue">1.0</span>
+            </div>
+          </div>
 
-        <div class="control-group">
-          <label for="volumeRange">🔊 Volume: <span id="volumeValue">100%</span></label>
-          <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1" />
+          <div class="control-group">
+            <label for="volumeRange">🔊 Volume</label>
+            <div class="range-container">
+              <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1" />
+              <span class="range-value" id="volumeValue">100%</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Buttons -->
-      <div class="buttons">
-        <button id="speakBtn" class="btn btn-primary">
-          <span>🔊</span> Speak
-        </button>
-        <button id="pauseBtn" class="btn btn-secondary" disabled>
-          <span>⏸️</span> Pause
-        </button>
-        <button id="resumeBtn" class="btn btn-secondary" disabled>
-          <span>▶️</span> Resume
-        </button>
-        <button id="stopBtn" class="btn btn-danger" disabled>
-          <span>⏹️</span> Stop
-        </button>
+      <!-- Buttons Section -->
+      <div class="buttons-section">
+        <div class="buttons-main">
+          <button id="speakBtn" class="btn btn-primary btn-large">
+            <span class="btn-icon-inner">🔊</span>
+            <span class="btn-text">Speak Now</span>
+          </button>
+        </div>
+        <div class="buttons-secondary">
+          <button id="pauseBtn" class="btn btn-secondary" disabled>
+            <span>⏸️</span> Pause
+          </button>
+          <button id="resumeBtn" class="btn btn-secondary" disabled>
+            <span>▶️</span> Resume
+          </button>
+          <button id="stopBtn" class="btn btn-secondary btn-danger" disabled>
+            <span>⏹️</span> Stop
+          </button>
+        </div>
       </div>
 
-      <!-- Status -->
-      <div id="status" class="status"></div>
+      <!-- Status Bar -->
+      <div id="status" class="status-bar">
+        <span class="status-icon">✨</span>
+        <span class="status-text">Ready to speak!</span>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Multi-Language</h3>
+          <p>Urdu, Hindi, English & more</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Real-time processing</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>100% Private</h3>
+          <p>No data stored or sent</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Mobile Ready</h3>
+          <p>Works on all devices</p>
+        </div>
+      </div>
 
       <!-- Note -->
-      <div class="note">
-        <strong>💡 Tip:</strong> Aapka browser text ko audio mein convert kar raha hai. Internet nahi chahiye ek baar load hone ke baad!
+      <div class="info-box">
+        <strong>💡 Pro Tip:</strong> Browser native speech synthesis. Supports multiple languages. Works offline after first load!
       </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Made with ❤️ • 100% Free • Open Source</p>
+      <div class="footer-content">
+        <p>Made with ❤️ by Nauman AI • 100% Free • Open Source</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">GitHub</a>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Privacy</a>
+        </div>
+      </div>
     </footer>
   </div>
 
