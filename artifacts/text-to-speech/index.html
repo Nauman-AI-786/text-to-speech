@@ -1,83 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G9LGFHNGBF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-G9LGFHNGBF');
-</script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Text to Speech</title>
-    <meta name="description" content="Text to Speech — built on Replit. Update this description to reflect the app." />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Text to Speech" />
-    <meta property="og:description" content="Text to Speech — built on Replit. Update this description to reflect the app." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Text to Speech" />
-    <meta name="twitter:description" content="Text to Speech — built on Replit. Update this description to reflect the app." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <!-- Fixed Mobile Friendly AI Voice Downloader -->
-<div style="max-width: 500px; margin: 30px auto; padding: 25px; background: #0f172a; border-radius: 12px; font-family: system-ui, sans-serif; color: #fff; text-align: center; border: 1px solid #1e293b; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-  <h3 style="margin-top:0; color:#38bdf8; font-size: 22px;">🎙️ AI Voice Downloader</h3>
-  <p style="font-size: 13px; color: #94a3b8; margin-bottom: 20px;">Text likhein aur bina page reset hue direct audio download karein!</p>
-  
-  <textarea id="myCustomText" placeholder="Yahan apna Urdu ya English text likhein..." style="width: 100%; height: 110px; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; resize: none; font-size: 15px; box-sizing: border-box;"></textarea>
-  
-  <div style="text-align: left; margin: 15px 0;">
-    <label style="font-size: 13px; color: #cbd5e1; font-weight: 500;">Zabaan (Language) Chunein:</label>
-    <select id="myCustomLang" style="width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 15px;">
-      <option value="ur-PK" selected>🇵🇰 Urdu (Pakistan)</option>
-      <option value="hi-IN">🇮🇳 Hindi (India)</option>
-      <option value="en-US">🇺🇸 English (US)</option>
-      <option value="en-GB">🇬🇧 English (UK)</option>
-    </select>
-  </div>
-
-  <button id="myDownloadBtn" style="width: 100%; background: #0284c7; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.2s;">
-    ⬇️ MP3 Audio Download Karein
-  </button>
-</div>
-
-<script>
-  document.getElementById('myDownloadBtn').addEventListener('click', (e) => {
-    e.preventDefault(); 
-
-    const textInput = document.getElementById('myCustomText');
-    const langSelect = document.getElementById('myCustomLang');
-    
-    const text = textInput.value.trim();
-    const lang = langSelect.value; 
-    
-    if (!text) {
-      alert("Pehle box me kuch text likhein!");
-      return;
-    }
-
-    const encodedText = encodeURIComponent(text);
-    const audioUrl = `https://google.com{lang}&client=tw-ob&q=${encodedText}`;
-
-    alert("Converting... Aap ki select ki hui language me audio ready ho rahi hai!");
-
-    const link = document.createElement('a');
-    link.href = audioUrl;
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-</script>
-
-  </body>
-</html>
+<!-- index.html --><!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8" />  <meta name="viewport" content="width=device-width, initial-scale=1" />  <title>Text to Speech</title>  <link rel="stylesheet" href="style.css" /></head><body>  <div class="app">    <header class="header">      <div class="logo">        <div class="logo-icon">🔊</div>        <h1>Text to Speech</h1>      </div>      <button class="theme-btn" id="toggle-theme">🌙</button>    </header>
+    <div class="textarea-wrap">      <textarea id="text-input" placeholder="Type your text here..."></textarea>      <div class="char-count" id="char-count">0 characters</div>    </div>
+    <div class="controls">      <div class="control-group">        <label for="voice-select">Select Voice</label>        <select id="voice-select"></select>      </div>      <div class="control-group">        <label for="rate">Rate: <span id="rate-value">1</span></label>        <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1" />      </div>      <div class="control-group">        <label for="pitch">Pitch: <span id="pitch-value">1</span></label>        <input type="range" id="pitch" min="0" max="2" step="0.1" value="1" />      </div>    </div>
+    <div class="buttons">      <button class="btn btn-primary" id="speak-btn">Speak</button>      <button class="btn btn-secondary" id="stop-btn">Stop</button>    </div>
+    <div class="status" id="status"></div>
+    <footer class="footer">      &copy; 2024 Your Name    </footer>  </div>
+  <script src="script.js"></script></body></html>// script.jsconst synth = window.speechSynthesis;
+const textInput = document.getElementById('text-input');const voiceSelect = document.getElementById('voice-select');const rate = document.getElementById('rate');const pitch = document.getElementById('pitch');const speakBtn = document.getElementById('speak-btn');const stopBtn = document.getElementById('stop-btn');const status = document.getElementById('status');const charCount = document.getElementById('char-count');const rateValue = document.getElementById('rate-value');const pitchValue = document.getElementById('pitch-value');
+let voices = [];
+function populateVoiceList() {  voices = synth.getVoices();  voiceSelect.innerHTML = '';  voices.forEach((voice, i) => {    const option = document.createElement('option');    option.textContent = `${voice.name} (${voice.lang})`;    option.value = i;    voiceSelect.appendChild(option);  });}
+populateVoiceList();if (speechSynthesis.onvoiceschanged !== undefined) {  speechSynthesis.onvoiceschanged = populateVoiceList;}
+textInput.addEventListener('input', () => {  charCount.textContent = `${textInput.value.length} characters`;});
+rate.addEventListener('input', () => {  rateValue.textContent = rate.value;});
+pitch.addEventListener('input', () => {  pitchValue.textContent = pitch.value;});
+speakBtn.addEventListener('click', () => {  if (synth.speaking) {    status.textContent = 'Already speaking...';    return;  }  if (textInput.value.trim() === '') {    alert('Please enter text to speak.');    return;  }
+  const utterThis = new SpeechSynthesisUtterance(textInput.value);  utterThis.voice = voices[voiceSelect.value];  utterThis.rate = rate.value;  utterThis.pitch = pitch.value;
+  utterThis.onstart = () => {    status.textContent = 'Speaking...';  };  utterThis.onend = () => {    status.textContent = 'Done speaking.';  };  utterThis.onerror = (e) => {    status.textContent = 'Error occurred: ' + e.error;  };
+  synth.speak(utterThis);});
+stopBtn.addEventListener('click', () => {  if (synth.speaking) {    synth.cancel();    status.textContent = 'Speech stopped.';  }});
