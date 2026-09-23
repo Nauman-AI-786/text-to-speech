@@ -49,92 +49,90 @@
     ⬇️ MP3 Audio Download Karein
   </button>
 </div>
-    <!-- Advanced Text to Speech Controller Script -->
+    <!-- Final Synchronized TTS Controller Script -->
 <script>
-  // Browser ke Speech API aur UI elements ko jorna
-  const synth = window.speechSynthesis;
-  const voiceSelect = document.getElementById('voiceSelect');
-  const rateRange = document.getElementById('rateRange');
-  const pitchRange = document.getElementById('pitchRange');
-  const downloadBtn = document.getElementById('downloadAudioBtn');
-  let voices = [];
+  window.addEventListener('DOMContentLoaded', () => {
+    // 2 second ka delay taake Replit ka main UI sahi tarah load ho jaye
+    setTimeout(() => {
+      const synth = window.speechSynthesis;
+      const voiceSelect = document.getElementById('voiceSelect');
+      const rateRange = document.getElementById('rateRange');
+      const pitchRange = document.getElementById('pitchRange');
+      const downloadBtn = document.getElementById('downloadAudioBtn');
+      let voices = [];
 
-  // 1. Browser se Urdu, Hindi aur saari international aawazein nikalna
-  function populateVoiceList() {
-    voices = synth.getVoices();
-    if (voices.length === 0) return; // Agar abhi tak load nahi hueen to rukh jayein
-
-    voiceSelect.innerHTML = ''; // Purani list saaf karein
-    
-    voices.forEach((voice) => {
-      const option = document.createElement('option');
-      option.textContent = `${voice.name} (${voice.lang})`;
-      option.setAttribute('data-lang', voice.lang);
-      option.setAttribute('data-name', voice.name);
-      
-      // Urdu (ur) ya Hindi (hi) ko automatic pehle se select rakhna
-      if (voice.lang.includes('ur') || voice.lang.includes('hi')) {
-        option.selected = true;
+      if (!voiceSelect || !downloadBtn) {
+        console.log("UI Elements load nahi huay, reload karein.");
+        return;
       }
-      voiceSelect.appendChild(option);
-    });
-  }
 
-  // Google Chrome aur mobile browsers me voices late load hoti hain, is liye ye checks zaroori hain
-  populateVoiceList();
-  if (synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = populateVoiceList;
-  }
-  // Safe side ke liye 1 second baad dobara check karein agar load na hui hon
-  setTimeout(populateVoiceList, 1000);
+      function populateVoiceList() {
+        voices = synth.getVoices();
+        if (voices.length === 0) return;
 
-  // 2. Real MP3/Audio Download Karne Ka Advance Logic
-  downloadBtn.addEventListener('click', () => {
-    // Replit ki main website ka original textarea dhoondna jahan user text likhta hai
-    const textInput = document.querySelector('textarea') || document.querySelector('input[type="text"]');
-    
-    if (!textInput || !textInput.value.trim()) {
-      alert("Pehle upar diye gaye main box me kuch Urdu ya English text likhein!");
-      return;
-    }
+        voiceSelect.innerHTML = '';
+        voices.forEach((voice) => {
+          const option = document.createElement('option');
+          option.textContent = `${voice.name} (${voice.lang})`;
+          option.setAttribute('data-lang', voice.lang);
+          option.setAttribute('data-name', voice.name);
+          
+          if (voice.lang.includes('ur') || voice.lang.includes('hi')) {
+            option.selected = true;
+          }
+          voiceSelect.appendChild(option);
+        });
+      }
 
-    const text = textInput.value;
-    const selectedOption = voiceSelect.selectedOptions[0];
-    if (!selectedOption) {
-      alert("Abhi aawazein load ho rahi hain, please 2 second ruk kar dobara click karein.");
-      return;
-    }
-    
-    const selectedVoiceName = selectedOption.getAttribute('data-name');
-    const speed = parseFloat(rateRange.value);
-    const pitch = parseFloat(pitchRange.value);
+      populateVoiceList();
+      if (synth.onvoiceschanged !== undefined) {
+        synth.onvoiceschanged = populateVoiceList;
+      }
+      setInterval(populateVoiceList, 1000); // Har second check karega jab tak load na hon
 
-    // Audio tayar karna sun'nay ke liye
-    const utterance = new SpeechSynthesisUtterance(text);
-    const targetVoice = voices.find(v => v.name === selectedVoiceName);
-    if (targetVoice) utterance.voice = targetVoice;
-    utterance.rate = speed;
-    utterance.pitch = pitch;
+      downloadBtn.addEventListener('click', () => {
+        // Replit ka main textarea dhoondna
+        const textInput = document.querySelector('textarea') || document.querySelector('.w-full') || document.querySelector('input[type="text"]');
+        
+        if (!textInput || !textInput.value.trim()) {
+          alert("Pehle upar diye gaye main box me kuch text likhein!");
+          return;
+        }
 
-    alert("Converting... Aap ki chuninda aawaz me audio file download ho rahi hai!");
-    
-    // Pehle user ko sunaayein
-    synth.speak(utterance);
+        const text = textInput.value;
+        const selectedOption = voiceSelect.selectedOptions[0]; // Fixed here [0]
+        if (!selectedOption) {
+          alert("Aawazein load ho rahi hain, please thoda rukh kar click karein.");
+          return;
+        }
+        
+        const selectedVoiceName = selectedOption.getAttribute('data-name');
+        const speed = parseFloat(rateRange.value);
+        const pitch = parseFloat(pitchRange.value);
 
-    // Ab is text ko real audio format me convert kar ke download karwana
-    // Note: Google Text-to-Speech link API ka use kar ke real MP3 generate karna
-    const encodedText = encodeURIComponent(text);
-    const langCode = selectedOption.getAttribute('data-lang') || 'ur-PK';
-    const audioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
+        const utterance = new SpeechSynthesisUtterance(text);
+        const targetVoice = voices.find(v => v.name === selectedVoiceName);
+        if (targetVoice) utterance.voice = targetVoice;
+        utterance.rate = speed;
+        utterance.pitch = pitch;
 
-    // Browser me download trigger karna
-    const link = document.createElement('a');
-    link.href = audioUrl;
-    link.target = '_blank'; // Khule tab me audio save karne ke liye
-    link.download = "AI-Voice.mp3";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+        alert("Converting... Audio file download ho rahi hai!");
+        synth.speak(utterance);
+
+        // Google TTS integration download ke liye
+        const encodedText = encodeURIComponent(text);
+        const langCode = selectedOption.getAttribute('data-lang') || 'ur-PK';
+        const audioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
+
+        const link = document.createElement('a');
+        link.href = audioUrl;
+        link.target = '_blank';
+        link.download = "AI-Voice.mp3";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }, 2000); // 2 second ka wait
   });
 </script>
 
