@@ -1,3 +1,9 @@
+html { scroll-behavior: smooth; }
+
+section[id], .steps-section[id], .usecases-section[id],
+.faq-section[id], .header-section[id] {
+  scroll-margin-top: 90px;
+}
 /* ===== GLOBAL STYLES ===== */
 * {
   margin: 0;
