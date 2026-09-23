@@ -28,111 +28,54 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Custom Text to Speech Controls -->
-<div style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif;">
-  <h3>AI Custom Controls</h3>
+    <!-- Fixed Mobile Friendly AI Voice Downloader -->
+<div style="max-width: 500px; margin: 30px auto; padding: 25px; background: #0f172a; border-radius: 12px; font-family: system-ui, sans-serif; color: #fff; text-align: center; border: 1px solid #1e293b; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+  <h3 style="margin-top:0; color:#38bdf8; font-size: 22px;">🎙️ AI Voice Downloader</h3>
+  <p style="font-size: 13px; color: #94a3b8; margin-bottom: 20px;">Text likhein aur bina page reset hue direct audio download karein!</p>
   
-  <!-- Language and Voice Selection -->
-  <label>Aawaz aur Zabaan Chunein:</label>
-  <select id="voiceSelect" style="width: 100%; padding: 8px; margin: 10px 0; border-radius: 4px;"></select>
+  <textarea id="myCustomText" placeholder="Yahan apna Urdu ya English text likhein..." style="width: 100%; height: 110px; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; resize: none; font-size: 15px; box-sizing: border-box;"></textarea>
   
-  <!-- Speed Control -->
-  <label>Speed (Raftaar):</label>
-  <input type="range" id="rateRange" min="0.5" max="2" value="1" step="0.1" style="width: 100%; margin: 10px 0;">
-  
-  <!-- Pitch Control -->
-  <label>Pitch (Bhari ya Barik Aawaz):</label>
-  <input type="range" id="pitchRange" min="0.5" max="2" value="1" step="0.1" style="width: 100%; margin: 10px 0;">
-  
-  <!-- Download Button -->
-  <button id="downloadAudioBtn" style="width: 100%; background-color: #28a745; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px;">
+  <div style="text-align: left; margin: 15px 0;">
+    <label style="font-size: 13px; color: #cbd5e1; font-weight: 500;">Zabaan (Language) Chunein:</label>
+    <select id="myCustomLang" style="width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 15px;">
+      <option value="ur-PK" selected>🇵🇰 Urdu (Pakistan)</option>
+      <option value="hi-IN">🇮🇳 Hindi (India)</option>
+      <option value="en-US">🇺🇸 English (US)</option>
+      <option value="en-GB">🇬🇧 English (UK)</option>
+    </select>
+  </div>
+
+  <button id="myDownloadBtn" style="width: 100%; background: #0284c7; color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.2s;">
     ⬇️ MP3 Audio Download Karein
   </button>
 </div>
-    <!-- Final Synchronized TTS Controller Script -->
+
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    // 2 second ka delay taake Replit ka main UI sahi tarah load ho jaye
-    setTimeout(() => {
-      const synth = window.speechSynthesis;
-      const voiceSelect = document.getElementById('voiceSelect');
-      const rateRange = document.getElementById('rateRange');
-      const pitchRange = document.getElementById('pitchRange');
-      const downloadBtn = document.getElementById('downloadAudioBtn');
-      let voices = [];
+  document.getElementById('myDownloadBtn').addEventListener('click', (e) => {
+    e.preventDefault(); 
 
-      if (!voiceSelect || !downloadBtn) {
-        console.log("UI Elements load nahi huay, reload karein.");
-        return;
-      }
+    const textInput = document.getElementById('myCustomText');
+    const langSelect = document.getElementById('myCustomLang');
+    
+    const text = textInput.value.trim();
+    const lang = langSelect.value; 
+    
+    if (!text) {
+      alert("Pehle box me kuch text likhein!");
+      return;
+    }
 
-      function populateVoiceList() {
-        voices = synth.getVoices();
-        if (voices.length === 0) return;
+    const encodedText = encodeURIComponent(text);
+    const audioUrl = `https://google.com{lang}&client=tw-ob&q=${encodedText}`;
 
-        voiceSelect.innerHTML = '';
-        voices.forEach((voice) => {
-          const option = document.createElement('option');
-          option.textContent = `${voice.name} (${voice.lang})`;
-          option.setAttribute('data-lang', voice.lang);
-          option.setAttribute('data-name', voice.name);
-          
-          if (voice.lang.includes('ur') || voice.lang.includes('hi')) {
-            option.selected = true;
-          }
-          voiceSelect.appendChild(option);
-        });
-      }
+    alert("Converting... Aap ki select ki hui language me audio ready ho rahi hai!");
 
-      populateVoiceList();
-      if (synth.onvoiceschanged !== undefined) {
-        synth.onvoiceschanged = populateVoiceList;
-      }
-      setInterval(populateVoiceList, 1000); // Har second check karega jab tak load na hon
-
-      downloadBtn.addEventListener('click', () => {
-        // Replit ka main textarea dhoondna
-        const textInput = document.querySelector('textarea') || document.querySelector('.w-full') || document.querySelector('input[type="text"]');
-        
-        if (!textInput || !textInput.value.trim()) {
-          alert("Pehle upar diye gaye main box me kuch text likhein!");
-          return;
-        }
-
-        const text = textInput.value;
-        const selectedOption = voiceSelect.selectedOptions[0]; // Fixed here [0]
-        if (!selectedOption) {
-          alert("Aawazein load ho rahi hain, please thoda rukh kar click karein.");
-          return;
-        }
-        
-        const selectedVoiceName = selectedOption.getAttribute('data-name');
-        const speed = parseFloat(rateRange.value);
-        const pitch = parseFloat(pitchRange.value);
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        const targetVoice = voices.find(v => v.name === selectedVoiceName);
-        if (targetVoice) utterance.voice = targetVoice;
-        utterance.rate = speed;
-        utterance.pitch = pitch;
-
-        alert("Converting... Audio file download ho rahi hai!");
-        synth.speak(utterance);
-
-        // Google TTS integration download ke liye
-        const encodedText = encodeURIComponent(text);
-        const langCode = selectedOption.getAttribute('data-lang') || 'ur-PK';
-        const audioUrl = `https://google.com{langCode}&client=tw-ob&q=${encodedText}`;
-
-        const link = document.createElement('a');
-        link.href = audioUrl;
-        link.target = '_blank';
-        link.download = "AI-Voice.mp3";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }, 2000); // 2 second ka wait
+    const link = document.createElement('a');
+    link.href = audioUrl;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   });
 </script>
 
