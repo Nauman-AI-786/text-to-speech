@@ -273,35 +273,52 @@ function speakText(text, isPreview = false) {
 
   setTimeout(() => synth.speak(utter), 100); // delay zaroori hai
 }
-
-
-  async function downloadAudio(text) {
+// ===== DOWNLOAD AUDIO (with fallback) =====
+async function downloadAudio(text) {
   const voiceMap = {
-    'en-US': 'Joanna', 'en-GB': 'Amy',  'hi-IN': 'Aditi',
-    'ur-PK': 'Aditi',  'ar-SA': 'Zeina','fr-FR': 'Celine',
-    'de-DE': 'Marlene','es-ES': 'Conchita','it-IT': 'Carla',
-    'ja-JP': 'Mizuki','ko-KR': 'Seoyeon','ru-RU': 'Tatyana',
-    'pt-BR': 'Vitoria','zh-CN': 'Zhiyu'
+    'en-US':'Joanna','en-GB':'Amy','hi-IN':'Aditi','ur-PK':'Aditi',
+    'ar-SA':'Zeina','fr-FR':'Celine','de-DE':'Marlene','es-ES':'Conchita',
+    'it-IT':'Carla','ja-JP':'Mizuki','ko-KR':'Seoyeon','ru-RU':'Tatyana',
+    'pt-BR':'Vitoria','zh-CN':'Zhiyu'
   };
   const voice = voiceMap[languageSelect.value] || 'Joanna';
+  const clean = text.slice(0, 3000);
+
+  const api = `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encodeURIComponent(clean)}`;
+
+  // 3 raaste: seedha, phir 2 proxy
+  const sources = [
+    api,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(api)}`,
+    `https://corsproxy.io/?${encodeURIComponent(api)}`
+  ];
 
   setStatus('⏳', 'Download tayyar ho raha hai...');
-  try {
-    const url = `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encodeURIComponent(text.slice(0, 3000))}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('API failed');
-    const blob = await res.blob();
 
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `speech-${Date.now()}.mp3`;
-    a.click();
-    setStatus('✅', 'Download ho gaya!');
-  } catch (err) {
-    console.error(err);
-    setStatus('❌', 'Download fail — internet check karein');
+  for (const url of sources) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) { console.warn('Fail:', url, res.status); continue; }
+
+      const blob = await res.blob();
+      if (blob.size < 1000) { console.warn('Chhoti file:', url); continue; }
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `speech-${Date.now()}.mp3`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setStatus('✅', 'Download ho gaya!');
+      return;
+    } catch (err) {
+      console.warn('Error:', url, err.message);
+    }
   }
-  }
+
+  setStatus('❌', 'Download fail — Console (F12) dekhein');
+}
 function getSelectedVoice() {
   const name = voiceSelect.value;
   return voices.find(v => v.name === name) || voices[0];
