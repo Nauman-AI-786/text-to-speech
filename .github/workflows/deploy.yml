@@ -19,8 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PORT: 5173
-   
-
+      BASE_PATH: /text-to-speech/
+      
+ 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
