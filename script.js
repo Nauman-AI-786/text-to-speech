@@ -1,6 +1,6 @@
 const synth = window.speechSynthesis;
 
-// Element references
+// DOM Elements
 const textInput = document.getElementById('textInput');
 const voiceSelect = document.getElementById('voiceSelect');
 const rateRange = document.getElementById('rateRange');
@@ -10,12 +10,17 @@ const rateValue = document.getElementById('rateValue');
 const pitchValue = document.getElementById('pitchValue');
 const volumeValue = document.getElementById('volumeValue');
 const charCount = document.getElementById('charCount');
-const status = document.getElementById('status');
+const charCount2 = document.getElementById('charCount2');
+const wordCount = document.getElementById('wordCount');
+const statusBar = document.querySelector('.status-bar');
 const speakBtn = document.getElementById('speakBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resumeBtn = document.getElementById('resumeBtn');
 const stopBtn = document.getElementById('stopBtn');
 const themeToggle = document.getElementById('themeToggle');
+const infoBtn = document.getElementById('infoBtn');
+const infoModal = document.getElementById('infoModal');
+const modalClose = document.querySelector('.modal-close');
 
 let voices = [];
 let currentUtterance = null;
@@ -31,6 +36,10 @@ function populateVoiceList() {
     option.value = i;
     voiceSelect.appendChild(option);
   });
+
+  if (voices.length === 0) {
+    voiceSelect.innerHTML = '<option>No voices available</option>';
+  }
 }
 
 populateVoiceList();
@@ -38,45 +47,47 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
-// ===== CHARACTER COUNT =====
-textInput.addEventListener('input', () => {
-  const count = textInput.value.length;
-  charCount.textContent = count;
+// ===== CHARACTER & WORD COUNT =====
+function updateCounts() {
+  const text = textInput.value;
+  const chars = text.length;
+  const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
 
-  if (count === 0) {
-    speakBtn.disabled = false;
-    speakBtn.textContent = '🔊 Speak';
-  }
-});
+  charCount.textContent = chars;
+  charCount2.textContent = chars;
+  wordCount.textContent = words;
+}
+
+textInput.addEventListener('input', updateCounts);
 
 // ===== RANGE SLIDERS =====
 rateRange.addEventListener('input', () => {
-  rateValue.textContent = rateRange.value + 'x';
+  rateValue.textContent = (parseFloat(rateRange.value)).toFixed(1) + 'x';
 });
 
 pitchRange.addEventListener('input', () => {
-  pitchValue.textContent = pitchRange.value;
+  pitchValue.textContent = (parseFloat(pitchRange.value)).toFixed(1);
 });
 
 volumeRange.addEventListener('input', () => {
-  volumeValue.textContent = Math.round(volumeRange.value * 100) + '%';
+  volumeValue.textContent = Math.round(parseFloat(volumeRange.value) * 100) + '%';
 });
 
-// ===== STATUS MESSAGE =====
-function setStatus(message, type = 'info') {
-  status.textContent = message;
-  status.style.color = type === 'error' ? '#ff6b6b' : '#667eea';
+// ===== STATUS UPDATES =====
+function setStatus(icon, message) {
+  statusBar.querySelector('.status-icon').textContent = icon;
+  statusBar.querySelector('.status-text').textContent = message;
 }
 
-// ===== SPEAK FUNCTION =====
+// ===== MAIN SPEAK FUNCTION =====
 function speak() {
   if (synth.speaking) {
-    setStatus('❌ Speech already in progress!', 'error');
+    setStatus('❌', 'Speech already in progress!');
     return;
   }
 
   if (textInput.value.trim() === '') {
-    setStatus('❌ Please enter text first!', 'error');
+    setStatus('❌', 'Please enter text first!');
     return;
   }
 
@@ -88,21 +99,29 @@ function speak() {
   currentUtterance.pitch = parseFloat(pitchRange.value);
   currentUtterance.volume = parseFloat(volumeRange.value);
 
-  // Event listeners
+  // Event Listeners
   currentUtterance.onstart = () => {
-    setStatus('🎤 Speaking...');
+    setStatus('🎤', 'Speaking now...');
     speakBtn.disabled = true;
     pauseBtn.disabled = false;
     stopBtn.disabled = false;
   };
 
+  currentUtterance.onpause = () => {
+    setStatus('⏸️', 'Paused');
+  };
+
+  currentUtterance.onresume = () => {
+    setStatus('▶️', 'Resumed');
+  };
+
   currentUtterance.onend = () => {
-    setStatus('✅ Done!');
+    setStatus('✅', 'Done! Ready for more.');
     resetButtons();
   };
 
   currentUtterance.onerror = (event) => {
-    setStatus(`❌ Error: ${event.error}`, 'error');
+    setStatus('❌', `Error: ${event.error}`);
     resetButtons();
   };
 
@@ -113,7 +132,7 @@ function speak() {
 function pause() {
   if (synth.speaking && !synth.paused) {
     synth.pause();
-    setStatus('⏸️ Paused');
+    setStatus('⏸️', 'Paused');
     pauseBtn.disabled = true;
     resumeBtn.disabled = false;
   }
@@ -123,7 +142,7 @@ function pause() {
 function resume() {
   if (synth.paused) {
     synth.resume();
-    setStatus('🎤 Resumed...');
+    setStatus('▶️', 'Resumed');
     pauseBtn.disabled = false;
     resumeBtn.disabled = true;
   }
@@ -132,7 +151,7 @@ function resume() {
 // ===== STOP FUNCTION =====
 function stop() {
   synth.cancel();
-  setStatus('⏹️ Stopped');
+  setStatus('⏹️', 'Stopped');
   resetButtons();
 }
 
@@ -152,7 +171,7 @@ function toggleTheme() {
   themeToggle.textContent = isDark ? '☀️' : '🌙';
 }
 
-// Load saved theme
+// ===== LOAD SAVED THEME =====
 function loadTheme() {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
@@ -161,13 +180,46 @@ function loadTheme() {
   }
 }
 
+// ===== MODAL FUNCTIONS =====
+function openModal() {
+  infoModal.classList.add('active');
+}
+
+function closeModal() {
+  infoModal.classList.remove('active');
+}
+
 // ===== EVENT LISTENERS =====
 speakBtn.addEventListener('click', speak);
 pauseBtn.addEventListener('click', pause);
 resumeBtn.addEventListener('click', resume);
 stopBtn.addEventListener('click', stop);
 themeToggle.addEventListener('click', toggleTheme);
+infoBtn.addEventListener('click', openModal);
+modalClose.addEventListener('click', closeModal);
 
-// Initialize
+// Close modal when clicking outside
+infoModal.addEventListener('click', (e) => {
+  if (e.target === infoModal) {
+    closeModal();
+  }
+});
+
+// Keyboard Shortcuts
+document.addEventListener('keydown', (e) => {
+  // Spacebar to speak
+  if (e.code === 'Space' && e.target === document.body) {
+    e.preventDefault();
+    if (!synth.speaking) {
+      speak();
+    }
+  }
+  // Escape to stop
+  if (e.code === 'Escape' && synth.speaking) {
+    stop();
+  }
+});
+
+// ===== INITIALIZE =====
 loadTheme();
-setStatus('Ready!');
+setStatus('✨', 'Ready to speak!');
