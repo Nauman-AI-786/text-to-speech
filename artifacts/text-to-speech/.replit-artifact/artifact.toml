@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Text to Speech"
+description = "A lightweight browser-based text-to-speech tool with voice selection, playback controls, speed and volume adjustments, character counting, and light or dark mode."
+version = "1.0.0"
+id = "artifacts/text-to-speech"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18448
+
+[services.development]
+run = "pnpm --filter @workspace/text-to-speech run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/text-to-speech", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/text-to-speech/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18448"
+BASE_PATH = "/"
