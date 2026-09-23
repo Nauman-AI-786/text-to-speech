@@ -117,7 +117,7 @@ function updateVoiceList() {
   genderFilteredVoices.forEach((voice, index) => {
     const option = document.createElement('option');
     option.textContent = `${voice.name} (${voice.lang})`;
-    option.value = index;
+    option.value = voice.name;
     voiceSelect.appendChild(option);
   });
 }
@@ -140,17 +140,6 @@ function setupEventListeners() {
     });
   });
 
-  // Voice Search
-  voiceSearch.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    Array.from(voiceSelect.options).forEach(option => {
-      if (option.textContent.toLowerCase().includes(searchTerm)) {
-        option.style.display = 'block';
-      } else {
-        option.style.display = 'none';
-      }
-    });
-  });
 
   // Format Selection
   formatButtons.forEach(btn => {
@@ -251,77 +240,95 @@ function previewVoice() {
 
 // ===== GENERATE AUDIO =====
 function generateAudio() {
-  if (!textInput.value.trim()) {
-    setStatus('❌', 'Please enter some text!');
-    return;
-  }
-
-  if (isGenerating || synth.speaking) {
-    setStatus('❌', 'Generation in progress!');
-    return;
-  }
+  const text = textInput.value.trim();
+  if (!text) { setStatus('❌', 'Pehle text likhein!'); return; }
+  if (synth.speaking) { setStatus('❌', 'Pehle wali speech chal rahi hai!'); return; }
 
   isGenerating = true;
-  generateBtn.disabled = true;
   stopBtn.disabled = false;
-  setStatus('⏳', 'Generating audio...');
+  setStatus('🔊', 'Aap ka text play ho raha hai...');
 
-  const text = textInput.value;
-  const speedPercentage = parseInt(speedRange.value);
-  const pitchPercentage = parseInt(pitchRange.value);
+  speakText(text, false);
+  addResultCard(text);          // history ke liye (neeche FIX 3)
+}
 
-  // Simulate audio generation
-  setTimeout(() => {
-    const audioUrl = createAudioBlob(text);
-    addResultCard(text, audioUrl);
-    
-    isGenerating = false;
-    generateBtn.disabled = false;
-    stopBtn.disabled = true;
-    setStatus('✅', 'Audio generated successfully!');
+function speakText(text, isPreview = false) {
+  synth.cancel();               // pehle cancel
 
-    if (autoplayCheck.checked) {
-      const audio = new Audio(audioUrl);
-      audio.play();
-    }
-  }, 1500);
+  const utter = new SpeechSynthesisUtterance(text);
+  const v = getSelectedVoice(); // FIX 4 wala helper
+  if (v) { utter.voice = v; utter.lang = v.lang; }
+
+  const rate  = parseInt(speedRange.value) / 100;
+  const pitch = parseInt(pitchRange.value) / 100;
+  utter.rate  = Math.min(2, Math.max(0.5, 1 + rate));
+  utter.pitch = Math.min(2, Math.max(0,   1 + pitch));
+  utter.volume = 1;
+
+  utter.onstart = () => { if (!isPreview) stopBtn.disabled = false; };
+  utter.onend   = () => { isGenerating = false; stopBtn.disabled = true;
+                          if (!isPreview) setStatus('✅', 'Done!'); };
+  utter.onerror = (e) => { isGenerating = false;
+                           setStatus('❌', 'Voice error: ' + e.error); };
+
+  setTimeout(() => synth.speak(utter), 100); // delay zaroori hai
+}
+
+
+  async function downloadAudio(text) {
+  const voiceMap = {
+    'en-US': 'Joanna', 'en-GB': 'Amy',  'hi-IN': 'Aditi',
+    'ur-PK': 'Aditi',  'ar-SA': 'Zeina','fr-FR': 'Celine',
+    'de-DE': 'Marlene','es-ES': 'Conchita','it-IT': 'Carla',
+    'ja-JP': 'Mizuki','ko-KR': 'Seoyeon','ru-RU': 'Tatyana',
+    'pt-BR': 'Vitoria','zh-CN': 'Zhiyu'
+  };
+  const voice = voiceMap[languageSelect.value] || 'Joanna';
+
+  setStatus('⏳', 'Download tayyar ho raha hai...');
+  try {
+    const url = `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encodeURIComponent(text.slice(0, 3000))}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('API failed');
+    const blob = await res.blob();
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `speech-${Date.now()}.mp3`;
+    a.click();
+    setStatus('✅', 'Download ho gaya!');
+  } catch (err) {
+    console.error(err);
+    setStatus('❌', 'Download fail — internet check karein');
+  }
+  }
+function getSelectedVoice() {
+  const name = voiceSelect.value;
+  return voices.find(v => v.name === name) || voices[0];
 }
 
 // ===== SPEAK TEXT =====
 function speakText(text, isPreview = false) {
-  if (synth.speaking) {
-    synth.cancel();
-  }
+  synth.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  const voiceIndex = voiceSelect.selectedIndex;
-  
-  if (voices[voiceIndex]) {
-    utterance.voice = voices[voiceIndex];
-  }
+  const utter = new SpeechSynthesisUtterance(text);
+  const v = getSelectedVoice();          // ✅ NAYA helper use karta hai
+  if (v) { utter.voice = v; utter.lang = v.lang; }
 
-  const speedPercentage = parseInt(speedRange.value) / 100;
-  const pitchPercentage = parseInt(pitchRange.value) / 100;
+  const rate  = parseInt(speedRange.value) / 100;
+  const pitch = parseInt(pitchRange.value) / 100;
+  utter.rate  = Math.min(2, Math.max(0.5, 1 + rate));
+  utter.pitch = Math.min(2, Math.max(0,   1 + pitch));
+  utter.volume = 1;
 
-  utterance.rate = Math.max(0.1, 1 + speedPercentage);
-  utterance.pitch = Math.max(0.1, 1 + pitchPercentage);
-  utterance.volume = 1;
+  utter.onstart = () => { if (!isPreview) stopBtn.disabled = false; };
+  utter.onend   = () => { isGenerating = false; stopBtn.disabled = true;
+                          if (!isPreview) setStatus('✅', 'Done!'); };
+  utter.onerror = (e) => { isGenerating = false;
+                           setStatus('❌', 'Voice error: ' + e.error); };
 
-  utterance.onstart = () => {
-    if (!isPreview) {
-      stopBtn.disabled = false;
-    }
-  };
-
-  utterance.onend = () => {
-    if (!isPreview) {
-      stopBtn.disabled = true;
-    }
-  };
-
-  synth.speak(utterance);
+  setTimeout(() => synth.speak(utter), 100);
 }
-
 // ===== CREATE AUDIO BLOB =====
 function createAudioBlob(text) {
   // Simulating audio generation - in real scenario, use Web Audio API or backend
@@ -342,50 +349,35 @@ function createAudioBlob(text) {
 }
 
 // ===== ADD RESULT CARD =====
-function addResultCard(text, audioUrl) {
+function addResultCard(text) {
   const card = document.createElement('div');
   card.className = 'audio-card';
   card.innerHTML = `
-    <div class="audio-text">${escapeHtml(text.substring(0, 100))}</div>
-    <audio class="audio-player" controls>
-      <source src="${audioUrl}" type="audio/${selectedFormat}">
-    </audio>
+    <div class="audio-text">${escapeHtml(text.substring(0, 120))}</div>
     <div class="audio-actions">
-      <button class="btn btn-secondary btn-download" style="flex: 1;">
-        <span>⬇️</span> Download
+      <button class="btn btn-secondary btn-download" style="flex:1;">
+        <span>⬇️</span> Download MP3
       </button>
-      <button class="btn btn-secondary btn-copy-text" style="flex: 1;">
+      <button class="btn btn-secondary btn-copy-text" style="flex:1;">
         <span>📋</span> Copy
       </button>
-      <button class="btn btn-secondary btn-remove" style="flex: 1;">
+      <button class="btn btn-secondary btn-remove" style="flex:1;">
         <span>🗑️</span> Remove
       </button>
-    </div>
-  `;
+    </div>`;
 
-  card.querySelector('.btn-download').addEventListener('click', () => {
-    downloadAudio(audioUrl, text);
-  });
-
-  card.querySelector('.btn-copy-text').addEventListener('click', () => {
-    navigator.clipboard.writeText(text).then(() => {
-      setStatus('✅', 'Text copied!');
-    });
-  });
-
+  card.querySelector('.btn-download').addEventListener('click', () => downloadAudio(text));
+  card.querySelector('.btn-copy-text').addEventListener('click', () =>
+    navigator.clipboard.writeText(text).then(() => setStatus('✅', 'Text copied!')));
   card.querySelector('.btn-remove').addEventListener('click', () => {
     card.remove();
-    generatedAudios.pop();
+    generatedAudios = generatedAudios.filter(i => i.text !== text);
     updateResultsDisplay();
-    setStatus('🗑️', 'Item removed');
   });
 
-  if (resultsList.querySelector('.empty-state')) {
-    resultsList.innerHTML = '';
-  }
-
+  if (resultsList.querySelector('.empty-state')) resultsList.innerHTML = '';
   resultsList.appendChild(card);
-  generatedAudios.push({ text, audioUrl });
+  generatedAudios.push({ text });
   updateResultsDisplay();
 }
 
@@ -395,15 +387,6 @@ function updateResultsDisplay() {
   resultsCount.textContent = count > 0 
     ? `${count} generated ${count === 1 ? 'item' : 'items'}`
     : 'No generated items yet';
-}
-
-// ===== DOWNLOAD AUDIO =====
-function downloadAudio(audioUrl, text) {
-  const link = document.createElement('a');
-  link.href = audioUrl;
-  link.download = `audio_${Date.now()}.${selectedFormat}`;
-  link.click();
-  setStatus('⬇️', 'Download started!');
 }
 
 // ===== STOP GENERATION =====
