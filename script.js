@@ -27,6 +27,7 @@
     const copyBtn = $('copyBtn');
     const generateBtn = $('generateBtn');
     const stopBtn = $('stopBtn');
+    const downloadBtn = $('downloadBtn');
     const themeToggle = $('themeToggle');
     const charDisplay = $('charDisplay');
     const lineDisplay = $('lineDisplay');
@@ -430,6 +431,7 @@
       lineDisplay.textContent = text === '' ? 0 : text.split('\n').length;
       charCount2.textContent = chars;
       generateBtn.disabled = chars === 0;
+      if (downloadBtn) downloadBtn.disabled = chars === 0;
       previewBtn.disabled = chars === 0;
     }
 
@@ -524,6 +526,11 @@
       previewBtn.addEventListener('click', previewVoice);
       generateBtn.addEventListener('click', generateAudio);
       stopBtn.addEventListener('click', stopGeneration);
+      if (downloadBtn) downloadBtn.addEventListener('click', () => {
+        const t = textInput.value.trim();
+        if (!t) { setStatus('❌', 'Pehle text likhein!'); return; }
+        downloadAudio(t);
+      });
       fileImport.addEventListener('change', importFile);
 
       document.addEventListener('keydown', (e) => {
