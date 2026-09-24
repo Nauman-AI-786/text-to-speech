@@ -211,7 +211,51 @@
     }
 
     // ===== DOWNLOAD MP3 =====
+    function triggerDownload(href) {
+      const a = document.createElement('a');
+      a.href = href;
+      a.download = `speech-${Date.now()}.mp3`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    // Pehla raasta: Puter.js (ElevenLabs, free, user-pays). Fail ho to false return karta hai
+    async function downloadWithPuter(text) {
+      if (typeof puter === 'undefined' || !puter.ai || !puter.ai.txt2speech) return false;
+      try {
+        setStatus('⏳', 'Awaaz ban rahi hai (Puter sign-in maang sakta hai)...');
+        const voiceId = selectedGender === 'male'
+          ? 'pNInz6obpgDQGcFmaJgB'   // male
+          : '21m00Tcm4TlvDq8ikWAM';  // female (default)
+        const audio = await puter.ai.txt2speech(text.slice(0, 3000), {
+          provider: 'elevenlabs',
+          voice: voiceId,
+          model: 'eleven_multilingual_v2'
+        });
+        const src = audio && (audio.src || audio.currentSrc);
+        if (!src) return false;
+
+        let href = src;
+        try {
+          const res = await fetch(src);
+          const blob = await res.blob();
+          if (blob.size > 1000) href = URL.createObjectURL(blob);
+        } catch (e) { /* seedha src se download try hoga */ }
+
+        triggerDownload(href);
+        setStatus('✅', 'Download ho gaya!');
+        return true;
+      } catch (err) {
+        console.warn('Puter fail:', err);
+        return false;
+      }
+    }
+
     async function downloadAudio(text) {
+      if (await downloadWithPuter(text)) return;
+      setStatus('⏳', 'Backup tareeqa try ho raha hai...');
+
       const voiceMap = {
         'en-US': 'Joanna', 'en-GB': 'Amy', 'hi-IN': 'Aditi', 'ur-PK': 'Aditi',
         'ar-SA': 'Zeina', 'fr-FR': 'Celine', 'de-DE': 'Marlene', 'es-ES': 'Conchita',
