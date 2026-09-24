@@ -1,9 +1,7 @@
-
-
 /* =========================================================
    AI VOICE STUDIO
    Premium text-to-speech JavaScript
-   Browser SpeechSynthesis + optional Puter provider
+   Browser SpeechSynthesis only (Puter provider removed)
    ========================================================= */
 
 (() => {
@@ -46,9 +44,6 @@
     }
   };
 
-  const sleep = (ms) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
@@ -90,42 +85,6 @@
     } catch {
       return false;
     }
-  }
-
-  function downloadBlob(blob, filename) {
-    if (!blob || !blob.size) return false;
-
-    const objectUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-
-    link.href = objectUrl;
-    link.download = filename;
-    link.rel = "noopener";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    setTimeout(() => {
-      URL.revokeObjectURL(objectUrl);
-    }, 15000);
-
-    return true;
-  }
-
-  function triggerUrlDownload(url, filename) {
-    if (!url) return false;
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.rel = "noopener";
-    link.target = "_blank";
-
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    return true;
   }
 
   /* ---------------------------------------------------------
@@ -179,7 +138,6 @@
 
   let isSpeaking = false;
   let currentRunId = 0;
-  let currentProviderAudio = null;
 
   const generatedItems = [];
 
@@ -189,64 +147,6 @@
     "en-US": "Hello! This is a preview of the selected voice.",
     "en-GB": "Hello! This is a preview of the selected voice."
   };
-
-  /*
-   * Puter optional voices.
-   * Yeh voices sirf tab show hongi jab Puter.js available ho.
-   * Provider availability aur sign-in requirements provider par depend
-   * karte hain.
-   */
-  const NATURAL_VOICES = [
-    {
-      id: "puter:openai:nova",
-      label: "Nova · Natural female",
-      gender: "female",
-      provider: "openai",
-      voice: "nova"
-    },
-    {
-      id: "puter:openai:shimmer",
-      label: "Shimmer · Natural female",
-      gender: "female",
-      provider: "openai",
-      voice: "shimmer"
-    },
-    {
-      id: "puter:openai:onyx",
-      label: "Onyx · Natural male",
-      gender: "male",
-      provider: "openai",
-      voice: "onyx"
-    },
-    {
-      id: "puter:openai:echo",
-      label: "Echo · Natural male",
-      gender: "male",
-      provider: "openai",
-      voice: "echo"
-    },
-    {
-      id: "puter:openai:alloy",
-      label: "Alloy · Natural neutral",
-      gender: "all",
-      provider: "openai",
-      voice: "alloy"
-    },
-    {
-      id: "puter:elevenlabs:Rachel",
-      label: "Rachel · Natural female",
-      gender: "female",
-      provider: "elevenlabs",
-      voice: "Rachel"
-    },
-    {
-      id: "puter:elevenlabs:Adam",
-      label: "Adam · Natural male",
-      gender: "male",
-      provider: "elevenlabs",
-      voice: "Adam"
-    }
-  ];
 
   /* ---------------------------------------------------------
      Status and feedback
@@ -355,66 +255,6 @@
   }
 
   /* ---------------------------------------------------------
-     Puter provider helpers
-     --------------------------------------------------------- */
-
-  function puterReady() {
-    return Boolean(
-      window.puter &&
-      window.puter.ai &&
-      typeof window.puter.ai.txt2speech === "function"
-    );
-  }
-
-  function getNaturalVoiceFromValue() {
-    return (
-      NATURAL_VOICES.find((voice) => voice.id === voiceSelect?.value) || null
-    );
-  }
-
-  function getPuterOptions(naturalVoice) {
-    if (!naturalVoice) return null;
-
-    if (naturalVoice.provider === "elevenlabs") {
-      return {
-        provider: "elevenlabs",
-        model: "eleven_multilingual_v2",
-        voice: naturalVoice.voice
-      };
-    }
-
-    return {
-      provider: "openai",
-      model: "gpt-4o-mini-tts",
-      voice: naturalVoice.voice
-    };
-  }
-
-  function getAudioSource(audio) {
-    if (!audio) return "";
-
-    return (
-      audio.src ||
-      audio.currentSrc ||
-      audio.getAttribute?.("src") ||
-      ""
-    );
-  }
-
-  function stopProviderAudio() {
-    if (!currentProviderAudio) return;
-
-    try {
-      currentProviderAudio.pause();
-      currentProviderAudio.currentTime = 0;
-    } catch {
-      // Ignore audio cleanup errors.
-    }
-
-    currentProviderAudio = null;
-  }
-
-  /* ---------------------------------------------------------
      Browser voice handling
      --------------------------------------------------------- */
 
@@ -486,29 +326,6 @@
     return list;
   }
 
-  function getFilteredNaturalVoices() {
-    if (!puterReady()) return [];
-
-    const term = String(voiceSearch?.value || "")
-      .trim()
-      .toLowerCase();
-
-    return NATURAL_VOICES.filter((voice) => {
-      const genderOkay =
-        selectedGender === "all" ||
-        voice.gender === "all" ||
-        voice.gender === selectedGender;
-
-      const searchOkay =
-        !term ||
-        `${voice.label} ${voice.provider}`
-          .toLowerCase()
-          .includes(term);
-
-      return genderOkay && searchOkay;
-    });
-  }
-
   function appendOption(group, label, value, data = {}) {
     const option = document.createElement("option");
 
@@ -522,28 +339,16 @@
     group.appendChild(option);
   }
 
-  function updateVoiceHelp(browserCount, naturalCount) {
+  function updateVoiceHelp(browserCount) {
     if (!voiceHelp) return;
 
     const selectedLanguage = languageSelect?.value || "en-US";
     const languageName =
       languageSelect?.selectedOptions?.[0]?.textContent || selectedLanguage;
 
-    if (browserCount === 0 && naturalCount === 0) {
+    if (browserCount === 0) {
       voiceHelp.textContent =
         `${languageName} ke liye voice nahi mili. Device language settings check karein ya doosri language try karein.`;
-      return;
-    }
-
-    if (browserCount === 0 && naturalCount > 0) {
-      voiceHelp.textContent =
-        "Browser voice nahi mili. Available provider voice use ki ja sakti hai.";
-      return;
-    }
-
-    if (naturalCount > 0) {
-      voiceHelp.textContent =
-        "Natural provider voice available hai. Provider sign-in ya availability apply ho sakti hai.";
       return;
     }
 
@@ -556,31 +361,13 @@
 
     const previousValue = voiceSelect.value;
     const browserList = getFilteredBrowserVoices();
-    const naturalList = getFilteredNaturalVoices();
 
     voiceSelect.innerHTML = "";
 
-    if (naturalList.length > 0) {
-      const group = document.createElement("optgroup");
-      group.label = "Natural provider voices";
-
-      naturalList.forEach((voice) => {
-        appendOption(group, voice.label, voice.id, {
-          source: "natural",
-          provider: voice.provider
-        });
-      });
-
-      voiceSelect.appendChild(group);
-    }
-
     if (browserList.length > 0) {
-      const group = document.createElement("optgroup");
-      group.label = "Device browser voices";
-
       browserList.forEach((voice) => {
         appendOption(
-          group,
+          voiceSelect,
           `${voice.name} (${voice.lang})`,
           voice.voiceURI || `${voice.name}-${voice.lang}`,
           {
@@ -589,11 +376,7 @@
           }
         );
       });
-
-      voiceSelect.appendChild(group);
-    }
-
-    if (!naturalList.length && !browserList.length) {
+    } else {
       appendOption(
         voiceSelect,
         "Is language ki voice available nahi",
@@ -611,7 +394,7 @@
       voiceSelect.selectedIndex = 0;
     }
 
-    updateVoiceHelp(browserList.length, naturalList.length);
+    updateVoiceHelp(browserList.length);
     updateActionStates();
   }
 
@@ -762,7 +545,6 @@
     if (runId !== currentRunId) return;
 
     isSpeaking = false;
-    currentProviderAudio = null;
 
     updateActionStates();
     setStatus("✓", message, "success");
@@ -793,7 +575,6 @@
     const runId = ++currentRunId;
 
     speechSynth.cancel();
-    stopProviderAudio();
 
     isSpeaking = true;
     updateActionStates();
@@ -887,129 +668,7 @@
     return true;
   }
 
-  /* ---------------------------------------------------------
-     Optional Puter natural voice playback
-     --------------------------------------------------------- */
-
-  async function speakWithPuter(text, isPreview, naturalVoice) {
-    if (!puterReady() || !naturalVoice) return null;
-
-    const runId = ++currentRunId;
-
-    speechSynth?.cancel();
-    stopProviderAudio();
-
-    isSpeaking = true;
-    updateActionStates();
-
-    setStatus(
-      "◌",
-      "Natural provider voice prepare ho rahi hai..."
-    );
-
-    try {
-      const audio = await window.puter.ai.txt2speech(
-        text.slice(0, 3000),
-        getPuterOptions(naturalVoice)
-      );
-
-      if (runId !== currentRunId) {
-        try {
-          audio?.pause?.();
-        } catch {
-          // Ignore stale audio errors.
-        }
-        return null;
-      }
-
-      if (!audio || typeof audio.play !== "function") {
-        throw new Error("Provider ne playable audio return nahi ki.");
-      }
-
-      currentProviderAudio = audio;
-
-      const source = getAudioSource(audio);
-
-      if (source) {
-        audio.dataset.sourceUrl = source;
-      }
-
-      audio.onended = () => {
-        finishSpeaking(
-          runId,
-          isPreview
-            ? "Natural voice preview complete"
-            : "Natural audio playback complete"
-        );
-      };
-
-      audio.onerror = () => {
-        if (runId !== currentRunId) return;
-
-        isSpeaking = false;
-        currentProviderAudio = null;
-        updateActionStates();
-
-        setStatus(
-          "!",
-          "Natural voice play nahi ho saki.",
-          "error"
-        );
-      };
-
-      await audio.play();
-
-      setStatus(
-        "●",
-        isPreview
-          ? "Natural voice preview chal raha hai..."
-          : "Natural provider audio chal raha hai..."
-      );
-
-      return audio;
-    } catch (error) {
-      console.warn("Optional provider error:", error);
-
-      if (runId !== currentRunId) return null;
-
-      isSpeaking = false;
-      currentProviderAudio = null;
-      updateActionStates();
-
-      setStatus(
-        "!",
-        "Natural voice unavailable hai. Browser voice use ki ja rahi hai.",
-        "normal"
-      );
-
-      showToast(
-        "Natural voice available nahi hui, browser voice use ho rahi hai.",
-        "normal"
-      );
-
-      return null;
-    }
-  }
-
   async function speakSelected(text, isPreview = false) {
-    const naturalVoice = getNaturalVoiceFromValue();
-
-    if (naturalVoice && puterReady()) {
-      const providerAudio = await speakWithPuter(
-        text,
-        isPreview,
-        naturalVoice
-      );
-
-      if (providerAudio) {
-        return {
-          type: "provider",
-          audio: providerAudio,
-          sourceUrl: getAudioSource(providerAudio)
-        };
-      }
-    }
-
     const browserStarted = speakWithBrowser(text, isPreview);
 
     return browserStarted
@@ -1029,8 +688,6 @@
     } catch {
       // Ignore speech cancellation errors.
     }
-
-    stopProviderAudio();
 
     isSpeaking = false;
     updateActionStates();
@@ -1104,43 +761,7 @@
     resultsList.appendChild(empty);
   }
 
-  function attachAudioToCard(entry, audio) {
-    if (!audio || !entry?.card) return;
-
-    const source = getAudioSource(audio);
-
-    if (!source) return;
-
-    entry.audio = audio;
-    entry.sourceUrl = source;
-    entry.audioType = "provider";
-
-    const existingAudio = $(".audio-player", entry.card);
-
-    if (existingAudio) {
-      existingAudio.remove();
-    }
-
-    const player = document.createElement("audio");
-    player.className = "audio-player";
-    player.controls = true;
-    player.preload = "metadata";
-    player.src = source;
-    player.setAttribute("aria-label", "Generated audio player");
-
-    const meta = $(".audio-card-meta", entry.card);
-
-    if (meta) {
-      entry.card.insertBefore(player, meta);
-    } else {
-      entry.card.appendChild(player);
-    }
-
-    entry.downloadButton.disabled = false;
-    entry.downloadButton.title = "Download available provider audio";
-  }
-
-  function addResultCard(text, playbackResult = null) {
+  function addResultCard(text) {
     if (!resultsList) return null;
 
     removeEmptyState();
@@ -1149,11 +770,7 @@
       id: `audio-${Date.now()}-${Math.random().toString(16).slice(2)}`,
       text,
       createdAt: new Date(),
-      audio: null,
-      sourceUrl: "",
-      audioType: playbackResult?.type || "browser",
-      card: null,
-      downloadButton: null
+      card: null
     };
 
     const card = document.createElement("article");
@@ -1182,12 +799,6 @@
     const actions = document.createElement("div");
     actions.className = "audio-card-actions";
 
-    const downloadButton = createButton(
-      "Download MP3",
-      "outline-button",
-      "↓"
-    );
-
     const copyButton = createButton(
       "Copy",
       "outline-button",
@@ -1200,16 +811,7 @@
       "×"
     );
 
-    downloadButton.disabled = true;
-    downloadButton.title =
-      "MP3 sirf real provider audio available hone par download hogi";
-
     entry.card = card;
-    entry.downloadButton = downloadButton;
-
-    downloadButton.addEventListener("click", () => {
-      downloadEntry(entry);
-    });
 
     copyButton.addEventListener("click", async () => {
       const copied = await copyToClipboard(entry.text);
@@ -1227,16 +829,12 @@
       removeEntry(entry);
     });
 
-    actions.append(downloadButton, copyButton, removeButton);
+    actions.append(copyButton, removeButton);
     card.append(textElement, meta, actions);
     resultsList.prepend(card);
 
     generatedItems.unshift(entry);
     updateResultsCount();
-
-    if (playbackResult?.audio) {
-      attachAudioToCard(entry, playbackResult.audio);
-    }
 
     return entry;
   }
@@ -1248,86 +846,10 @@
       generatedItems.splice(index, 1);
     }
 
-    if (entry.audio && entry.audio !== currentProviderAudio) {
-      try {
-        entry.audio.pause?.();
-      } catch {
-        // Ignore.
-      }
-    }
-
     entry.card?.remove();
 
     updateResultsCount();
     restoreEmptyState();
-  }
-
-  async function downloadEntry(entry) {
-    if (!entry?.sourceUrl) {
-      setStatus(
-        "!",
-        "Browser voice se direct MP3 export supported nahi hota. MP3 ke liye real provider audio available hona zaroori hai.",
-        "error"
-      );
-
-      showToast(
-        "Is result ke liye MP3 available nahi hai.",
-        "error"
-      );
-
-      return;
-    }
-
-    const filename = `ai-voice-studio-${Date.now()}.mp3`;
-
-    try {
-      setStatus("◌", "MP3 download tayyar ho rahi hai...");
-
-      const response = await fetch(entry.sourceUrl);
-
-      if (!response.ok) {
-        throw new Error(`Download request failed: ${response.status}`);
-      }
-
-      const blob = await response.blob();
-
-      if (!blob.size) {
-        throw new Error("Empty audio file");
-      }
-
-      const downloaded = downloadBlob(blob, filename);
-
-      if (!downloaded) {
-        throw new Error("Download could not start");
-      }
-
-      setStatus("✓", "MP3 download start ho gayi", "success");
-      showToast("MP3 download start ho gayi", "success");
-    } catch (error) {
-      console.warn("MP3 download error:", error);
-
-      /*
-       * Cross-origin provider files fetch nahi hone par direct URL
-       * download attempt kiya jata hai. Fake MP3 generate nahi hoti.
-       */
-      const directDownload = triggerUrlDownload(
-        entry.sourceUrl,
-        filename
-      );
-
-      if (directDownload) {
-        setStatus(
-          "i",
-          "Direct audio link open ki gayi. Agar download start na ho to audio player menu use karein."
-        );
-      } else {
-        setStatus(
-          "!",
-          "MP3 download available nahi ho saki.",
-          "error"
-        );
-      }
-    }
   }
 
   /* ---------------------------------------------------------
@@ -1373,9 +895,7 @@
 
     saveSettings();
 
-    const naturalVoiceSelected = Boolean(getNaturalVoiceFromValue());
-
-    if (!naturalVoiceSelected && !getSelectedBrowserVoice()) {
+    if (!getSelectedBrowserVoice()) {
       setStatus(
         "i",
         "Specific voice select nahi hui. Browser default voice use hogi."
@@ -1386,18 +906,12 @@
 
     if (!result) return;
 
-    const entry = addResultCard(text, result);
+    addResultCard(text);
 
-    if (result.audio && entry) {
-      attachAudioToCard(entry, result.audio);
-    }
-
-    if (result.type === "browser") {
-      setStatus(
-        "●",
-        "Browser audio play ho raha hai. Browser SpeechSynthesis direct MP3 export nahi karti."
-      );
-    }
+    setStatus(
+      "●",
+      "Browser audio play ho raha hai. Browser SpeechSynthesis direct MP3 export nahi karti."
+    );
 
     showToast("Audio result add ho gaya", "success");
   }
@@ -1653,14 +1167,6 @@
     window.addEventListener("beforeunload", () => {
       saveSettings();
       stopPlayback();
-
-      generatedItems.forEach((entry) => {
-        try {
-          entry.audio?.pause?.();
-        } catch {
-          // Ignore cleanup errors.
-        }
-      });
     });
 
     window.addEventListener("error", (event) => {
@@ -1686,7 +1192,6 @@
         speed: speedRange?.value || "",
         pitch: pitchRange?.value || "",
         textLength: getText().length,
-        providerAvailable: puterReady(),
         speaking: isSpeaking
       }),
       generateAudio,
@@ -1731,13 +1236,6 @@
       );
     }
 
-    /*
-     * Puter script defer ke saath load hoti hai. Is liye kuch time baad
-     * voice list dobara refresh karte hain agar provider available ho.
-     */
-    setTimeout(updateVoiceList, 500);
-    setTimeout(updateVoiceList, 1500);
-
     exposeDebugApi();
     updateActionStates();
   }
@@ -1750,4 +1248,3 @@
     initialize();
   }
 })();
-
