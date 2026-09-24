@@ -102,7 +102,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
 <symbol id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
 <symbol id="sl" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
-<symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></symbol>
+<symbol id="dlicon" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></symbol>
 <symbol id="inf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
 </defs></svg>
 
@@ -128,7 +128,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
  <div><svg class="i"><use href="#globe"/></svg><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
  <div><svg class="i"><use href="#play"/></svg><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
  <div><svg class="i"><use href="#sl"/></svg><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
- <div><svg class="i"><use href="#dl"/></svg><b>MP3 download</b><span>Audio apne device mein save karein</span></div>
+ <div><svg class="i"><use href="#dlicon"/></svg><b>MP3 download</b><span>Audio apne device mein save karein</span></div>
 </section>
 
 <div class="app" id="studio">
@@ -168,7 +168,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
   </div>
   <div class="act">
    <button class="go" id="go" type="button">&#9679; Generate audio</button>
-   <button class="sm" id="dl" type="button">&#8595; Download MP3</button>
+   <button <button class="sm" id="dlBtn" type="button">&#8595; Download MP3</button>
    <button class="sm" id="ps" type="button">Pause</button>
    <button class="sm" id="sp" type="button">&#9632; Stop</button>
   </div>
@@ -310,13 +310,13 @@ async function mp3(text){
   return URL.createObjectURL(new Blob(bl,{type:'audio/mpeg'}));
 }
 function dlf(url){const a=document.createElement('a');a.href=url;a.download='ai-voice-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
-$('dl').onclick=async()=>{
+$('dlBtn').onclick=async()=>{
   const t=$('txt').value.trim();
   if(!t){say('Pehle text likhein ya paste karein.');return}
-  $('dl').disabled=true;
+  $('dlBtn').disabled=true;
   try{const url=await mp3(t);hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);say('MP3 tayyar hai. Download shuru ho gaya, neeche player mein bhi sun sakte hain.')}
   catch(e){say(e.message==='NOKEY'?'MP3 ke liye pehle sidebar mein ElevenLabs API key save karein.':e.message==='NOVOICE'?'MP3 voice select karein (key save karne ke baad list aati hai).':'MP3 nahi ban saki: '+e.message)}
-  $('dl').disabled=false;
+  $('dlBtn').disabled=false;
 };
 $('ks').onclick=()=>{const v=$('key').value.trim();if(!v){say('Key khali hai.');return}try{localStorage.setItem('aiv-ek',v);$('key').value='';$('key').placeholder='Key saved';say('API key save ho gayi. Voices load ho rahi hain...');loadEV()}catch(e){say('Key save nahi ho saki.')}};
 $('kc').onclick=()=>{try{localStorage.removeItem('aiv-ek')}catch(e){}$('key').value='';$('key').placeholder='API key';loadEV();say('API key hata di gayi.')};
