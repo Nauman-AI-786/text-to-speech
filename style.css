@@ -93,7 +93,8 @@ body {
 .separator { margin: 0 6px; opacity: .5; }
 .main-textarea { min-height: 200px; resize: vertical; padding: 16px; font-size: 15px; line-height: 1.7; }
 .textarea-actions { display: flex; gap: 10px; margin-top: 12px; }
-.action-buttons { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 18px; }
+.action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+.action-buttons #generateBtn { grid-column: 1 / -1; }
 .status-box { display: flex; align-items: center; gap: 10px; padding: 13px 18px; margin-bottom: 18px;
   border-radius: 14px; background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent);
   font-size: 14px; font-weight: 600; box-shadow: var(--shadow); }
