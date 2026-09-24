@@ -3,184 +3,742 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Free Urdu Text to Speech - MP3 Download</title>
-  <meta name="description" content="Urdu, Hindi aur English text ko free mein natural awaaz mein badlein aur MP3 download karein.">
-  <link rel="canonical" href="https://nauman-ai-786.github.io/text-to-speech/">
+
+  <title>Urdu Text to Speech Studio | MP3 Voice Tool</title>
+
+  <meta
+    name="description"
+    content="Urdu, Hindi aur English text ko browser voice ke zariye audio mein sunein. Voice, speed aur pitch controls ke saath simple text to speech studio."
+  >
+
   <meta name="robots" content="index, follow">
+  <meta name="author" content="AI Voice Studio">
   <meta name="theme-color" content="#6366f1">
 
-  <!-- Social sharing (WhatsApp, Facebook, LinkedIn) -->
+  <link
+    rel="canonical"
+    href="https://nauman-ai-786.github.io/text-to-speech/"
+  >
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AI Voice Studio">
-  <meta property="og:title" content="Free Urdu Text to Speech - MP3 Download">
-  <meta property="og:description" content="Urdu, Hindi aur English text ko free mein natural awaaz mein badlein aur MP3 download karein.">
-  <meta property="og:url" content="https://nauman-ai-786.github.io/text-to-speech/">
+  <meta property="og:title" content="Urdu Text to Speech Studio">
+  <meta
+    property="og:description"
+    content="Urdu, Hindi aur English text ko voice mein convert karein aur available option ke zariye audio hasil karein."
+  >
+  <meta
+    property="og:url"
+    content="https://nauman-ai-786.github.io/text-to-speech/"
+  >
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Urdu Text to Speech - MP3 Download">
-  <meta name="twitter:description" content="Urdu, Hindi aur English text ko free mein natural awaaz mein badlein aur MP3 download karein.">
+  <meta name="twitter:title" content="Urdu Text to Speech Studio">
+  <meta
+    name="twitter:description"
+    content="Urdu, Hindi aur English text ke liye simple aur professional text to speech studio."
+  >
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Optional provider. App browser voices ke baghair bhi kaam karegi. -->
+  <script src="https://js.puter.com/v2/" defer></script>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- WebApplication structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Voice Studio",
+    "url": "https://nauman-ai-786.github.io/text-to-speech/",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web Browser",
+    "description": "Urdu, Hindi aur English text ke liye browser-based text to speech studio.",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kya yeh tool Urdu text ko read kar sakta hai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Agar aapke browser ya device mein Urdu voice available hai to text Urdu mein read ho sakta hai. Available voices browser aur device par depend karti hain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kya browser SpeechSynthesis direct MP3 download karta hai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Browser ki built-in SpeechSynthesis aam tor par direct MP3 file export nahi karti. MP3 sirf available audio provider ke real audio result ke zariye download hoti hai."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Voice list mein Urdu voice nazar na aaye to kya karun?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Browser ya operating system mein Urdu language voice install ya enable karein. Kuch browsers mein voices page load hone ke baad available hoti hain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kya mera text private rehta hai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Browser voice use karte waqt text browser ke speech engine ko diya jata hai. External provider use karte waqt provider ki processing apply ho sakti hai. Sensitive information enter na karein."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
-  <nav class="navbar">
-    <div class="nav-content">
-      <div class="logo"><span class="logo-icon">🎙️</span><span>AI Voice Studio</span></div>
-      <div class="nav-actions"><button class="btn-icon" id="themeToggle" aria-label="Theme">🌙</button></div>
-    </div>
-  </nav>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <div class="container">
-    <div class="main-wrapper">
-      <aside class="sidebar">
-        <div class="sidebar-title"><h2>⚙️ Settings</h2></div>
+  <!-- Top navigation -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Primary navigation">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="AI Voice Studio home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 0 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z"></path>
+              <path d="M5 11a7 7 0 0 0 14 0M12 18v3M8.5 21h7"></path>
+            </svg>
+          </span>
 
-        <div class="control-section">
-          <label class="section-label" for="languageSelect">Language</label>
-          <select id="languageSelect" class="control-select">
-            <option value="ur-PK">🇵🇰 Urdu (Pakistan)</option>
-            <option value="hi-IN">🇮🇳 Hindi (India)</option>
-            <option value="en-US">🇺🇸 English (US)</option>
-            <option value="en-GB">🇬🇧 English (UK)</option>
-          </select>
+          <span class="brand-copy">
+            <strong>AI Voice</strong>
+            <span>Studio</span>
+          </span>
+        </a>
+
+        <div class="nav-actions">
+          <a class="nav-link" href="#how-it-works">How it works</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+
+          <button
+            class="icon-button"
+            id="themeToggle"
+            type="button"
+            aria-label="Switch theme"
+            title="Switch theme"
+          >
+            <span class="theme-icon" aria-hidden="true">☾</span>
+          </button>
         </div>
+      </div>
+    </nav>
+  </header>
 
-        <div class="control-section">
-          <span class="section-label">Voice type</span>
-          <div class="gender-buttons">
-            <button class="gender-btn active" data-gender="all"><span>👥</span>All</button>
-            <button class="gender-btn" data-gender="female"><span>👩</span>Female</button>
-            <button class="gender-btn" data-gender="male"><span>👨</span>Male</button>
+  <main id="main-content">
+    <div class="page-shell" id="top">
+
+      <!-- Hero -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            Urdu · Hindi · English
           </div>
-          <input type="text" id="voiceSearch" class="voice-search-input" placeholder="Voice search...">
-        </div>
 
-        <div class="control-section">
-          <label class="section-label" for="voiceSelect">Voice</label>
-          <select id="voiceSelect" class="control-select"></select>
-          <button class="btn btn-secondary btn-preview" id="previewBtn" disabled>▶️ Preview voice</button>
-        </div>
+          <h1 id="hero-title">Text to Speech Studio</h1>
 
-        <div class="control-section">
-          <span class="section-label">Speed</span>
-          <div class="range-control">
-            <span class="range-value-min">50%</span>
-            <input type="range" id="speedRange" class="control-range" min="50" max="200" step="5" value="100">
-            <span class="range-value-max">200%</span>
+          <p class="hero-description">
+            Text likhein, apni available voice chunein aur browser ya supported
+            provider ke zariye audio sunein.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-link" href="#studio">
+              Start creating
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <a class="secondary-link" href="#how-it-works">
+              Learn how it works
+            </a>
           </div>
-          <div class="range-display" id="speedValue">100%</div>
-        </div>
 
-        <div class="control-section">
-          <span class="section-label">Pitch</span>
-          <div class="range-control">
-            <span class="range-value-min">50%</span>
-            <input type="range" id="pitchRange" class="control-range" min="50" max="200" step="5" value="100">
-            <span class="range-value-max">200%</span>
-          </div>
-          <div class="range-display" id="pitchValue">100%</div>
-        </div>
-
-        <div class="control-section">
-          <span class="section-label">Download format</span>
-          <div class="format-buttons">
-            <button class="format-btn active" data-format="mp3"><span>🎵</span>MP3</button>
+          <div class="trust-note">
+            <span class="trust-icon" aria-hidden="true">◉</span>
+            <span>
+              Privacy note: sensitive information enter na karein. External
+              provider use karne par uski processing apply ho sakti hai.
+            </span>
           </div>
         </div>
 
-        <div class="control-section">
-          <span class="section-label">Import text file</span>
-          <input type="file" id="fileImport" class="file-input" accept=".txt,text/plain">
-        </div>
-      </aside>
+        <div class="hero-visual" aria-label="Decorative audio waveform graphic">
+          <div class="visual-glow visual-glow-one"></div>
+          <div class="visual-glow visual-glow-two"></div>
 
-      <main class="main-content">
-        <section class="header-section">
-          <div class="header-text">
-            <h1>Text to Speech Studio</h1>
-            <p>Text likhein, awaaz chunein aur seconds mein audio sunein ya MP3 download karein.</p>
+          <div class="audio-orb">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Microphone icon">
+              <circle cx="60" cy="60" r="44" class="orb-ring"></circle>
+              <path
+                class="mic-path"
+                d="M60 68a12 12 0 0 0 12-12V38a12 12 0 0 0-24 0v18a12 12 0 0 0 12 12Z"
+              ></path>
+              <path class="mic-path" d="M38 55a22 22 0 0 0 44 0"></path>
+              <path class="mic-path" d="M60 77v12M50 89h20"></path>
+            </svg>
           </div>
-        </section>
 
-        <section class="input-section">
-          <div class="section-header">
-            <h3>📝 Your script</h3>
-            <div class="text-info">
-              <span><b id="charDisplay">0</b> chars</span><span class="separator">|</span>
-              <span><b id="wordCount">0</b> words</span><span class="separator">|</span>
-              <span><b id="lineDisplay">0</b> lines</span><span class="separator">|</span>
-              <span>Total <b id="charCount2">0</b></span>
+          <div class="waveform waveform-main" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="floating-label label-top">
+            <span class="label-dot"></span>
+            Voice ready
+          </div>
+
+          <div class="floating-label label-bottom">
+            <span class="label-wave">〰</span>
+            Speak naturally
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature strip -->
+      <section class="feature-strip" aria-label="Available features">
+        <article class="feature-item">
+          <span class="feature-icon icon-indigo" aria-hidden="true">A</span>
+          <div>
+            <h2>Multiple languages</h2>
+            <p>Urdu, Hindi aur English options</p>
+          </div>
+        </article>
+
+        <article class="feature-item">
+          <span class="feature-icon icon-pink" aria-hidden="true">◉</span>
+          <div>
+            <h2>Voice preview</h2>
+            <p>Generate se pehle voice check karein</p>
+          </div>
+        </article>
+
+        <article class="feature-item">
+          <span class="feature-icon icon-amber" aria-hidden="true">↕</span>
+          <div>
+            <h2>Speed &amp; pitch</h2>
+            <p>Apni listening ke mutabiq adjust karein</p>
+          </div>
+        </article>
+
+        <article class="feature-item">
+          <span class="feature-icon icon-green" aria-hidden="true">↓</span>
+          <div>
+            <h2>Audio options</h2>
+            <p>Provider support ho to MP3 hasil karein</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- Main workspace -->
+      <section class="studio-layout" id="studio" aria-labelledby="studio-title">
+
+        <!-- Settings panel -->
+        <aside class="settings-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="panel-kicker">Workspace</span>
+              <h2 id="studio-title">Voice settings</h2>
+            </div>
+
+            <span class="settings-status" title="Settings panel">
+              <span aria-hidden="true">●</span>
+            </span>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="languageSelect">
+              Language
+            </label>
+
+            <select id="languageSelect" class="control-input">
+              <option value="ur-PK">Urdu · Pakistan</option>
+              <option value="hi-IN">Hindi · India</option>
+              <option value="en-US">English · US</option>
+              <option value="en-GB">English · UK</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Voice type</span>
+
+            <div class="segmented-control" role="group" aria-label="Voice type">
+              <button
+                class="segment-button active"
+                type="button"
+                data-gender="all"
+                aria-pressed="true"
+              >
+                All
+              </button>
+
+              <button
+                class="segment-button"
+                type="button"
+                data-gender="female"
+                aria-pressed="false"
+              >
+                Female
+              </button>
+
+              <button
+                class="segment-button"
+                type="button"
+                data-gender="male"
+                aria-pressed="false"
+              >
+                Male
+              </button>
             </div>
           </div>
-          <textarea id="textInput" class="main-textarea" dir="auto" maxlength="10000" placeholder="Yahan text likhein ya paste karein..."></textarea>
-          <div class="textarea-actions">
-            <button class="btn btn-secondary" id="copyBtn">📋 Copy</button>
-            <button class="btn btn-secondary" id="clearBtn">🧹 Clear</button>
-          </div>
-        </section>
 
-        <div class="action-buttons">
-          <button class="btn btn-primary btn-large" id="generateBtn" disabled>🎙️ Generate</button>
-          <button class="btn btn-secondary btn-large" id="stopBtn" disabled>⏹️ Stop</button>
+          <div class="control-group">
+            <label class="control-label" for="voiceSearch">
+              Search voice
+            </label>
+
+            <div class="input-with-icon">
+              <span aria-hidden="true">⌕</span>
+              <input
+                id="voiceSearch"
+                class="control-input"
+                type="search"
+                placeholder="Voice name search..."
+                autocomplete="off"
+              >
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="voiceSelect">
+              Voice
+            </label>
+
+            <select id="voiceSelect" class="control-input">
+              <option value="">Loading available voices...</option>
+            </select>
+
+            <button
+              id="previewBtn"
+              class="outline-button full-width"
+              type="button"
+              disabled
+            >
+              <span aria-hidden="true">▶</span>
+              Preview voice
+            </button>
+
+            <p id="voiceHelp" class="field-help">
+              Available voices browser aur device par depend karti hain.
+            </p>
+          </div>
+
+          <div class="control-group">
+            <div class="range-heading">
+              <label class="control-label" for="speedRange">Speed</label>
+              <output id="speedValue" for="speedRange">100%</output>
+            </div>
+
+            <input
+              id="speedRange"
+              class="range-input"
+              type="range"
+              min="50"
+              max="200"
+              step="5"
+              value="100"
+            >
+
+            <div class="range-labels">
+              <span>Slow</span>
+              <span>Normal</span>
+              <span>Fast</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="range-heading">
+              <label class="control-label" for="pitchRange">Pitch</label>
+              <output id="pitchValue" for="pitchRange">100%</output>
+            </div>
+
+            <input
+              id="pitchRange"
+              class="range-input"
+              type="range"
+              min="50"
+              max="200"
+              step="5"
+              value="100"
+            >
+
+            <div class="range-labels">
+              <span>Low</span>
+              <span>Natural</span>
+              <span>High</span>
+            </div>
+          </div>
+
+          <div class="provider-note">
+            <span class="provider-note-icon" aria-hidden="true">i</span>
+            <p>
+              Natural provider voice available ho to app usay use karne ki
+              koshish karegi. Warna browser voice use hogi.
+            </p>
+          </div>
+
+          <label class="import-button" for="fileImport">
+            <span aria-hidden="true">↑</span>
+            Import .txt file
+          </label>
+
+          <input
+            id="fileImport"
+            class="visually-hidden"
+            type="file"
+            accept=".txt,text/plain"
+          >
+        </aside>
+
+        <!-- Main text workspace -->
+        <div class="workspace-column">
+          <section class="script-card" aria-labelledby="script-title">
+            <div class="card-heading">
+              <div>
+                <span class="panel-kicker">Your content</span>
+                <h2 id="script-title">Write your script</h2>
+              </div>
+
+              <div class="text-statistics" aria-live="polite">
+                <span><strong id="charDisplay">0</strong> chars</span>
+                <span class="stat-divider">/</span>
+                <span><strong id="wordCount">0</strong> words</span>
+                <span class="stat-divider">/</span>
+                <span><strong id="lineDisplay">0</strong> lines</span>
+              </div>
+            </div>
+
+            <label class="visually-hidden" for="textInput">
+              Text to convert to speech
+            </label>
+
+            <textarea
+              id="textInput"
+              class="script-textarea"
+              dir="auto"
+              maxlength="10000"
+              placeholder="Yahan apna Urdu, Hindi ya English text likhein ya paste karein..."
+              aria-describedby="textHelp"
+            ></textarea>
+
+            <div class="textarea-footer">
+              <span id="textHelp" class="field-help">
+                Maximum 10,000 characters. Ctrl + Enter se generate kar sakte hain.
+              </span>
+
+              <span class="character-limit">
+                <strong id="charCount2">0</strong> / 10,000
+              </span>
+            </div>
+
+            <div class="textarea-actions">
+              <button id="copyBtn" class="outline-button" type="button">
+                <span aria-hidden="true">▣</span>
+                Copy text
+              </button>
+
+              <button id="clearBtn" class="outline-button" type="button">
+                <span aria-hidden="true">×</span>
+                Clear
+              </button>
+            </div>
+          </section>
+
+          <div class="generation-actions">
+            <button
+              id="generateBtn"
+              class="primary-button generate-button"
+              type="button"
+              disabled
+            >
+              <span aria-hidden="true">◉</span>
+              Generate audio
+            </button>
+
+            <button
+              id="stopBtn"
+              class="outline-button stop-button"
+              type="button"
+              disabled
+            >
+              <span aria-hidden="true">■</span>
+              Stop
+            </button>
+          </div>
+
+          <div
+            id="status"
+            class="status-message"
+            role="status"
+            aria-live="polite"
+          >
+            <span class="status-icon" aria-hidden="true">✦</span>
+            <span class="status-text">Ready to generate audio</span>
+          </div>
+
+          <section class="results-card" aria-labelledby="results-title">
+            <div class="card-heading">
+              <div>
+                <span class="panel-kicker">Your sessions</span>
+                <h2 id="results-title">Generated audio</h2>
+              </div>
+
+              <span class="results-count">No items yet</span>
+            </div>
+
+            <div id="resultsList" class="results-list">
+              <div class="empty-state">
+                <div class="empty-visual" aria-hidden="true">
+                  <span>〰</span>
+                </div>
+
+                <h3>Your audio will appear here</h3>
+                <p>
+                  Script likhein, voice select karein aur Generate audio press karein.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how-it-works" class="content-section" aria-labelledby="how-title">
+        <div class="section-intro">
+          <span class="section-badge">Simple workflow</span>
+          <h2 id="how-title">How it works</h2>
+          <p>
+            Kuch simple steps mein apne text ko sunne ke liye tayyar karein.
+          </p>
         </div>
 
-        <div class="status-box" id="status">
-          <span class="status-icon">✨</span><span class="status-text">Ready to generate audio</span>
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h3>Text likhein</h3>
+            <p>
+              Apna script type karein, paste karein ya TXT file import karein.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h3>Voice choose karein</h3>
+            <p>
+              Language, voice type, speed aur pitch apni zaroorat ke mutabiq set karein.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h3>Audio generate karein</h3>
+            <p>
+              Preview ke baad Generate audio button press karein.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">04</span>
+            <h3>Listen ya download</h3>
+            <p>
+              Browser mein audio sunein. MP3 option provider support par depend karega.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Use cases -->
+      <section class="content-section" aria-labelledby="usecases-title">
+        <div class="section-intro">
+          <span class="section-badge">Built for everyday work</span>
+          <h2 id="usecases-title">Useful for your workflow</h2>
+          <p>
+            Voice content ko prepare karne ke liye simple aur flexible workspace.
+          </p>
         </div>
 
-        <section class="results-section">
-          <div class="results-header">
-            <h3>🎧 Results</h3>
-            <span class="results-count">No generated items yet</span>
-          </div>
-          <div class="results-list" id="resultsList">
-            <div class="empty-state"><span class="empty-icon">🎵</span><p>Abhi koi item nahi.</p></div>
-          </div>
-        </section>
+        <div class="usecases-grid">
+          <article class="usecase-card">
+            <div class="usecase-icon" aria-hidden="true">▶</div>
+            <h3>Video voiceovers</h3>
+            <p>YouTube videos, reels aur short content ke scripts check karein.</p>
+          </article>
 
-        <section class="steps-section" id="usage">
-          <h3>How to use</h3>
-          <div class="steps-grid">
-            <div class="step-card"><div class="step-number">1</div><h4>Text likhein</h4><p>Apna script likhein, paste karein ya .txt file import karein.</p></div>
-            <div class="step-card"><div class="step-number">2</div><h4>Awaaz chunein</h4><p>Language, voice, speed aur pitch set karein.</p></div>
-            <div class="step-card"><div class="step-number">3</div><h4>Generate</h4><p>Generate dabayein aur awaaz sunein.</p></div>
-            <div class="step-card"><div class="step-number">4</div><h4>Download</h4><p>Result card se MP3 download karein.</p></div>
-          </div>
-        </section>
+          <article class="usecase-card">
+            <div class="usecase-icon" aria-hidden="true">Aa</div>
+            <h3>Learning</h3>
+            <p>Notes aur study material ko sun kar revise karein.</p>
+          </article>
 
-        <section class="usecases-section" id="usecases">
-          <h3>Use cases</h3>
-          <div class="usecases-grid">
-            <div class="usecase-card"><span class="usecase-icon">🎬</span><h4>Videos</h4><p>YouTube aur reels ke voiceover.</p></div>
-            <div class="usecase-card"><span class="usecase-icon">📚</span><h4>Padhai</h4><p>Notes ko sun kar yaad karein.</p></div>
-            <div class="usecase-card"><span class="usecase-icon">🎧</span><h4>Audiobooks</h4><p>Kahani ya article ko audio banayein.</p></div>
-            <div class="usecase-card"><span class="usecase-icon">📢</span><h4>Announcements</h4><p>Dukan ya event ke messages.</p></div>
-          </div>
-        </section>
+          <article class="usecase-card">
+            <div class="usecase-icon" aria-hidden="true">◌</div>
+            <h3>Articles</h3>
+            <p>Long-form text ko voice playback ke liye prepare karein.</p>
+          </article>
 
-        <section class="faq-section" id="faq">
-          <h3>FAQ</h3>
-          <div class="faq-list">
-            <details class="faq-item"><summary>Kya yeh free hai?</summary><p>Haan, yeh site free hai.</p></details>
-            <details class="faq-item"><summary>Awaaz robotic kyun lagti hai?</summary><p>Device voices aap ke phone par depend karti hain. "Natural voices" wale group se behtar awaaz chunein.</p></details>
-            <details class="faq-item"><summary>Kya Urdu chalti hai?</summary><p>Haan, Language mein Urdu chunein. Kuch devices mein Urdu voice install karni par sakti hai.</p></details>
-            <details class="faq-item"><summary>Download kaise karun?</summary><p>Generate ke baad result card par Download MP3 dabayein.</p></details>
-          </div>
-        </section>
-      </main>
+          <article class="usecase-card">
+            <div class="usecase-icon" aria-hidden="true">!</div>
+            <h3>Announcements</h3>
+            <p>Shop, event ya public announcement ka audio draft banayein.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="content-section faq-section" aria-labelledby="faq-title">
+        <div class="section-intro">
+          <span class="section-badge">Need to know</span>
+          <h2 id="faq-title">Frequently asked questions</h2>
+          <p>Voice aur audio export ke baare mein important information.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>
+              Kya yeh tool Urdu text ko read kar sakta hai?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Agar browser ya device mein Urdu voice available hai to Urdu text
+              read ho sakta hai. Voice availability operating system aur browser
+              par depend karti hai.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Urdu voice list mein nazar na aaye to kya karun?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Urdu language voice ko apne device settings mein enable karein aur
+              page reload karein. Kuch browsers voices ko thori der se load karte hain.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Kya browser voice direct MP3 download karti hai?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Browser ki built-in SpeechSynthesis aam tor par direct MP3 export
+              nahi karti. MP3 tab available hogi jab supported provider real audio
+              file return kare.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Kya mera text private rehta hai?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Browser voice use karte waqt text browser speech engine ko diya jata
+              hai. External provider use karte waqt provider ki processing apply
+              ho sakti hai. Sensitive information enter na karein.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Privacy note -->
+      <section class="privacy-card" aria-labelledby="privacy-title">
+        <div class="privacy-icon" aria-hidden="true">i</div>
+        <div>
+          <h2 id="privacy-title">Use responsibly</h2>
+          <p>
+            Yeh tool voice testing aur content preparation ke liye hai. Passwords,
+            private documents, financial details ya koi sensitive personal
+            information enter na karein.
+          </p>
+        </div>
+      </section>
     </div>
-  </div>
+  </main>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section"><h4>AI Voice Studio</h4><p>Free online text to speech tool.</p></div>
-      <div class="footer-section"><h4>Links</h4><a href="#usage">How to use</a><a href="#faq">FAQ</a></div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="AI Voice Studio home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 0 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z"></path>
+              <path d="M5 11a7 7 0 0 0 14 0M12 18v3M8.5 21h7"></path>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <strong>AI Voice</strong>
+            <span>Studio</span>
+          </span>
+        </a>
+
+        <p>
+          Urdu, Hindi aur English text ke liye simple browser-based voice studio.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#studio">Studio</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#faq">FAQ</a>
+      </div>
     </div>
-    <div class="footer-bottom">&copy; 2026 AI Voice Studio</div>
+
+    <div class="footer-bottom">
+      <span>© 2026 AI Voice Studio</span>
+      <span>Built for clear and accessible audio workflows</span>
+    </div>
   </footer>
 
-  <script src="https://js.puter.com/v2/"></script>
+  <noscript>
+    <div class="noscript-message">
+      Is website ko use karne ke liye JavaScript enable karein. Browser voice
+      functionality JavaScript ke baghair kaam nahi karegi.
+    </div>
+  </noscript>
+
   <script src="script.js" defer></script>
 </body>
 </html>
+
