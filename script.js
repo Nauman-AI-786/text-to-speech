@@ -50,6 +50,33 @@
       'ur-PK': 'السلام علیکم! یہ منتخب آواز کا نمونہ ہے۔'
     };
 
+    // ===== NATURAL VOICES (Puter.js, free) =====
+    const NATURAL_VOICES = [
+      { id: 'puter:elevenlabs:21m00Tcm4TlvDq8ikWAM', label: 'Rachel (Natural, Female)', gender: 'female', provider: 'elevenlabs', voice: '21m00Tcm4TlvDq8ikWAM' },
+      { id: 'puter:elevenlabs:pNInz6obpgDQGcFmaJgB', label: 'Adam (Natural, Male)', gender: 'male', provider: 'elevenlabs', voice: 'pNInz6obpgDQGcFmaJgB' },
+      { id: 'puter:openai:nova', label: 'Nova (Natural, Female)', gender: 'female', provider: 'openai', voice: 'nova' },
+      { id: 'puter:openai:shimmer', label: 'Shimmer (Natural, Female)', gender: 'female', provider: 'openai', voice: 'shimmer' },
+      { id: 'puter:openai:onyx', label: 'Onyx (Natural, Male)', gender: 'male', provider: 'openai', voice: 'onyx' },
+      { id: 'puter:openai:echo', label: 'Echo (Natural, Male)', gender: 'male', provider: 'openai', voice: 'echo' },
+      { id: 'puter:openai:alloy', label: 'Alloy (Natural, Neutral)', gender: 'all', provider: 'openai', voice: 'alloy' }
+    ];
+    let currentAudio = null;
+
+    function puterReady() {
+      return typeof puter !== 'undefined' && puter.ai && puter.ai.txt2speech;
+    }
+    function getNaturalSelected() {
+      return NATURAL_VOICES.find(n => n.id === voiceSelect.value) || null;
+    }
+    function naturalOptions(nv) {
+      return nv.provider === 'openai'
+        ? { provider: 'openai', model: 'gpt-4o-mini-tts', voice: nv.voice }
+        : { provider: 'elevenlabs', model: 'eleven_multilingual_v2', voice: nv.voice };
+    }
+    function stopNatural() {
+      if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+    }
+
     // ===== STATUS =====
     function setStatus(icon, message) {
       if (!statusBox) return;
@@ -103,20 +130,43 @@
       const term = voiceSearch.value.trim().toLowerCase();
       if (term) list = list.filter(v => (v.name + ' ' + v.lang).toLowerCase().includes(term));
 
+      const prev = voiceSelect.value;
       voiceSelect.innerHTML = '';
-      if (!list.length) {
+
+      const nat = puterReady() ? NATURAL_VOICES.filter(n =>
+        (selectedGender === 'all' || n.gender === 'all' || n.gender === selectedGender) &&
+        (!term || n.label.toLowerCase().includes(term))) : [];
+
+      if (nat.length) {
+        const g = document.createElement('optgroup');
+        g.label = '✨ Natural voices (Puter)';
+        nat.forEach(n => {
+          const o = document.createElement('option');
+          o.textContent = n.label;
+          o.value = n.id;
+          g.appendChild(o);
+        });
+        voiceSelect.appendChild(g);
+      }
+
+      if (list.length) {
+        const g = document.createElement('optgroup');
+        g.label = '📱 Device voices';
+        list.forEach(v => {
+          const o = document.createElement('option');
+          o.textContent = `${v.name} (${v.lang})`;
+          o.value = v.voiceURI;
+          g.appendChild(o);
+        });
+        voiceSelect.appendChild(g);
+      } else if (!nat.length) {
         const o = document.createElement('option');
-        o.textContent = 'Is language ki voice is device mein nahi hai';
+        o.textContent = 'Is selection ki koi voice nahi mili';
         o.value = '';
         voiceSelect.appendChild(o);
-        return;
       }
-      list.forEach(v => {
-        const o = document.createElement('option');
-        o.textContent = `${v.name} (${v.lang})`;
-        o.value = v.voiceURI;
-        voiceSelect.appendChild(o);
-      });
+
+      if (prev && Array.from(voiceSelect.options).some(o => o.value === prev)) voiceSelect.value = prev;
     }
 
     function getSelectedVoice() {
@@ -147,7 +197,37 @@
       return out;
     }
 
+    async function speakNatural(text, isPreview, nv) {
+      synth.cancel();
+      stopNatural();
+      try {
+        setStatus('⏳', 'Natural awaaz ban rahi hai (Puter sign-in maang sakta hai)...');
+        const audio = await puter.ai.txt2speech(text.slice(0, 3000), naturalOptions(nv));
+        currentAudio = audio;
+        audio.playbackRate = Math.min(2, Math.max(0.5, sliderFactor(speedRange)));
+        audio.onended = () => {
+          isGenerating = false;
+          stopBtn.disabled = true;
+          setStatus('✅', isPreview ? 'Preview complete' : 'Done!');
+        };
+        await audio.play();
+        stopBtn.disabled = false;
+        setStatus('🔊', 'Natural awaaz chal rahi hai...');
+      } catch (err) {
+        console.warn('Natural voice fail:', err);
+        setStatus('⚠️', 'Natural awaaz nahi chali, device awaaz use ho rahi hai');
+        speakBrowser(text, isPreview);
+      }
+    }
+
     function speakText(text, isPreview) {
+      const nv = getNaturalSelected();
+      if (nv && puterReady()) return speakNatural(text, isPreview, nv);
+      stopNatural();
+      speakBrowser(text, isPreview);
+    }
+
+    function speakBrowser(text, isPreview) {
       synth.cancel();
       const chunks = splitText(text);
       if (!chunks.length) return;
@@ -204,6 +284,7 @@
 
     function stopGeneration() {
       synth.cancel();
+      stopNatural();
       isGenerating = false;
       generateBtn.disabled = textInput.value.length === 0;
       stopBtn.disabled = true;
@@ -225,14 +306,8 @@
       if (typeof puter === 'undefined' || !puter.ai || !puter.ai.txt2speech) return false;
       try {
         setStatus('⏳', 'Awaaz ban rahi hai (Puter sign-in maang sakta hai)...');
-        const voiceId = selectedGender === 'male'
-          ? 'pNInz6obpgDQGcFmaJgB'   // male
-          : '21m00Tcm4TlvDq8ikWAM';  // female (default)
-        const audio = await puter.ai.txt2speech(text.slice(0, 3000), {
-          provider: 'elevenlabs',
-          voice: voiceId,
-          model: 'eleven_multilingual_v2'
-        });
+        const nv = getNaturalSelected() || NATURAL_VOICES.find(n => n.gender === (selectedGender === 'male' ? 'male' : 'female') && n.provider === 'elevenlabs');
+        const audio = await puter.ai.txt2speech(text.slice(0, 3000), naturalOptions(nv));
         const src = audio && (audio.src || audio.currentSrc);
         if (!src) return false;
 
