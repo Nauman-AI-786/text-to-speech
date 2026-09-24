@@ -274,15 +274,18 @@ function play(text,record){
 }
 
 /* ElevenLabs */
+const DEF=[['EXAVITQu4vr4xnSDxMaL','Sarah'],['JBFqnCBsd6RMkjVDRZzb','George'],['Xb7hH8MSUJpSbSDYk0k2','Alice'],['nPczCjzI2devNBz1zQrb','Brian'],['cgSgspJ2msm6clMCkdW9','Jessica'],['onwK4e9ZLuTAKqWW03F9','Daniel']].map(a=>({voice_id:a[0],name:a[1]}));
 async function loadEV(){
   const k=ku();
   if(!k){EV=[];$('ev').innerHTML='<option value="">Pehle API key save karein</option>';return}
   try{
     const r=await fetch('https://api.elevenlabs.io/v1/voices',{headers:{'xi-api-key':k}});
     const j=await r.json();if(!r.ok)throw new Error(errm(j));
-    EV=(j.voices||[]).sort((a,b)=>(a.category==='premade'?0:1)-(b.category==='premade'?0:1)||a.name.localeCompare(b.name));
-    fillEV();say(EV.length+' MP3 voices mil gayi. Ab Download MP3 use kar sakte hain.');
-  }catch(e){$('ev').innerHTML='<option value="">Voices load nahi hui</option>';say('ElevenLabs voices load nahi hui: '+e.message+'. Key aur permissions check karein.')}
+    EV=j.voices||[];
+    say(EV.length+' MP3 voices mil gayi.');
+  }catch(e){EV=[];say('Voices list nahi mili ('+e.message+'). Default voices lag di gayi hain.')}
+  if(!EV.length)EV=DEF;
+  fillEV();
 }
 function fillEV(){
   let list=EV;
