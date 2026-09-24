@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,93 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI Voice Studio | Premium Text to Speech</title>
 <meta name="description" content="Premium Text to Speech Studio: Urdu, Hindi, English aur device ki sab languages mein text ko awaz mein badlein aur MP3 download karein.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090b14;--card:rgba(255,255,255,.045);--ln:rgba(255,255,255,.1);--soft:rgba(255,255,255,.05);--tx:#f3efe6;--mu:#9a9fb5;--au:#d9b160;--gd:linear-gradient(135deg,#f7e6b4,#d9b160 55%,#b9822f);--on:#1a1408;--nav:rgba(9,11,20,.8)}
-[data-t=light]{--bg:#f7f3ea;--card:#fff;--ln:rgba(60,45,10,.13);--soft:#f3eee1;--tx:#1a1c2b;--mu:#666a80;--au:#9a6b1c;--gd:linear-gradient(135deg,#c99a3c,#a87424);--on:#fff;--nav:rgba(247,243,234,.85)}
+/* ============ Tokens ============ */
+:root{
+  --bg:#0f1918;
+  --bg-2:#14211f;
+  --panel:#16221f;
+  --panel-soft:#1c2b28;
+  --line:rgba(224,244,236,.09);
+  --tx:#e7efe9;
+  --mu:#93a8a1;
+  --accent:#6fbfa0;
+  --accent-2:#4a9a86;
+  --ink:#06211a;
+  --radius-lg:22px;
+  --radius-md:14px;
+  --radius-sm:10px;
+}
+[data-t=light]{
+  --bg:#f5f8f4;
+  --bg-2:#eef3ee;
+  --panel:#ffffff;
+  --panel-soft:#eaf2ec;
+  --line:rgba(20,55,44,.13);
+  --tx:#1c2b25;
+  --mu:#607870;
+  --accent:#2f8e73;
+  --accent-2:#1e6c59;
+  --ink:#ffffff;
+}
+
+/* ============ Reset ============ */
 *{box-sizing:border-box;margin:0}
-body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);line-height:1.55;background:radial-gradient(800px 500px at 8% -5%,rgba(90,60,190,.28),transparent 60%),radial-gradient(700px 500px at 100% 20%,rgba(217,177,96,.14),transparent 60%),var(--bg);background-attachment:fixed}
+html{scroll-padding-top:80px}
+body{
+  font-family:Karla,system-ui,sans-serif;
+  color:var(--tx);
+  line-height:1.6;
+  background:
+    radial-gradient(700px 420px at 10% -8%, rgba(111,191,160,.10), transparent 62%),
+    radial-gradient(640px 460px at 96% 10%, rgba(74,154,134,.09), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:Fraunces,serif}
 .w{max-width:1120px;margin:0 auto;padding:0 20px}
-svg.i{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
-nav{position:sticky;top:0;z-index:9;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0)}
-nav .w{display:flex;align-items:center;gap:20px;height:66px}
-.lg{display:flex;align-items:center;gap:11px;margin-right:auto;text-decoration:none;color:var(--tx)}
-.lg i{width:40px;height:40px;border-radius:12px;background:var(--gd);color:var(--on);display:grid;place-items:center}
-.lg b{display:block;font:700 1.25rem/1 'Cormorant Garamond',serif;letter-spacing:.02em}.lg small{font-size:.66rem;color:var(--au);letter-spacing:.2em}
-nav a.l{color:var(--mu);text-decoration:none;font-size:.88rem;font-weight:500}
-.tg{border:1px solid var(--ln);background:var(--card);color:var(--au);border-radius:99px;padding:9px 16px;font:600 .78rem Manrope;cursor:pointer}
-.hero{margin:26px 0 20px;border:1px solid var(--ln);border-radius:28px;padding:clamp(26px,5vw,52px);display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:center;background:linear-gradient(140deg,rgba(255,255,255,.07),rgba(255,255,255,.015));overflow:hidden}
-.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(217,177,96,.4);color:var(--au);border-radius:99px;padding:6px 14px;font-size:.75rem;font-weight:600}
-.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--au)}
-.hero h1{font:700 clamp(2.6rem,7vw,4.6rem)/1 'Cormorant Garamond',serif;margin:22px 0 16px;background:var(--gd);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mu);max-width:50ch}
-.bt{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 20px}
-.bt a{padding:14px 26px;border-radius:99px;font-weight:700;font-size:.88rem;text-decoration:none;border:1px solid var(--ln);color:var(--tx)}
-.bt a:first-child{background:var(--gd);color:var(--on);border:0;box-shadow:0 12px 30px -10px rgba(217,177,96,.6)}
-.pv{font-size:.74rem}
-.ring{position:relative;width:250px;height:250px;margin:auto}
-.ring::before,.ring::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(217,177,96,.22)}
-.ring::before{inset:-14px}.ring::after{inset:28px;border-color:rgba(217,177,96,.14)}
-.ring s{position:absolute;left:50%;top:50%;width:3px;margin-left:-1.5px;height:var(--h);border-radius:3px;background:var(--gd);transform-origin:0 0;transform:rotate(calc(var(--a)*1deg)) translateY(84px)}
-.ring.live s{animation:hb 1s ease-in-out infinite;animation-delay:calc(var(--a)*3ms)}
-@keyframes hb{50%{height:calc(var(--h)*.35)}}
-.core{position:absolute;inset:82px;border-radius:50%;background:var(--gd);color:var(--on);display:grid;place-items:center;font-size:2rem;box-shadow:0 0 60px rgba(217,177,96,.4)}
-.vr{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;color:var(--au);border:1px solid var(--ln);background:var(--bg);border-radius:99px;padding:4px 12px}
-.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.fc div,.card,.sec,.use{background:var(--card);border:1px solid var(--ln);border-radius:22px;backdrop-filter:blur(10px)}
-.fc div{padding:18px}.fc svg{font-size:1.5rem;color:var(--au);margin-bottom:10px}
-.fc b{display:block;font-size:.88rem}.fc span{font-size:.76rem;color:var(--mu)}
-.app{display:grid;grid-template-columns:330px 1fr;gap:20px;align-items:start}
-.card{padding:22px;margin-bottom:16px}
-.ey{font-size:.75rem;color:var(--au);font-weight:600;letter-spacing:.06em}
-h2{font:700 1.75rem/1.15 'Cormorant Garamond',serif;margin:2px 0 14px}
-label{display:block;font-size:.8rem;font-weight:600;margin:15px 0 7px;color:var(--mu)}
-select,input[type=text],input[type=password],textarea{width:100%;background:var(--soft);border:1px solid var(--ln);color:var(--tx);border-radius:13px;padding:12px;font:500 .95rem Manrope,sans-serif}
-select option{background:#151829;color:#f3efe6}
-textarea{min-height:210px;resize:vertical;line-height:1.75;font-weight:400}
-:focus-visible{outline:2px solid var(--au);outline-offset:2px}
-.seg{display:flex;background:var(--soft);border-radius:13px;padding:4px;border:1px solid var(--ln)}
-.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px;border-radius:9px;font:600 .76rem Manrope;cursor:pointer}
-.seg .on{background:var(--gd);color:var(--on)}
-.gb{width:100%;border:1px solid var(--ln);background:var(--soft);color:var(--tx);border-radius:13px;padding:12px;font:600 .82rem Manrope;cursor:pointer;margin-top:10px}
-.gb:hover,.sm:hover{border-color:var(--au)}
+img,svg{max-width:100%}
+svg.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+::selection{background:var(--accent);color:var(--ink)}
+
+/* ============ Nav ============ */
+nav{
+  position:sticky;top:0;z-index:9;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0);
+}
+nav .w{display:flex;align-items:center;gap:22px;height:64px}
+.lg{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:var(--tx)}
+.lg i{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink);display:grid;place-items:center;flex:none}
+.lg b{display:block;font:600 1.12rem/1 Fraunces,serif;letter-spacing:.01em}
+.lg small{font-size:.62rem;color:var(--mu);letter-spacing:.16em}
+nav a.l{color:var(--mu);text-decoration:none;font-size:.85rem;font-weight:500}
+nav a.l:hover{color:var(--tx)}
+.tg{border:1px solid var(--line);background:var(--panel-soft);color:var(--accent);border-radius:99px;padding:8px 15px;font:600 .76rem Karla;cursor:pointer}
+.tg:hover{border-color:var(--accent)}
+
+/* ============ Hero ============ */
+.hero{
+  margin:28px 0 18px;
+  padding:clamp(28px,5vw,54px);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+}
+.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);color:var(--accent);border-radius:99px;padding:6px 14px;font-size:.74rem;font-weight:600;background:var(--panel-soft)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{
+  font:500 clamp(2.5rem,6.4vw,4.1rem)/1.04 Fraunces,serif;
+  margin:20px 0 16px;
+  color:var(--tx);
+  letter-spacing:-.01em;
+}
+.hero p{color:var(--mu);max-width:46ch;font-size:1.02rem}
+.bt{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 18px}
+.bt a{padding:13px 24px;border-radius:99px;font-weight:600;font-size:.87rem;text-decoration:none;border:1px solid var(--line);color:var(--tx)}
+.bt a:first-child{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink);border:0;box-shadow:0 10px 26px -12px rgba(111,191,160,.5)}
+.bt a:last-child:hover{border-color:var(--accent);color:var(--accent)}
+.pv{font-size:.74rem;color:var(--mu);max-width:48ch}
+
+/* orb / waveform visual */
+.ring{position:relative;width:230px;height:230px;margin:auto}
+.ring::before{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid var(--line)}
+.ring s{position:absolute;left:50%;top:50%;width:3px;margin-left:-1.5px;height:var(--h);border-radius:3px;background:linear-gradient(180deg,var(--accent),var(--accent-2));opacity:.85;transform-origin:0 0;transform:rotate(calc(var(--a)*1deg)) translateY(78px)}
+.ring.live s{animation:hb 1.1s ease-in-out infinite;animation-delay:calc(var(--a)*3ms)}
+@keyframes hb{50%{height:calc(var(--h)*.4)}}
+.core{position:absolute;inset:76px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink);display:grid;place-items:center;font-size:1.9rem;box-shadow:0 0 40px rgba(111,191,160,.28)}
+.vr{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.7rem;color:var(--accent);border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:4px 12px}
+
+/* ============ Feature strip ============ */
+.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.fc div{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md);padding:17px}
+.fc svg{color:var(--accent);margin-bottom:9px}
+.fc b{display:block;font-size:.87rem;font-weight:700}
+.fc span{font-size:.78rem;color:var(--mu)}
+
+/* ============ App / workspace ============ */
+.app{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;margin-bottom:16px}
+.ey{font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:.03em}
+h2{font:500 1.7rem/1.15 Fraunces,serif;margin:3px 0 14px}
+label{display:block;font-size:.79rem;font-weight:600;margin:16px 0 7px;color:var(--mu)}
+select,input[type=text],input[type=password],textarea{
+  width:100%;background:var(--panel-soft);border:1px solid var(--line);color:var(--tx);
+  border-radius:var(--radius-sm);padding:12px;font:500 .94rem Karla,sans-serif;
+}
+select option{background:var(--panel);color:var(--tx)}
+textarea{min-height:200px;resize:vertical;line-height:1.75;font-weight:400}
+.seg{display:flex;background:var(--panel-soft);border-radius:var(--radius-sm);padding:4px;border:1px solid var(--line)}
+.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px;border-radius:8px;font:600 .76rem Karla;cursor:pointer}
+.seg .on{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink)}
+.gb{width:100%;border:1px solid var(--line);background:var(--panel-soft);color:var(--tx);border-radius:var(--radius-sm);padding:12px;font:600 .82rem Karla;cursor:pointer;margin-top:10px}
+.gb:hover,.sm:hover{border-color:var(--accent)}
 .hn{font-size:.72rem;color:var(--mu);margin-top:8px}
-.rg{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin:18px 0 8px;color:var(--mu)}.rg b{color:var(--au)}
-input[type=range]{width:100%;accent-color:var(--au)}
+.rg{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin:18px 0 8px;color:var(--mu)}
+.rg b{color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
 .sc{display:flex;justify-content:space-between;font-size:.65rem;color:var(--mu)}
-.note{background:var(--soft);border:1px solid var(--ln);border-radius:13px;padding:14px;font-size:.75rem;color:var(--mu);margin-top:18px}
+.note{background:var(--panel-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:15px;font-size:.75rem;color:var(--mu);margin-top:18px}
 .note b{color:var(--tx)}.note label{margin:12px 0 6px}
-.im{display:block;text-align:center;border:1px dashed var(--au);color:var(--au);border-radius:13px;padding:12px;font:600 .82rem Manrope;cursor:pointer;margin-top:12px}
+.im{display:block;text-align:center;border:1px dashed var(--accent);color:var(--accent);border-radius:var(--radius-sm);padding:12px;font:600 .82rem Karla;cursor:pointer;margin-top:12px}
 .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
 .ct{font-size:.75rem;color:var(--mu);font-weight:600}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.sm{border:1px solid var(--ln);background:var(--soft);color:var(--tx);border-radius:99px;padding:10px 18px;font:600 .76rem Manrope;cursor:pointer}
+.sm{border:1px solid var(--line);background:var(--panel-soft);color:var(--tx);border-radius:99px;padding:10px 18px;font:600 .76rem Karla;cursor:pointer}
 .sm:disabled{opacity:.5;cursor:wait}
 .act{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-.go{flex:1;min-width:180px;border:0;border-radius:99px;background:var(--gd);color:var(--on);padding:18px;font:700 .95rem Manrope;cursor:pointer;box-shadow:0 14px 34px -12px rgba(217,177,96,.7)}
-.stt{background:var(--card);border:1px solid var(--ln);border-left:3px solid var(--au);border-radius:14px;padding:16px;font-size:.85rem;font-weight:600;margin-bottom:16px}
-.pb{height:4px;background:var(--ln);border-radius:4px;margin-top:10px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--gd);transition:width .3s}
-.ses{background:var(--soft);border:1px solid var(--ln);border-radius:15px;padding:14px;margin-top:12px;max-width:460px}
-.ses p{font-size:.85rem}.ses .m{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin:8px 0}
+.go{flex:1;min-width:180px;border:0;border-radius:99px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink);padding:17px;font:700 .93rem Karla;cursor:pointer;box-shadow:0 12px 28px -14px rgba(111,191,160,.55)}
+.stt{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius-md);padding:16px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+.pb{height:4px;background:var(--line);border-radius:4px;margin-top:10px;overflow:hidden}
+.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s}
+.ses{background:var(--panel-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:14px;margin-top:12px;max-width:460px}
+.ses p{font-size:.85rem}
+.ses .m{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin:8px 0}
 .ses .b{display:flex;gap:8px;margin-top:8px}.ses .sm{flex:1;padding:8px}
 .ses audio{width:100%;height:38px;margin-top:6px}
 .empty{color:var(--mu);font-size:.85rem}
-.sec{padding:clamp(22px,4vw,36px);margin-top:20px}
-.sec>p{color:var(--mu);margin-bottom:18px}
+
+/* ============ Content sections ============ */
+.sec{padding:clamp(24px,4vw,38px);margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg)}
+.sec>p{color:var(--mu);margin-bottom:18px;max-width:60ch}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.it{background:var(--soft);border:1px solid var(--ln);border-radius:16px;padding:18px}
-.it i{display:inline-grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:9px;background:var(--gd);color:var(--on);font:700 .72rem Manrope;margin-bottom:12px}
-.it b{display:block;margin-bottom:4px}.it span{font-size:.82rem;color:var(--mu)}
-details{background:var(--soft);border:1px solid var(--ln);border-radius:14px;padding:16px}
-summary{cursor:pointer;font-weight:600;font-size:.86rem;list-style:none;display:flex;justify-content:space-between;gap:10px}
-summary::after{content:"+";color:var(--au);font-size:1.1rem}details[open] summary::after{content:"−"}
+.it{background:var(--panel-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:18px}
+.it i{display:inline-grid;place-items:center;min-width:32px;height:28px;padding:0 8px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--ink);font:700 .7rem Karla;margin-bottom:12px}
+.it b{display:block;margin-bottom:4px;font-size:.95rem}
+.it span{font-size:.83rem;color:var(--mu)}
+details{background:var(--panel-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px}
+summary{cursor:pointer;font-weight:600;font-size:.87rem;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--accent);font-size:1.1rem}
+details[open] summary::after{content:"−"}
 details p{font-size:.85rem;color:var(--mu);margin-top:10px}
-.use{margin-top:20px;padding:20px;display:flex;gap:14px;font-size:.85rem;color:var(--mu)}.use b{color:var(--tx);display:block}.use svg{font-size:1.4rem;color:var(--au);flex:none}
-footer{margin-top:40px;border-top:1px solid var(--ln);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0))}
+.use{margin-top:20px;padding:20px;display:flex;gap:14px;font-size:.85rem;color:var(--mu);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md)}
+.use b{color:var(--tx);display:block}
+.use svg{color:var(--accent);flex:none}
+
+/* ============ Footer ============ */
+footer{margin-top:40px;border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0))}
 footer .w>div{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
-footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--mu);text-decoration:none;font-size:.85rem;margin-left:14px}
-@media(max-width:860px){.hero,.app{grid-template-columns:1fr}.fc,.g2{grid-template-columns:1fr 1fr}.ring{transform:scale(.85)}}
-@media(max-width:520px){.fc,.g2{grid-template-columns:1fr}.go{flex-basis:100%}}
+footer p{font-size:.8rem;color:var(--mu);margin-top:14px}
+footer a.f{color:var(--mu);text-decoration:none;font-size:.85rem;margin-left:14px}
+footer a.f:hover{color:var(--accent)}
+
+@media(max-width:860px){
+  .hero,.app{grid-template-columns:1fr}
+  .fc,.g2{grid-template-columns:1fr 1fr}
+  .ring{transform:scale(.85)}
+}
+@media(max-width:520px){
+  .fc,.g2{grid-template-columns:1fr}
+  .go{flex-basis:100%}
+}
 @media(prefers-reduced-motion:reduce){.ring.live s{animation:none}}
 </style>
 </head>
@@ -107,7 +203,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 </defs></svg>
 
 <nav><div class="w">
- <a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><small>STUDIO</small></span></a>
+ <a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><br><small>STUDIO</small></span></a>
  <a class="l" href="#how">How it works</a><a class="l" href="#faq">FAQ</a>
  <button class="tg" id="tg" type="button">Light mode</button>
 </div></nav>
@@ -116,7 +212,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 <section class="hero">
  <div>
   <span class="pill">Urdu, Hindi, English aur sab languages</span>
-  <h1>Text to Speech Studio</h1>
+  <h1 class="serif">Give your words<br>a voice worth hearing.</h1>
   <p>Text likhein, apni available voice chunein, audio sunein aur MP3 download karein.</p>
   <div class="bt"><a href="#studio">Start creating</a><a href="#how">Learn how it works</a></div>
   <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p>
@@ -133,7 +229,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 
 <div class="app" id="studio">
  <aside class="card">
-  <div class="ey">Workspace</div><h2>Voice settings</h2>
+  <div class="ey">Workspace</div><h2 class="serif">Voice settings</h2>
   <label for="lang" style="margin-top:0">Language</label><select id="lang"></select>
   <label>Voice type</label>
   <div class="seg" id="seg"><button data-g="all" class="on" type="button">All</button><button data-g="f" type="button">Female</button><button data-g="m" type="button">Male</button></div>
@@ -161,26 +257,26 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 
  <div>
   <div class="card">
-   <div class="hd"><div><div class="ey">Your content</div><h2>Write your script</h2></div><span class="ct" id="st">0 chars / 0 words / 0 lines</span></div>
+   <div class="hd"><div><div class="ey">Your content</div><h2 class="serif">Write your script</h2></div><span class="ct" id="st">0 chars / 0 words / 0 lines</span></div>
    <textarea id="txt" dir="auto" maxlength="10000" placeholder="Yahan apna text likhein ya paste karein..." aria-label="Script"></textarea>
    <p class="hn"><span id="cc">0</span> / 10,000 &middot; Maximum 10,000 characters. Ctrl + Enter se generate kar sakte hain.</p>
    <div class="row"><button class="sm" id="cp" type="button">Copy text</button><button class="sm" id="cl" type="button">Clear</button></div>
   </div>
   <div class="act">
    <button class="go" id="go" type="button">&#9679; Generate audio</button>
-   <button <button class="sm" id="dlBtn" type="button">&#8595; Download MP3</button>
+   <button class="sm" id="dlBtn" type="button">&#8595; Download MP3</button>
    <button class="sm" id="ps" type="button">Pause</button>
    <button class="sm" id="sp" type="button">&#9632; Stop</button>
   </div>
   <div class="stt" aria-live="polite"><span id="ms">Ready. Text likhein aur Generate audio dabayein.</span><div class="pb"><i id="pg"></i></div></div>
   <div class="card">
-   <div class="hd"><div><div class="ey">Your sessions</div><h2>Generated audio</h2></div><span class="ct" id="n">0 items</span></div>
+   <div class="hd"><div><div class="ey">Your sessions</div><h2 class="serif">Generated audio</h2></div><span class="ct" id="n">0 items</span></div>
    <div id="ses"></div>
   </div>
  </div>
 </div>
 
-<section class="sec" id="how"><div class="ey">Simple workflow</div><h2>How it works</h2><p>Kuch simple steps mein apne text ko sunne ke liye tayyar karein.</p>
+<section class="sec" id="how"><div class="ey">Simple workflow</div><h2 class="serif">How it works</h2><p>Kuch simple steps mein apne text ko sunne ke liye tayyar karein.</p>
  <div class="g2">
   <div class="it"><i>01</i><b>Text likhein</b><span>Apna script type karein, paste karein ya TXT file import karein.</span></div>
   <div class="it"><i>02</i><b>Voice choose karein</b><span>Language, voice type, speed aur pitch apni zaroorat ke mutabiq set karein.</span></div>
@@ -189,7 +285,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
  </div>
 </section>
 
-<section class="sec"><div class="ey">Built for everyday work</div><h2>Useful for your workflow</h2><p>Voice content ko prepare karne ke liye simple aur flexible workspace.</p>
+<section class="sec"><div class="ey">Built for everyday work</div><h2 class="serif">Useful for your workflow</h2><p>Voice content ko prepare karne ke liye simple aur flexible workspace.</p>
  <div class="g2">
   <div class="it"><b>Video voiceovers</b><span>YouTube videos, reels aur short content ke scripts check karein.</span></div>
   <div class="it"><b>Learning</b><span>Notes aur study material ko sun kar revise karein.</span></div>
@@ -198,7 +294,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
  </div>
 </section>
 
-<section class="sec" id="faq"><div class="ey">Need to know</div><h2>Frequently asked questions</h2><p>Voice aur audio export ke baare mein important information.</p>
+<section class="sec" id="faq"><div class="ey">Need to know</div><h2 class="serif">Frequently asked questions</h2><p>Voice aur audio export ke baare mein important information.</p>
  <div class="g2">
   <details><summary>Kya yeh tool Urdu text ko read kar sakta hai?</summary><p>Haan, agar aapke device par Urdu voice maujood ho. Language list mein Urdu nazar aaye to use select karein.</p></details>
   <details><summary>Urdu voice list mein nazar na aaye to kya karun?</summary><p>Chrome ya Edge use karein. Android par Settings mein Google Text-to-speech ke andar Urdu voice install karein, phir page refresh karein.</p></details>
@@ -211,7 +307,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--
 </div>
 
 <footer><div class="w">
- <div><a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><small>STUDIO</small></span></a><span><a class="f" href="#studio">Studio</a><a class="f" href="#how">How it works</a><a class="f" href="#faq">FAQ</a></span></div>
+ <div><a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><br><small>STUDIO</small></span></a><span><a class="f" href="#studio">Studio</a><a class="f" href="#how">How it works</a><a class="f" href="#faq">FAQ</a></span></div>
  <p>Urdu, Hindi aur English text ke liye simple voice studio. MP3 audio ElevenLabs se. &copy; 2026 AI Voice Studio.</p>
 </div></footer>
 
@@ -230,7 +326,7 @@ const PV={ur:'السلام علیکم، یہ آواز کا نمونہ ہے۔',hi
 const ku=()=>{try{return localStorage.getItem('aiv-ek')||''}catch(e){return ''}};
 const errm=j=>{const d=j&&j.detail;return typeof d==='string'?d:(d&&(d.message||d.status))||'API error'};
 
-for(let i=0;i<60;i++){const s=document.createElement('s');s.style.setProperty('--a',i*6);s.style.setProperty('--h',(10+Math.abs(Math.sin(i*.65))*24+(i%3)*3)+'px');$('orb').appendChild(s)}
+for(let i=0;i<60;i++){const s=document.createElement('s');s.style.setProperty('--a',i*6);s.style.setProperty('--h',(9+Math.abs(Math.sin(i*.65))*22+(i%3)*3)+'px');$('orb').appendChild(s)}
 
 function loadV(){
   V=S.getVoices();if(!V.length)return;
