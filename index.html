@@ -1,114 +1,134 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI Voice Studio | Text to Speech</title>
-<meta name="description" content="Text to Speech Studio: Urdu, Hindi, English aur device ki sab languages mein text ko awaz mein badlein.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>AI Voice Studio | Premium Text to Speech</title>
+<meta name="description" content="Premium Text to Speech Studio: Urdu, Hindi, English aur device ki sab languages mein text ko awaz mein badlein aur MP3 download karein.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f5fb;--card:#fff;--tx:#151a33;--mu:#6b7194;--ln:#e6e8f4;--soft:#f6f7fd;--ac:#5b5fe8;--gr:linear-gradient(120deg,#6366f1,#8b5cf6 35%,#ec4899 70%,#f59e0b)}
-[data-t=dark]{--bg:#0d1020;--card:#161a30;--tx:#eef0ff;--mu:#9aa1c6;--ln:#2a3050;--soft:#1b2040;--ac:#8b8fff}
+:root{--bg:#090b14;--card:rgba(255,255,255,.045);--ln:rgba(255,255,255,.1);--soft:rgba(255,255,255,.05);--tx:#f3efe6;--mu:#9a9fb5;--au:#d9b160;--gd:linear-gradient(135deg,#f7e6b4,#d9b160 55%,#b9822f);--on:#1a1408;--nav:rgba(9,11,20,.8)}
+[data-t=light]{--bg:#f7f3ea;--card:#fff;--ln:rgba(60,45,10,.13);--soft:#f3eee1;--tx:#1a1c2b;--mu:#666a80;--au:#9a6b1c;--gd:linear-gradient(135deg,#c99a3c,#a87424);--on:#fff;--nav:rgba(247,243,234,.85)}
 *{box-sizing:border-box;margin:0}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;padding-bottom:env(safe-area-inset-bottom,0)}
+body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);line-height:1.55;background:radial-gradient(800px 500px at 8% -5%,rgba(90,60,190,.28),transparent 60%),radial-gradient(700px 500px at 100% 20%,rgba(217,177,96,.14),transparent 60%),var(--bg);background-attachment:fixed}
 .w{max-width:1120px;margin:0 auto;padding:0 20px}
-nav{position:sticky;top:0;z-index:9;background:var(--card);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0)}
-nav .w{display:flex;align-items:center;gap:18px;height:64px}
-.lg{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:var(--tx)}
-.lg i{width:42px;height:42px;border-radius:13px;background:var(--gr);display:grid;place-items:center;color:#fff;font-style:normal}
-.lg b{display:block;font-size:1rem;line-height:1.1}.lg small{font-size:.65rem;letter-spacing:.14em;color:var(--mu);font-weight:600}
-nav a.l{color:var(--mu);text-decoration:none;font-size:.9rem;font-weight:500}
-.tg{width:42px;height:42px;border-radius:50%;border:1px solid var(--ln);background:var(--card);color:var(--tx);cursor:pointer;font-size:1.1rem}
-.hero{margin:24px 0 20px;border-radius:26px;background:var(--gr);color:#fff;padding:clamp(24px,5vw,44px);display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:center;overflow:hidden}
-.pill{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:6px 14px;font-size:.72rem;font-weight:700;letter-spacing:.1em}
-.hero h1{font-size:clamp(2.1rem,6vw,3.4rem);letter-spacing:-.04em;line-height:1.05;margin:22px 0 14px;font-weight:800}
-.hero p{opacity:.92;max-width:52ch}
-.bt{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
-.bt a{padding:13px 22px;border-radius:99px;font-weight:600;font-size:.9rem;text-decoration:none;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff}
-.bt a:first-child{background:#fff;color:#151a33}
-.pv{font-size:.75rem;opacity:.85;max-width:56ch}
-.orb{width:min(230px,60vw);aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);margin:auto;display:flex;align-items:center;justify-content:center;gap:5px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.orb s{display:block;width:5px;border-radius:5px;background:#fff;opacity:.9;animation:wv 1.3s ease-in-out infinite}
-@keyframes wv{50%{transform:scaleY(.4)}}
+svg.i{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+nav{position:sticky;top:0;z-index:9;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0)}
+nav .w{display:flex;align-items:center;gap:20px;height:66px}
+.lg{display:flex;align-items:center;gap:11px;margin-right:auto;text-decoration:none;color:var(--tx)}
+.lg i{width:40px;height:40px;border-radius:12px;background:var(--gd);color:var(--on);display:grid;place-items:center}
+.lg b{display:block;font:700 1.25rem/1 'Cormorant Garamond',serif;letter-spacing:.02em}.lg small{font-size:.66rem;color:var(--au);letter-spacing:.2em}
+nav a.l{color:var(--mu);text-decoration:none;font-size:.88rem;font-weight:500}
+.tg{border:1px solid var(--ln);background:var(--card);color:var(--au);border-radius:99px;padding:9px 16px;font:600 .78rem Manrope;cursor:pointer}
+.hero{margin:26px 0 20px;border:1px solid var(--ln);border-radius:28px;padding:clamp(26px,5vw,52px);display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:center;background:linear-gradient(140deg,rgba(255,255,255,.07),rgba(255,255,255,.015));overflow:hidden}
+.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(217,177,96,.4);color:var(--au);border-radius:99px;padding:6px 14px;font-size:.75rem;font-weight:600}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--au)}
+.hero h1{font:700 clamp(2.6rem,7vw,4.6rem)/1 'Cormorant Garamond',serif;margin:22px 0 16px;background:var(--gd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mu);max-width:50ch}
+.bt{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 20px}
+.bt a{padding:14px 26px;border-radius:99px;font-weight:700;font-size:.88rem;text-decoration:none;border:1px solid var(--ln);color:var(--tx)}
+.bt a:first-child{background:var(--gd);color:var(--on);border:0;box-shadow:0 12px 30px -10px rgba(217,177,96,.6)}
+.pv{font-size:.74rem}
+.ring{position:relative;width:250px;height:250px;margin:auto}
+.ring::before,.ring::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(217,177,96,.22)}
+.ring::before{inset:-14px}.ring::after{inset:28px;border-color:rgba(217,177,96,.14)}
+.ring s{position:absolute;left:50%;top:50%;width:3px;margin-left:-1.5px;height:var(--h);border-radius:3px;background:var(--gd);transform-origin:0 0;transform:rotate(calc(var(--a)*1deg)) translateY(84px)}
+.ring.live s{animation:hb 1s ease-in-out infinite;animation-delay:calc(var(--a)*3ms)}
+@keyframes hb{50%{height:calc(var(--h)*.35)}}
+.core{position:absolute;inset:82px;border-radius:50%;background:var(--gd);color:var(--on);display:grid;place-items:center;font-size:2rem;box-shadow:0 0 60px rgba(217,177,96,.4)}
+.vr{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;color:var(--au);border:1px solid var(--ln);background:var(--bg);border-radius:99px;padding:4px 12px}
 .fc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.fc div,.card,.sec{background:var(--card);border:1px solid var(--ln);border-radius:20px}
-.fc div{padding:18px}.fc i{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;color:#fff;font-style:normal;font-weight:700;margin-bottom:10px}
-.fc b{display:block;font-size:.85rem}.fc span{font-size:.75rem;color:var(--mu)}
-.app{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+.fc div,.card,.sec,.use{background:var(--card);border:1px solid var(--ln);border-radius:22px;backdrop-filter:blur(10px)}
+.fc div{padding:18px}.fc svg{font-size:1.5rem;color:var(--au);margin-bottom:10px}
+.fc b{display:block;font-size:.88rem}.fc span{font-size:.76rem;color:var(--mu)}
+.app{display:grid;grid-template-columns:330px 1fr;gap:20px;align-items:start}
 .card{padding:22px;margin-bottom:16px}
-.ey{font-size:.68rem;font-weight:700;letter-spacing:.14em;color:var(--ac);text-transform:uppercase}
-h2{font-size:1.5rem;letter-spacing:-.03em;margin:4px 0 14px}
-label{display:block;font-size:.8rem;font-weight:600;margin:14px 0 7px}
-select,input[type=text],textarea{width:100%;background:var(--soft);border:1px solid var(--ln);color:var(--tx);border-radius:12px;padding:12px;font:500 .95rem Inter,sans-serif}
-textarea{min-height:200px;resize:vertical;line-height:1.7;font-weight:400}
-:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.seg{display:flex;background:var(--soft);border-radius:12px;padding:4px}
-.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px;border-radius:9px;font:600 .75rem Inter;cursor:pointer}
-.seg .on{background:var(--card);color:var(--ac);box-shadow:0 1px 4px rgba(0,0,0,.12)}
-.gb{width:100%;border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:12px;padding:12px;font:600 .82rem Inter;cursor:pointer;margin-top:10px}
-.gb:hover,.sm:hover{border-color:var(--ac)}
+.ey{font-size:.75rem;color:var(--au);font-weight:600;letter-spacing:.06em}
+h2{font:700 1.75rem/1.15 'Cormorant Garamond',serif;margin:2px 0 14px}
+label{display:block;font-size:.8rem;font-weight:600;margin:15px 0 7px;color:var(--mu)}
+select,input[type=text],input[type=password],textarea{width:100%;background:var(--soft);border:1px solid var(--ln);color:var(--tx);border-radius:13px;padding:12px;font:500 .95rem Manrope,sans-serif}
+select option{background:#151829;color:#f3efe6}
+textarea{min-height:210px;resize:vertical;line-height:1.75;font-weight:400}
+:focus-visible{outline:2px solid var(--au);outline-offset:2px}
+.seg{display:flex;background:var(--soft);border-radius:13px;padding:4px;border:1px solid var(--ln)}
+.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px;border-radius:9px;font:600 .76rem Manrope;cursor:pointer}
+.seg .on{background:var(--gd);color:var(--on)}
+.gb{width:100%;border:1px solid var(--ln);background:var(--soft);color:var(--tx);border-radius:13px;padding:12px;font:600 .82rem Manrope;cursor:pointer;margin-top:10px}
+.gb:hover,.sm:hover{border-color:var(--au)}
 .hn{font-size:.72rem;color:var(--mu);margin-top:8px}
-.rg{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin:16px 0 8px}.rg b{color:var(--ac)}
-input[type=range]{width:100%;accent-color:var(--ac)}
+.rg{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin:18px 0 8px;color:var(--mu)}.rg b{color:var(--au)}
+input[type=range]{width:100%;accent-color:var(--au)}
 .sc{display:flex;justify-content:space-between;font-size:.65rem;color:var(--mu)}
-.note{background:var(--soft);border:1px solid var(--ln);border-radius:12px;padding:12px;font-size:.75rem;color:var(--mu);margin-top:16px}
-.im{display:block;text-align:center;border:1px dashed var(--ac);color:var(--ac);border-radius:12px;padding:12px;font:600 .82rem Inter;cursor:pointer;margin-top:12px}
+.note{background:var(--soft);border:1px solid var(--ln);border-radius:13px;padding:14px;font-size:.75rem;color:var(--mu);margin-top:18px}
+.note b{color:var(--tx)}.note label{margin:12px 0 6px}
+.im{display:block;text-align:center;border:1px dashed var(--au);color:var(--au);border-radius:13px;padding:12px;font:600 .82rem Manrope;cursor:pointer;margin-top:12px}
 .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
 .ct{font-size:.75rem;color:var(--mu);font-weight:600}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.sm{border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:99px;padding:9px 18px;font:600 .75rem Inter;cursor:pointer}
-.act{display:flex;gap:12px;margin-bottom:14px}
-.go{flex:1;border:0;border-radius:99px;background:var(--gr);color:#fff;padding:18px;font:700 .95rem Inter;cursor:pointer;box-shadow:0 12px 30px -10px rgba(139,92,246,.6)}
-.act .sm{padding:0 22px}
-.stt{background:var(--card);border:1px solid var(--ln);border-left:3px solid var(--ac);border-radius:14px;padding:16px;font-size:.85rem;font-weight:600;margin-bottom:16px}
-.pb{height:4px;background:var(--ln);border-radius:4px;margin-top:10px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--gr);transition:width .3s}
-.ses{background:var(--soft);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-top:12px;max-width:420px}
+.sm{border:1px solid var(--ln);background:var(--soft);color:var(--tx);border-radius:99px;padding:10px 18px;font:600 .76rem Manrope;cursor:pointer}
+.sm:disabled{opacity:.5;cursor:wait}
+.act{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.go{flex:1;min-width:180px;border:0;border-radius:99px;background:var(--gd);color:var(--on);padding:18px;font:700 .95rem Manrope;cursor:pointer;box-shadow:0 14px 34px -12px rgba(217,177,96,.7)}
+.stt{background:var(--card);border:1px solid var(--ln);border-left:3px solid var(--au);border-radius:14px;padding:16px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+.pb{height:4px;background:var(--ln);border-radius:4px;margin-top:10px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--gd);transition:width .3s}
+.ses{background:var(--soft);border:1px solid var(--ln);border-radius:15px;padding:14px;margin-top:12px;max-width:460px}
 .ses p{font-size:.85rem}.ses .m{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin:8px 0}
-.ses .b{display:flex;gap:8px}.ses .sm{flex:1;padding:8px}
+.ses .b{display:flex;gap:8px;margin-top:8px}.ses .sm{flex:1;padding:8px}
+.ses audio{width:100%;height:38px;margin-top:6px}
 .empty{color:var(--mu);font-size:.85rem}
-.sec{padding:clamp(20px,4vw,34px);margin-top:20px}
+.sec{padding:clamp(22px,4vw,36px);margin-top:20px}
 .sec>p{color:var(--mu);margin-bottom:18px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .it{background:var(--soft);border:1px solid var(--ln);border-radius:16px;padding:18px}
-.it i{display:inline-grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:9px;background:var(--gr);color:#fff;font:700 .7rem Inter;margin-bottom:12px}
+.it i{display:inline-grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:9px;background:var(--gd);color:var(--on);font:700 .72rem Manrope;margin-bottom:12px}
 .it b{display:block;margin-bottom:4px}.it span{font-size:.82rem;color:var(--mu)}
 details{background:var(--soft);border:1px solid var(--ln);border-radius:14px;padding:16px}
-summary{cursor:pointer;font-weight:600;font-size:.85rem;list-style:none;display:flex;justify-content:space-between;gap:10px}
-summary::after{content:"+";color:var(--ac);font-size:1.1rem}details[open] summary::after{content:"−"}
+summary{cursor:pointer;font-weight:600;font-size:.86rem;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--au);font-size:1.1rem}details[open] summary::after{content:"−"}
 details p{font-size:.85rem;color:var(--mu);margin-top:10px}
-.use{margin-top:20px;border-radius:18px;padding:20px;background:var(--soft);border:1px solid var(--ln);display:flex;gap:14px;font-size:.85rem;color:var(--mu)}.use b{color:var(--tx);display:block}
-footer{margin-top:40px;border-top:1px solid var(--ln);background:var(--card);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0))}
+.use{margin-top:20px;padding:20px;display:flex;gap:14px;font-size:.85rem;color:var(--mu)}.use b{color:var(--tx);display:block}.use svg{font-size:1.4rem;color:var(--au);flex:none}
+footer{margin-top:40px;border-top:1px solid var(--ln);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0))}
 footer .w>div{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
-footer p{font-size:.8rem;color:var(--mu);margin-top:12px}
-@media(max-width:820px){.hero,.app{grid-template-columns:1fr}.orb{display:none}.fc,.g2{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.fc,.g2{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.orb s{animation:none}}
+footer p{font-size:.8rem;color:var(--mu);margin-top:14px}footer a.f{color:var(--mu);text-decoration:none;font-size:.85rem;margin-left:14px}
+@media(max-width:860px){.hero,.app{grid-template-columns:1fr}.fc,.g2{grid-template-columns:1fr 1fr}.ring{transform:scale(.85)}}
+@media(max-width:520px){.fc,.g2{grid-template-columns:1fr}.go{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.ring.live s{animation:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></symbol>
+<symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+<symbol id="sl" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></symbol>
+<symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></symbol>
+<symbol id="inf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+</defs></svg>
+
 <nav><div class="w">
- <a class="lg" href="#top"><i>&#9835;</i><span><b>AI Voice</b><small>STUDIO</small></span></a>
+ <a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><small>STUDIO</small></span></a>
  <a class="l" href="#how">How it works</a><a class="l" href="#faq">FAQ</a>
- <button class="tg" id="tg" type="button" aria-label="Theme">&#9790;</button>
+ <button class="tg" id="tg" type="button">Light mode</button>
 </div></nav>
 
 <div class="w" id="top">
 <section class="hero">
  <div>
-  <span class="pill">URDU · HINDI · ENGLISH · ALL LANGUAGES</span>
+  <span class="pill">Urdu, Hindi, English aur sab languages</span>
   <h1>Text to Speech Studio</h1>
-  <p>Text likhein, apni available voice chunein aur browser ya supported provider ke zariye audio sunein.</p>
+  <p>Text likhein, apni available voice chunein, audio sunein aur MP3 download karein.</p>
   <div class="bt"><a href="#studio">Start creating</a><a href="#how">Learn how it works</a></div>
-  <p class="pv">Privacy note: sensitive information enter na karein. Aapka text is device ke browser mein hi process hota hai.</p>
+  <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p>
  </div>
- <div class="orb" id="orb" aria-hidden="true"></div>
+ <div class="ring" id="orb" aria-hidden="true"><div class="core"><svg class="i"><use href="#mic"/></svg></div><span class="vr" id="vr">Voice ready</span></div>
 </section>
 
 <section class="fc">
- <div><i style="background:#5b5fe8">A</i><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
- <div><i style="background:#ec4899">&#9679;</i><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
- <div><i style="background:#f59e0b">&#8597;</i><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
- <div><i style="background:#10b981">&#8595;</i><b>Audio options</b><span>Provider support ho to MP3 hasil karein</span></div>
+ <div><svg class="i"><use href="#globe"/></svg><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
+ <div><svg class="i"><use href="#play"/></svg><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
+ <div><svg class="i"><use href="#sl"/></svg><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
+ <div><svg class="i"><use href="#dl"/></svg><b>MP3 download</b><span>Audio apne device mein save karein</span></div>
 </section>
 
 <div class="app" id="studio">
@@ -124,10 +144,18 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:12px}
   <div class="rg"><span>Speed</span><b id="sv">100%</b></div>
   <input type="range" id="spd" min="50" max="200" step="5" value="100" aria-label="Speed">
   <div class="sc"><span>Slow</span><span>Normal</span><span>Fast</span></div>
-  <div class="rg"><span>Pitch</span><b id="pvv">100%</b></div>
+  <div class="rg"><span>Pitch (sirf browser voice)</span><b id="pvv">100%</b></div>
   <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
   <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
-  <div class="note">Natural provider voice available ho to app usay use karne ki koshish karegi. Warna browser voice use hogi.</div>
+
+  <div class="note"><b>MP3 download (ElevenLabs)</b><br>Apni ElevenLabs API key yahan dalein. Ye sirf aapke browser mein save hoti hai.
+   <input type="password" id="key" placeholder="API key" autocomplete="off" style="margin-top:10px">
+   <div class="row"><button class="sm" id="ks" type="button">Save key</button><button class="sm" id="kc" type="button">Remove</button></div>
+   <label for="ev">MP3 voice</label><select id="ev"><option value="">Pehle API key save karein</option></select>
+   <label for="em">MP3 model</label>
+   <select id="em"><option value="eleven_v3">Eleven v3 (sab languages, Urdu)</option><option value="eleven_multilingual_v2">Multilingual v2 (stable)</option></select>
+   <p class="hn">Speed slider MP3 par sirf Multilingual v2 mein chalta hai. Free plan par audio publish karte waqt ElevenLabs ko credit dein.</p>
+  </div>
   <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
  </aside>
 
@@ -140,6 +168,7 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:12px}
   </div>
   <div class="act">
    <button class="go" id="go" type="button">&#9679; Generate audio</button>
+   <button class="sm" id="dl" type="button">&#8595; Download MP3</button>
    <button class="sm" id="ps" type="button">Pause</button>
    <button class="sm" id="sp" type="button">&#9632; Stop</button>
   </div>
@@ -156,16 +185,16 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:12px}
   <div class="it"><i>01</i><b>Text likhein</b><span>Apna script type karein, paste karein ya TXT file import karein.</span></div>
   <div class="it"><i>02</i><b>Voice choose karein</b><span>Language, voice type, speed aur pitch apni zaroorat ke mutabiq set karein.</span></div>
   <div class="it"><i>03</i><b>Audio generate karein</b><span>Preview ke baad Generate audio button press karein.</span></div>
-  <div class="it"><i>04</i><b>Listen ya download</b><span>Browser mein audio sunein. MP3 option provider support par depend karega.</span></div>
+  <div class="it"><i>04</i><b>Listen ya download</b><span>Browser mein audio sunein ya Download MP3 se file save karein.</span></div>
  </div>
 </section>
 
 <section class="sec"><div class="ey">Built for everyday work</div><h2>Useful for your workflow</h2><p>Voice content ko prepare karne ke liye simple aur flexible workspace.</p>
  <div class="g2">
-  <div class="it"><i>&#9654;</i><b>Video voiceovers</b><span>YouTube videos, reels aur short content ke scripts check karein.</span></div>
-  <div class="it"><i>Aa</i><b>Learning</b><span>Notes aur study material ko sun kar revise karein.</span></div>
-  <div class="it"><i>&#9679;</i><b>Articles</b><span>Long-form text ko voice playback ke liye prepare karein.</span></div>
-  <div class="it"><i>!</i><b>Announcements</b><span>Shop, event ya public announcement ka audio draft banayein.</span></div>
+  <div class="it"><b>Video voiceovers</b><span>YouTube videos, reels aur short content ke scripts check karein.</span></div>
+  <div class="it"><b>Learning</b><span>Notes aur study material ko sun kar revise karein.</span></div>
+  <div class="it"><b>Articles</b><span>Long-form text ko voice playback ke liye prepare karein.</span></div>
+  <div class="it"><b>Announcements</b><span>Shop, event ya public announcement ka audio draft banayein.</span></div>
  </div>
 </section>
 
@@ -173,32 +202,35 @@ footer p{font-size:.8rem;color:var(--mu);margin-top:12px}
  <div class="g2">
   <details><summary>Kya yeh tool Urdu text ko read kar sakta hai?</summary><p>Haan, agar aapke device par Urdu voice maujood ho. Language list mein Urdu nazar aaye to use select karein.</p></details>
   <details><summary>Urdu voice list mein nazar na aaye to kya karun?</summary><p>Chrome ya Edge use karein. Android par Settings mein Google Text-to-speech ke andar Urdu voice install karein, phir page refresh karein.</p></details>
-  <details><summary>Kya browser voice direct MP3 download karti hai?</summary><p>Nahi. Browser ki voice sirf playback karti hai. MP3 ke liye kisi TTS provider ki API chahiye hoti hai.</p></details>
-  <details><summary>Kya mera text private rehta hai?</summary><p>Haan, is page par text aapke browser mein hi process hota hai aur kisi server par nahi bheja jata.</p></details>
+  <details><summary>Kya MP3 download ho sakti hai?</summary><p>Haan. Download MP3 button ElevenLabs se audio banata hai. Iske liye ElevenLabs ki API key chahiye. Free plan mein har mahine limited credits milte hain.</p></details>
+  <details><summary>Kya mera text private rehta hai?</summary><p>Browser playback mein text aapke device par rehta hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p></details>
  </div>
 </section>
 
-<div class="use"><i class="lg" style="margin:0"><i>i</i></i><div><b>Use responsibly</b>Yeh tool voice testing aur content preparation ke liye hai. Passwords, private documents, financial details ya koi sensitive personal information enter na karein.</div></div>
+<div class="use"><svg class="i"><use href="#inf"/></svg><div><b>Use responsibly</b>Yeh tool voice testing aur content preparation ke liye hai. Passwords, private documents, financial details ya koi sensitive personal information enter na karein.</div></div>
 </div>
 
 <footer><div class="w">
- <div><a class="lg" href="#top"><i>&#9835;</i><span><b>AI Voice</b><small>STUDIO</small></span></a><span style="font-size:.85rem;color:var(--mu)"><a class="l" href="#studio" style="color:inherit;text-decoration:none">Studio</a> &nbsp; <a href="#how" style="color:inherit;text-decoration:none">How it works</a> &nbsp; <a href="#faq" style="color:inherit;text-decoration:none">FAQ</a></span></div>
- <p>Urdu, Hindi aur English text ke liye simple browser-based voice studio. &copy; 2026 AI Voice Studio.</p>
+ <div><a class="lg" href="#top"><i><svg class="i"><use href="#mic"/></svg></i><span><b>AI Voice</b><small>STUDIO</small></span></a><span><a class="f" href="#studio">Studio</a><a class="f" href="#how">How it works</a><a class="f" href="#faq">FAQ</a></span></div>
+ <p>Urdu, Hindi aur English text ke liye simple voice studio. MP3 audio ElevenLabs se. &copy; 2026 AI Voice Studio.</p>
 </div></footer>
 
 <script>
 const $=i=>document.getElementById(i),S=window.speechSynthesis;
-let V=[],Q=[],ix=0,tk=0,state='idle',hist=[],gen='all';
+let V=[],EV=[],Q=[],ix=0,tk=0,state='idle',hist=[],gen='all';
 const norm=l=>(l||'').replace('_','-');
 const nm=c=>{try{return new Intl.DisplayNames(['en'],{type:'language'}).of(c).replace(' (',' · ').replace(')','')}catch(e){return c}};
 const FEM=/female|woman|zira|hazel|susan|samantha|victoria|karen|tessa|moira|fiona|veena|heera|kalpana|uzma|aria|jenny|sara|salma|helena|paulina|monica|lekha|amelie/i;
 const MAL=/male|\bman\b|david|mark|george|james|richard|daniel|alex|hemant|ravi|asad|salman|guy|fred|thomas|jorge|diego/i;
 const isF=n=>FEM.test(n),isM=n=>!FEM.test(n)&&MAL.test(n);
-const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const say=m=>$('ms').textContent=m;
+const dt=()=>new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
 const PV={ur:'السلام علیکم، یہ آواز کا نمونہ ہے۔',hi:'नमस्ते, यह आवाज़ का नमूना है।',ar:'مرحبا، هذا نموذج للصوت.',es:'Hola, esta es una muestra de voz.',fr:'Bonjour, ceci est un échantillon de voix.',tr:'Merhaba, bu bir ses örneğidir.',zh:'你好，这是语音示例。'};
+const ku=()=>{try{return localStorage.getItem('aiv-ek')||''}catch(e){return ''}};
+const errm=j=>{const d=j&&j.detail;return typeof d==='string'?d:(d&&(d.message||d.status))||'API error'};
 
-for(let i=0;i<14;i++){const s=document.createElement('s');s.style.height=(20+Math.abs(Math.sin(i*1.3))*80)+'px';s.style.animationDelay=(i*.08)+'s';$('orb').appendChild(s)}
+for(let i=0;i<60;i++){const s=document.createElement('s');s.style.setProperty('--a',i*6);s.style.setProperty('--h',(10+Math.abs(Math.sin(i*.65))*24+(i%3)*3)+'px');$('orb').appendChild(s)}
 
 function loadV(){
   V=S.getVoices();if(!V.length)return;
@@ -206,29 +238,30 @@ function loadV(){
   $('lang').innerHTML=ls.map(l=>`<option value="${l}">${nm(l)}</option>`).join('');
   const nav=norm(navigator.language||'en-US'),bs=x=>x.split('-')[0];
   $('lang').value=ls.includes(cur)?cur:(ls.includes('ur-PK')?'ur-PK':ls.includes(nav)?nav:(ls.find(l=>bs(l)===bs(nav))||ls[0]));
+  $('vr').textContent=V.length+' voices ready';
   fillV();
 }
 function fillV(){
   const l=$('lang').value,q=$('q').value.toLowerCase();
-  let all=V.filter(v=>norm(v.lang)===l),list=all;
+  let all=V.filter(v=>norm(v.lang)===l),list=all,note='';
   if(gen==='f')list=all.filter(v=>isF(v.name));if(gen==='m')list=all.filter(v=>isM(v.name));
-  let note='';
   if(!list.length&&gen!=='all'){list=all;note=' Is language ki voices mein gender ki maloomat nahi, is liye sab dikhayi ja rahi hain.'}
   if(q)list=list.filter(v=>v.name.toLowerCase().includes(q));
   $('voice').innerHTML=list.map(v=>`<option value="${esc(v.name)}">${esc(v.name)}</option>`).join('')||'<option value="">Koi voice nahi mili</option>';
   $('vn').textContent=all.length+' browser voice'+(all.length==1?'':'s')+' available. Voice availability device par depend karti hai.'+note;
 }
 const cur=()=>V.find(v=>v.name===$('voice').value&&norm(v.lang)===$('lang').value);
-function chunk(t){const o=[];(t.match(/[^.!?۔।؟\n]+[.!?۔।؟]*/g)||[t]).forEach(s=>{s=s.trim();while(s.length>200){let c=s.lastIndexOf(' ',200);if(c<50)c=200;o.push(s.slice(0,c));s=s.slice(c).trim()}if(s)o.push(s)});return o}
-function setS(s){state=s;$('ps').textContent=s==='paused'?'Resume':'Pause'}
-function nxt(my,done){
+function chunk(t,n=200){const o=[];(t.match(/[^.!?۔।؟\n]+[.!?۔।؟]*/g)||[t]).forEach(s=>{s=s.trim();while(s.length>n){let c=s.lastIndexOf(' ',n);if(c<n/4)c=n;o.push(s.slice(0,c));s=s.slice(c).trim()}if(s)o.push(s)});return o}
+function pack(t,n){const o=[];let c='';chunk(t,n).forEach(s=>{if(c&&(c+' '+s).length>n){o.push(c);c=s}else c=c?c+' '+s:s});if(c)o.push(c);return o}
+function setS(s){state=s;$('ps').textContent=s==='paused'?'Resume':'Pause';$('orb').classList.toggle('live',s==='playing')}
+function nxt(my){
   if(my!==tk)return;
-  if(ix>=Q.length){setS('idle');$('pg').style.width='100%';say(done||'Browser audio playback complete');return}
+  if(ix>=Q.length){setS('idle');$('pg').style.width='100%';say('Browser audio playback complete');return}
   const u=new SpeechSynthesisUtterance(Q[ix]),v=cur();
   if(v){u.voice=v;u.lang=v.lang}else u.lang=$('lang').value;
   u.rate=$('spd').value/100;u.pitch=Math.min(2,$('pit').value/100);
   u.onstart=()=>{if(my===tk){say('Playing: '+Q[ix].slice(0,70)+(Q[ix].length>70?'...':''));$('pg').style.width=(ix/Q.length*100)+'%'}};
-  u.onend=()=>{if(my===tk){ix++;nxt(my,done)}};
+  u.onend=()=>{if(my===tk){ix++;nxt(my)}};
   u.onerror=e=>{if(my===tk&&e.error!=='canceled'&&e.error!=='interrupted'){setS('idle');say('Yeh voice play nahi ho saki. Koi aur voice try karein.')}};
   S.speak(u);
 }
@@ -236,18 +269,65 @@ function play(text,record){
   if(!S){say('Is browser mein speech support nahi hai. Chrome ya Edge use karein.');return}
   if(!text.trim()){say('Pehle text likhein ya paste karein.');return}
   S.cancel();Q=chunk(text.trim());ix=0;const my=++tk;setS('playing');$('pg').style.width='0';
-  if(record){hist.unshift({t:text.trim(),l:nm($('lang').value),d:new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})});rs()}
+  if(record){hist.unshift({t:text.trim(),l:nm($('lang').value),d:dt()});rs()}
   nxt(my);
 }
+
+/* ElevenLabs */
+async function loadEV(){
+  const k=ku();
+  if(!k){EV=[];$('ev').innerHTML='<option value="">Pehle API key save karein</option>';return}
+  try{
+    const r=await fetch('https://api.elevenlabs.io/v1/voices',{headers:{'xi-api-key':k}});
+    const j=await r.json();if(!r.ok)throw new Error(errm(j));
+    EV=(j.voices||[]).sort((a,b)=>(a.category==='premade'?0:1)-(b.category==='premade'?0:1)||a.name.localeCompare(b.name));
+    fillEV();say(EV.length+' MP3 voices mil gayi. Ab Download MP3 use kar sakte hain.');
+  }catch(e){$('ev').innerHTML='<option value="">Voices load nahi hui</option>';say('ElevenLabs voices load nahi hui: '+e.message+'. Key aur permissions check karein.')}
+}
+function fillEV(){
+  let list=EV;
+  if(gen!=='all'){const g=gen==='f'?'female':'male',f=EV.filter(v=>v.labels&&v.labels.gender===g);if(f.length)list=f}
+  const cv=$('ev').value;
+  $('ev').innerHTML=list.map(v=>`<option value="${esc(v.voice_id)}">${esc(v.name)}${v.labels&&v.labels.accent?' · '+esc(v.labels.accent):''}</option>`).join('')||'<option value="">Koi voice nahi mili</option>';
+  if(list.some(v=>v.voice_id===cv))$('ev').value=cv;
+}
+async function mp3(text){
+  const k=ku();if(!k)throw new Error('NOKEY');
+  const vid=$('ev').value;if(!vid)throw new Error('NOVOICE');
+  const m=$('em').value,parts=pack(text,m==='eleven_v3'?2500:4000),bl=[];
+  for(let i=0;i<parts.length;i++){
+    say('MP3 ban rahi hai... '+(i+1)+'/'+parts.length+' (~'+text.length+' credits)');$('pg').style.width=(i/parts.length*100)+'%';
+    const body={text:parts[i],model_id:m};
+    if(m!=='eleven_v3')body.voice_settings={speed:Math.min(1.2,Math.max(.7,$('spd').value/100))};
+    const r=await fetch('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(vid)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':k,'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r.ok){let j={};try{j=await r.json()}catch(e){}throw new Error(errm(j)+' ('+r.status+')')}
+    bl.push(await r.blob());
+  }
+  $('pg').style.width='100%';
+  return URL.createObjectURL(new Blob(bl,{type:'audio/mpeg'}));
+}
+function dlf(url){const a=document.createElement('a');a.href=url;a.download='ai-voice-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
+$('dl').onclick=async()=>{
+  const t=$('txt').value.trim();
+  if(!t){say('Pehle text likhein ya paste karein.');return}
+  $('dl').disabled=true;
+  try{const url=await mp3(t);hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);say('MP3 tayyar hai. Download shuru ho gaya, neeche player mein bhi sun sakte hain.')}
+  catch(e){say(e.message==='NOKEY'?'MP3 ke liye pehle sidebar mein ElevenLabs API key save karein.':e.message==='NOVOICE'?'MP3 voice select karein (key save karne ke baad list aati hai).':'MP3 nahi ban saki: '+e.message)}
+  $('dl').disabled=false;
+};
+$('ks').onclick=()=>{const v=$('key').value.trim();if(!v){say('Key khali hai.');return}try{localStorage.setItem('aiv-ek',v);$('key').value='';$('key').placeholder='Key saved';say('API key save ho gayi. Voices load ho rahi hain...');loadEV()}catch(e){say('Key save nahi ho saki.')}};
+$('kc').onclick=()=>{try{localStorage.removeItem('aiv-ek')}catch(e){}$('key').value='';$('key').placeholder='API key';loadEV();say('API key hata di gayi.')};
+if(ku()){$('key').placeholder='Key saved';loadEV()}
+
 function rs(){
-  $('ses').innerHTML=hist.map((h,i)=>`<div class="ses"><p dir="auto">${esc(h.t.slice(0,140))}${h.t.length>140?'...':''}</p><div class="m"><span>${esc(h.l)}</span><span>${h.d}</span></div><div class="b"><button class="sm" data-a="p" data-i="${i}">Play</button><button class="sm" data-a="c" data-i="${i}">Copy</button><button class="sm" data-a="r" data-i="${i}">Remove</button></div></div>`).join('')||'<p class="empty">Abhi koi audio generate nahi hui. Upar script likh kar Generate audio dabayein.</p>';
+  $('ses').innerHTML=hist.map((h,i)=>`<div class="ses"><p dir="auto">${esc(h.t.slice(0,140))}${h.t.length>140?'...':''}</p><div class="m"><span>${esc(h.l)}${h.url?' · MP3':''}</span><span>${h.d}</span></div>${h.url?`<audio controls src="${h.url}"></audio>`:''}<div class="b">${h.url?`<button class="sm" data-a="d" data-i="${i}">Download</button>`:`<button class="sm" data-a="p" data-i="${i}">Play</button>`}<button class="sm" data-a="c" data-i="${i}">Copy</button><button class="sm" data-a="r" data-i="${i}">Remove</button></div></div>`).join('')||'<p class="empty">Abhi koi audio generate nahi hui. Upar script likh kar Generate audio dabayein.</p>';
   $('n').textContent=hist.length+' item'+(hist.length==1?'':'s');
 }
 async function copy(t,ok){try{await navigator.clipboard.writeText(t);say(ok)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');say(ok)}catch(x){say('Copy nahi ho saka.')}a.remove()}}
 function stats(){const t=$('txt').value;$('cc').textContent=t.length.toLocaleString();$('st').textContent=`${t.length} chars / ${(t.trim().match(/\S+/g)||[]).length} words / ${t?t.split('\n').length:0} lines`}
 
 $('lang').onchange=fillV;$('q').oninput=fillV;
-$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV()};
+$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV();fillEV()};
 $('spd').oninput=()=>$('sv').textContent=$('spd').value+'%';
 $('pit').oninput=()=>$('pvv').textContent=$('pit').value+'%';
 $('txt').oninput=stats;
@@ -258,10 +338,10 @@ $('prev').onclick=()=>play(PV[$('lang').value.split('-')[0]]||'Hello, this is a 
 $('cp').onclick=()=>copy($('txt').value,'Text copy ho gaya.');
 $('cl').onclick=()=>{$('txt').value='';stats();$('txt').focus()};
 $('txt').addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='Enter')$('go').click()});
-$('ses').onclick=e=>{const b=e.target.closest('button');if(!b)return;const h=hist[+b.dataset.i];if(b.dataset.a==='p')play(h.t,false);if(b.dataset.a==='c')copy(h.t,'Text copy ho gaya.');if(b.dataset.a==='r'){hist.splice(+b.dataset.i,1);rs()}};
+$('ses').onclick=e=>{const b=e.target.closest('button');if(!b)return;const h=hist[+b.dataset.i],a=b.dataset.a;if(a==='p')play(h.t,false);if(a==='d')dlf(h.url);if(a==='c')copy(h.t,'Text copy ho gaya.');if(a==='r'){if(h.url)URL.revokeObjectURL(h.url);hist.splice(+b.dataset.i,1);rs()}};
 $('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('txt').value=String(r.result).slice(0,10000);stats();say('File import ho gayi: '+f.name)};r.readAsText(f);e.target.value=''};
-$('tg').onclick=()=>{const d=document.documentElement,dk=d.dataset.t==='dark';d.dataset.t=dk?'':'dark';$('tg').innerHTML=dk?'&#9790;':'&#9728;';try{localStorage.setItem('aiv-t',dk?'':'dark')}catch(e){}};
-try{if(localStorage.getItem('aiv-t')==='dark'){document.documentElement.dataset.t='dark';$('tg').innerHTML='&#9728;'}}catch(e){}
+$('tg').onclick=()=>{const d=document.documentElement,lt=d.dataset.t==='light';d.dataset.t=lt?'':'light';$('tg').textContent=lt?'Light mode':'Dark mode';try{localStorage.setItem('aiv-t',lt?'':'light')}catch(e){}};
+try{if(localStorage.getItem('aiv-t')==='light'){document.documentElement.dataset.t='light';$('tg').textContent='Dark mode'}}catch(e){}
 stats();rs();
 if(S){loadV();S.onvoiceschanged=loadV;setTimeout(loadV,600)}else say('Is browser mein speech support nahi hai.');
 window.addEventListener('beforeunload',()=>S&&S.cancel());
