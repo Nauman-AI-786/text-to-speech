@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sukhan Studio | Premium Text to Speech</title>
 <meta name="description" content="Sukhan Studio: Urdu, Hindi aur English mein text ko awaz mein badlein aur MP3 download karein.">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="text to speech, urdu text to speech, hindi text to speech, awaz banane wala tool, tts studio, mp3 voice generator">
+<meta name="theme-color" content="#0b1020">
+<link rel="canonical" href="https://sukhanstudio.example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sukhan Studio | Premium Text to Speech">
+<meta property="og:description" content="Urdu, Hindi aur English text ko premium quality awaz mein badlein aur MP3 download karein.">
+<meta property="og:site_name" content="Sukhan Studio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sukhan Studio | Premium Text to Speech">
+<meta name="twitter:description" content="Urdu, Hindi aur English text ko premium quality awaz mein badlein aur MP3 download karein.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Sukhan Studio","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web Browser)","description":"Urdu, Hindi aur English text ko awaz mein badalne aur MP3 download karne ka tool.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap');
 :root{--bg:#0b1020;--panel:#121a30;--panel2:#1a2440;--line:rgba(232,196,140,.14);--tx:#f4eee2;--mu:#a3a9bf;--gold:#e8c48c;--gold2:#b8894a;--ink:#0b1020}
@@ -151,7 +165,8 @@ footer a.f:hover{color:var(--gold)}
   <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
 
   <label for="prov" style="margin-top:24px">MP3 provider</label>
-  <select id="prov"><option value="el">ElevenLabs (behtareen quality, key chahiye)</option><option value="se">StreamElements (bilkul free)</option></select>
+  <select id="prov"><option value="el">ElevenLabs (default, key chahiye)</option><option value="se">StreamElements (free backup)</option></select>
+  <p class="hn">Agar chuni hui service fail ho jaye to app khud doosri service se MP3 banane ki koshish karega.</p>
 
   <div class="note" id="elBlock"><b>ElevenLabs</b><br>API key sirf aapke browser mein save hoti hai.
    <input type="password" id="key" placeholder="API key" autocomplete="off" style="margin-top:10px">
@@ -352,16 +367,35 @@ const isSE=()=>$('prov').value==='se';
 $('prov').onchange=()=>{if(isSE())fillSE();else if(ku())loadEV();else fillEV()};
 
 function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
+async function makeMp3(t){
+  const primary=isSE()?'se':'el';
+  try{
+    const url=primary==='se'?await mp3SE(t):await mp3(t);
+    return {url,fallback:false};
+  }catch(e1){
+    if(primary==='el'&&e1.message==='NOKEY'){
+      say('ElevenLabs key nahi mili, free StreamElements try kar rahe hain...');
+    }else{
+      say((primary==='el'?'ElevenLabs':'StreamElements')+' se MP3 nahi ban saki, backup service try kar rahe hain...');
+    }
+    try{
+      const url=primary==='se'?await mp3(t):await mp3SE(t);
+      return {url,fallback:true};
+    }catch(e2){
+      throw e1.message!=='NOKEY'?e1:e2;
+    }
+  }
+}
 $('dlBtn').onclick=async()=>{
   const t=$('txt').value.trim();
   if(!t){say('Pehle text likhein ya paste karein.');return}
   $('dlBtn').disabled=true;
   try{
-    const url=isSE()?await mp3SE(t):await mp3(t);
+    const{url,fallback}=await makeMp3(t);
     hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);
-    say('MP3 tayyar hai. Download shuru ho gaya.');
+    say(fallback?'MP3 tayyar hai (backup service se). Download shuru ho gaya.':'MP3 tayyar hai. Download shuru ho gaya.');
   }catch(e){
-    say(e.message==='NOKEY'?'MP3 ke liye pehle ElevenLabs API key save karein (ya StreamElements chunein).':e.message==='NOVOICE'?'MP3 voice select karein.':'MP3 nahi ban saki: '+e.message);
+    say(e.message==='NOKEY'?'MP3 ke liye ElevenLabs API key save karein, ya StreamElements provider chunein.':e.message==='NOVOICE'?'MP3 voice select karein.':'MP3 nahi ban saki: '+e.message);
   }
   $('dlBtn').disabled=false;
 };
