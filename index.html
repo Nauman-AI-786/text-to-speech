@@ -3,213 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sukhan Studio | Premium Text to Speech</title>
-<meta name="description" content="Sukhan Studio: Urdu, Hindi aur English mein text ko awaz mein badlein aur MP3 download karein.">
+<title>Sukhan-e-Awaz | Text to Speech</title>
+<meta name="description" content="Sukhan-e-Awaz: Urdu, Hindi aur English mein text ko awaz mein badlein aur MP3 download karein.">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="text to speech, urdu text to speech, hindi text to speech, awaz banane wala tool, tts studio, mp3 voice generator">
-<meta name="theme-color" content="#0b1020">
+<meta name="keywords" content="text to speech, urdu text to speech, hindi text to speech, awaz banane wala tool, tts studio, mp3 voice generator, sukhan-e-awaz">
+<meta name="theme-color" content="#0a0f1f">
 <link rel="canonical" href="https://sukhanstudio.example.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sukhan Studio | Premium Text to Speech">
+<meta property="og:title" content="Sukhan-e-Awaz | Text to Speech">
 <meta property="og:description" content="Urdu, Hindi aur English text ko premium quality awaz mein badlein aur MP3 download karein.">
-<meta property="og:site_name" content="Sukhan Studio">
+<meta property="og:site_name" content="Sukhan-e-Awaz">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sukhan Studio | Premium Text to Speech">
+<meta name="twitter:title" content="Sukhan-e-Awaz | Text to Speech">
 <meta name="twitter:description" content="Urdu, Hindi aur English text ko premium quality awaz mein badlein aur MP3 download karein.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Sukhan Studio","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web Browser)","description":"Urdu, Hindi aur English text ko awaz mein badalne aur MP3 download karne ka tool.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Sukhan-e-Awaz","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web Browser)","description":"Urdu, Hindi aur English text ko awaz mein badalne aur MP3 download karne ka tool.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap');
-:root{--bg:#0b1020;--panel:#121a30;--panel2:#1a2440;--line:rgba(232,196,140,.14);--tx:#f4eee2;--mu:#a3a9bf;--gold:#e8c48c;--gold2:#b8894a;--ink:#0b1020}
-[data-t=light]{--bg:#f7f3ea;--panel:#fffdf7;--panel2:#f0eadb;--line:rgba(120,90,40,.18);--tx:#1d2338;--mu:#6b6f84;--gold:#b8894a;--gold2:#8a6432;--ink:#fffdf7}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Alex+Brush&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#0a0f1f;
+  --bg2:#0d1730;
+  --panel:#111c37;
+  --panel2:#0d1730;
+  --line:rgba(212,166,86,.16);
+  --line-strong:rgba(212,166,86,.35);
+  --tx:#f3ecdc;
+  --mu:#96a0bd;
+  --gold:#e9c47e;
+  --gold-lt:#f7dfa8;
+  --gold-dk:#b9863f;
+  --ink:#150f04;
+}
+[data-t=light]{
+  --bg:#f8f4e9;--bg2:#fffdf8;--panel:#fffdf8;--panel2:#f4ecd8;
+  --line:rgba(140,100,40,.2);--line-strong:rgba(140,100,40,.4);
+  --tx:#241d0d;--mu:#6c6550;--gold:#b8843c;--gold-lt:#96692a;--gold-dk:#8a6432;--ink:#fffdf8;
+}
 *{box-sizing:border-box;margin:0}
-body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);background:var(--bg);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;background-image:radial-gradient(900px 500px at 90% -10%,rgba(232,196,140,.10),transparent 60%)}
-.serif{font-family:Playfair Display,Georgia,serif}
-.w{max-width:1120px;margin:0 auto;padding:0 22px}
+body{
+  font-family:Manrope,system-ui,sans-serif;color:var(--tx);background:var(--bg);
+  line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(1100px 620px at 85% -8%,rgba(233,196,126,.10),transparent 62%),
+    radial-gradient(900px 500px at 8% 8%,rgba(233,196,126,.06),transparent 60%);
+}
+.serif{font-family:'Playfair Display',Georgia,serif}
+.w{max-width:1180px;margin:0 auto;padding:0 22px}
 svg.i{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
 :focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 ::selection{background:var(--gold);color:var(--ink)}
-nav{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
-nav .w{display:flex;align-items:center;gap:22px;height:68px}
-.lg{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;color:var(--tx)}
-.lg i{width:30px;height:30px;border-radius:8px;background:var(--gold);color:var(--ink);display:grid;place-items:center}
-.lg b{display:block;font:italic 500 1.2rem/1 Playfair Display,serif}
-.lg small{display:block;font:600 .5rem/1 Manrope;letter-spacing:.2em;color:var(--gold);margin-top:3px}
-nav a.l{color:var(--mu);text-decoration:none;font-size:.82rem;font-weight:500}
-nav a.l:hover{color:var(--gold)}
-.tg{border:1px solid var(--gold);background:none;color:var(--gold);border-radius:99px;padding:8px 16px;font:600 .75rem Manrope;cursor:pointer}
+a{color:inherit}
+
+/* ---------- Nav ---------- */
+nav{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
+nav .w{display:flex;align-items:center;gap:26px;height:78px}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;text-decoration:none;color:var(--tx)}
+.mic-badge{width:46px;height:46px;border:1.5px solid var(--gold);display:grid;place-items:center;position:relative;flex:none;background:radial-gradient(circle at 35% 30%,rgba(233,196,126,.16),transparent 70%);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)}
+.mic-badge .bars{display:flex;align-items:flex-end;gap:2px;height:60%}
+.mic-badge .bars i{width:2px;background:var(--gold);border-radius:1px;display:block;opacity:.75}
+.mic-badge .bars.bl i:nth-child(1){height:35%}.mic-badge .bars.bl i:nth-child(2){height:62%}.mic-badge .bars.bl i:nth-child(3){height:92%}
+.mic-badge .bars.br i:nth-child(1){height:92%}.mic-badge .bars.br i:nth-child(2){height:62%}.mic-badge .bars.br i:nth-child(3){height:35%}
+.pill .mic-badge .bars{display:none}
+.mic-badge svg{color:var(--gold);width:17px;height:17px}
+.mic-badge svg path,.mic-badge svg rect,.mic-badge svg circle{fill:var(--gold);stroke:none}
+.brand .bt{display:block;font:400 2.1rem/1 'Alex Brush',cursive;background:linear-gradient(120deg,var(--gold-lt),var(--gold) 55%,var(--gold-dk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand small{display:block;font:600 .62rem/1 Manrope;letter-spacing:.14em;color:var(--mu);margin-top:4px}
+.navlinks{display:flex;align-items:center;gap:30px}
+.navlinks a{color:var(--mu);text-decoration:none;font-size:.86rem;font-weight:600}
+.navlinks a:hover,.navlinks a.on{color:var(--gold)}
+.pill{display:flex;align-items:center;gap:9px;border:1px solid var(--line-strong);border-radius:99px;padding:6px 18px 6px 8px;text-decoration:none}
+.pill .bt{font-size:1.35rem}
+.pill .mic-badge{width:28px;height:28px}
+.pill .mic-badge svg{width:13px;height:13px}
+.tg{border:1px solid var(--line-strong);background:none;color:var(--gold);border-radius:99px;padding:8px 15px;font:600 .72rem Manrope;cursor:pointer}
 .tg:hover{background:var(--gold);color:var(--ink)}
-.hero{margin:40px 0 28px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-.eyebrow{font:600 .75rem Manrope;color:var(--gold)}
-.hero h1{font:500 clamp(2.3rem,5.4vw,3.9rem)/1.1 Playfair Display,serif;margin:16px 0 16px}
-.hero h1 em{color:var(--gold)}
-.hero p{color:var(--mu);max-width:46ch;font-size:1rem}
-.bt{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 18px}
-.bt a{padding:13px 24px;border-radius:99px;font:600 .88rem Manrope;text-decoration:none;border:1px solid var(--line);color:var(--tx)}
-.bt a:first-child{background:var(--gold);color:var(--ink);border:0}
-.bt a:last-child:hover{border-color:var(--gold);color:var(--gold)}
-.pv{font-size:.8rem;color:var(--mu);max-width:50ch}
-.orb{position:relative;width:250px;height:250px;margin:auto;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
-.orb::before{content:"";position:absolute;inset:14px;border-radius:50%;border:1px dashed var(--line)}
-.core{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#f7e2b8,var(--gold) 50%,var(--gold2));color:var(--ink);display:grid;place-items:center;box-shadow:0 0 50px rgba(232,196,140,.25);font-size:1.8rem}
-.orb.live .core{animation:pulse 1.4s ease-in-out infinite}
-@keyframes pulse{50%{transform:scale(1.06)}}
-.vr{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;font:600 .7rem Manrope;color:var(--gold);border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:4px 12px}
-.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-.fc div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
-.fc svg{color:var(--gold);margin-bottom:8px}
-.fc b{display:block;font:600 1rem Playfair Display,serif}
-.fc span{font-size:.8rem;color:var(--mu)}
-.app{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:18px}
-.ey{font:600 .72rem Manrope;color:var(--gold)}
-h2{font:500 1.6rem/1.2 Playfair Display,serif;margin:4px 0 12px}
-label{display:block;font:600 .74rem Manrope;margin:16px 0 7px;color:var(--mu)}
-select,input[type=text],input[type=password],textarea{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:11px;font:500 .92rem Manrope}
+
+/* ---------- Hero ---------- */
+.hero{text-align:center;padding:56px 0 8px}
+.flourish{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);opacity:.85;margin-bottom:10px}
+.flourish .ln{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dk),transparent)}
+.flourish .mic-badge{width:58px;height:58px}
+.flourish .mic-badge svg{width:24px;height:24px}
+.hero h1{font:400 clamp(4.2rem,11vw,7.4rem)/1 'Alex Brush',cursive;background:linear-gradient(120deg,var(--gold-lt),var(--gold) 45%,var(--gold-dk));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+.hero .tagline{font:600 .95rem Manrope;color:var(--mu);letter-spacing:.02em;margin-bottom:18px}
+.hero .tagline i{color:var(--gold);font-style:normal;margin:0 8px}
+.hero p{max-width:56ch;margin:0 auto;color:var(--mu);font-size:1rem}
+
+/* ---------- App layout ---------- */
+.app{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start;margin:40px 0 22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:6px}
+.studio-card{padding:0}
+.tabs{display:flex;gap:4px;padding:14px 14px 0}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:none;border:0;color:var(--mu);padding:14px 10px 16px;font:700 .82rem Manrope;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab svg{width:16px;height:16px}
+.tab.on{color:var(--gold);border-color:var(--gold)}
+.tab:hover:not(.on){color:var(--tx)}
+.tab-body{padding:22px}
+.pane{display:none}
+.pane.on{display:block}
+
+textarea{width:100%;min-height:190px;resize:vertical;background:transparent;border:0;color:var(--tx);padding:0;font:400 1rem/1.75 Manrope;display:block}
+textarea:focus{outline:none}
+.ta-wrap{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+textarea::placeholder{color:var(--mu)}
+.taFoot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;font-size:.8rem;color:var(--mu)}
+.taFoot .sm{display:inline-flex;align-items:center;gap:5px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px}
+.chip{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:transparent}
+label{display:block;font:700 .74rem Manrope;margin:0 0 8px;color:var(--mu);display:flex;align-items:center;gap:7px}
+label svg{width:14px;height:14px;color:var(--gold)}
+select,input[type=text],input[type=password]{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px;font:600 .9rem Manrope}
+.chip select{border:0;padding:0;background:transparent;font:700 .92rem Manrope;width:100%}
+.chip input[type=range]{margin:0}
 select option{background:var(--panel);color:var(--tx)}
-textarea{min-height:230px;resize:vertical;line-height:1.75;font:400 1rem Manrope}
-.seg{display:flex;background:var(--panel2);border-radius:12px;padding:4px;border:1px solid var(--line)}
-.seg button{flex:1;border:0;background:none;color:var(--mu);padding:8px;border-radius:9px;font:600 .75rem Manrope;cursor:pointer}
-.seg .on{background:var(--gold);color:var(--ink)}
-.gb,.sm{border:1px solid var(--line);background:var(--panel2);color:var(--tx);border-radius:99px;padding:10px 16px;font:600 .78rem Manrope;cursor:pointer}
-.gb{width:100%;margin-top:10px}
-.gb:hover,.sm:hover{border-color:var(--gold);color:var(--gold)}
-.hn{font-size:.75rem;color:var(--mu);margin-top:8px}
-.rg{display:flex;justify-content:space-between;font:600 .78rem Manrope;margin:18px 0 8px;color:var(--mu)}
+.rg{display:flex;justify-content:space-between;font:700 .8rem Manrope;margin:0 0 6px;color:var(--mu)}
 .rg b{color:var(--gold)}
 input[type=range]{width:100%;accent-color:var(--gold)}
-.sc{display:flex;justify-content:space-between;font-size:.66rem;color:var(--mu)}
-.note{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:15px;font-size:.8rem;color:var(--mu);margin-top:18px}
-.note b{color:var(--tx)}.note label{margin:12px 0 6px}
-.im{display:block;text-align:center;border:1px dashed var(--gold);color:var(--gold);border-radius:12px;padding:11px;font:600 .8rem Manrope;cursor:pointer;margin-top:14px}
-.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.ct{font-size:.74rem;color:var(--mu)}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.act{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-.go{flex:1;min-width:180px;border:0;border-radius:99px;background:var(--gold);color:var(--ink);padding:16px;font:700 .92rem Manrope;cursor:pointer}
-.stt{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:15px;font-size:.88rem;margin-bottom:18px}
+.sc{display:flex;justify-content:space-between;font-size:.66rem;color:var(--mu);margin-top:3px}
+
+.gobtn{width:100%;border:0;border-radius:14px;background:linear-gradient(120deg,var(--gold-lt),var(--gold) 60%,var(--gold-dk));color:var(--ink);padding:17px;font:800 .96rem Manrope;cursor:pointer;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.gobtn:hover{filter:brightness(1.06)}
+.subrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.sm,.gb{border:1px solid var(--line);background:var(--panel2);color:var(--tx);border-radius:99px;padding:10px 16px;font:700 .78rem Manrope;cursor:pointer}
+.sm:hover,.gb:hover{border-color:var(--gold);color:var(--gold)}
+.gb{width:100%}
+
+.seg{display:flex;background:var(--panel2);border-radius:12px;padding:4px;border:1px solid var(--line);margin-bottom:18px}
+.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px;border-radius:9px;font:700 .76rem Manrope;cursor:pointer}
+.seg .on{background:var(--gold);color:var(--ink)}
+.note{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;font-size:.8rem;color:var(--mu);margin-top:8px}
+.note b{color:var(--tx)}
+.im{display:block;text-align:center;border:1px dashed var(--gold);color:var(--gold);border-radius:12px;padding:12px;font:700 .8rem Manrope;cursor:pointer;margin-top:18px}
+.hn{font-size:.75rem;color:var(--mu);margin-top:8px}
+
+.stt{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:15px;font-size:.86rem;margin:14px 0}
 .pb{height:3px;background:var(--line);margin-top:10px;overflow:hidden;border-radius:3px}
 .pb i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
-.ses{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:12px;max-width:480px}
-.ses p{font:400 1rem/1.5 Playfair Display,serif}
+
+.sesswrap{padding:22px;border-top:1px solid var(--line)}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.ey{font:700 .72rem Manrope;color:var(--gold);letter-spacing:.02em}
+h2{font:600 1.3rem/1.2 'Playfair Display',serif;margin-top:4px}
+.ct{font-size:.74rem;color:var(--mu)}
+.ses{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:12px}
+.ses p{font:400 1rem/1.5 'Playfair Display',serif}
 .ses .m{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mu);margin:8px 0}
 .ses .b{display:flex;gap:8px;margin-top:8px}.ses .sm{flex:1;padding:8px 6px}
 .ses audio{width:100%;height:38px;margin-top:6px}
 .empty{color:var(--mu);font-size:.88rem}
+
+/* ---------- Sidebar ---------- */
+.side{display:flex;flex-direction:column;gap:14px}
+.feat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}
+.fitem{display:flex;gap:13px;align-items:flex-start;padding:12px 6px}
+.fitem+.fitem{border-top:1px solid var(--line)}
+.fitem i{flex:none;width:40px;height:40px;border-radius:50%;background:transparent;border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold)}
+.fitem i svg{width:17px;height:17px}
+.fitem b{display:block;font:700 .88rem Manrope;margin-bottom:2px;color:var(--gold)}
+.fitem span{font-size:.78rem;color:var(--mu)}
+.highlight{background:linear-gradient(160deg,rgba(233,196,126,.12),transparent);border:1px solid var(--line-strong);border-radius:18px;padding:20px;text-align:center}
+.highlight svg{color:var(--gold);width:20px;height:20px;margin-bottom:8px}
+.highlight p{font:700 .88rem/1.4 Manrope;color:var(--tx)}
+
+/* ---------- Info sections ---------- */
 .sec{padding:clamp(24px,4vw,40px);margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:24px}
 .sec>p{color:var(--mu);margin-bottom:20px;max-width:60ch}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .it{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px}
-.it i{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);font:600 .8rem Manrope;font-style:normal;margin-bottom:10px}
-.it b{display:block;margin-bottom:5px;font:600 1.05rem Playfair Display,serif}
+.it i{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);font:700 .8rem Manrope;font-style:normal;margin-bottom:10px}
+.it b{display:block;margin-bottom:5px;font:600 1.05rem 'Playfair Display',serif}
 .it span{font-size:.88rem;color:var(--mu)}
 details{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
-summary{cursor:pointer;font:600 .95rem Manrope;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary{cursor:pointer;font:700 .95rem Manrope;list-style:none;display:flex;justify-content:space-between;gap:10px}
 summary::after{content:"+";color:var(--gold);font-size:1.2rem}
 details[open] summary::after{content:"−"}
 details p{font-size:.88rem;color:var(--mu);margin-top:10px}
 .use{margin-top:22px;padding:20px;display:flex;gap:14px;font-size:.86rem;color:var(--mu);background:var(--panel);border:1px solid var(--line);border-radius:16px}
-.use b{color:var(--gold);display:block;font:600 1rem Playfair Display,serif}
+.use b{color:var(--gold);display:block;font:600 1rem 'Playfair Display',serif}
 .use svg{color:var(--gold);flex:none}
-footer{margin-top:40px;border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom,0))}
-footer .w>div{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
-footer p{font-size:.8rem;color:var(--mu);margin-top:14px}
-footer a.f{color:var(--mu);text-decoration:none;font-size:.8rem;margin-left:14px}
+
+footer{margin-top:44px;border-top:1px solid var(--line);padding:30px 0 calc(30px + env(safe-area-inset-bottom,0));text-align:center}
+footer .brand{justify-content:center;margin:0 auto 10px}
+footer .flinks{display:flex;justify-content:center;gap:18px;margin-bottom:14px}
+footer a.f{color:var(--mu);text-decoration:none;font-size:.8rem}
 footer a.f:hover{color:var(--gold)}
-@media(max-width:860px){.hero,.app{grid-template-columns:1fr}.fc,.g2{grid-template-columns:1fr 1fr}.orb{transform:scale(.8)}}
-@media(max-width:520px){.fc,.g2{grid-template-columns:1fr}.go{flex-basis:100%}}
+footer p{font-size:.85rem;color:var(--mu)}
+footer p span{color:var(--gold)}
+
+@media(max-width:920px){.app{grid-template-columns:1fr}.row3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.navlinks{display:none}}
+@media(max-width:520px){.tabs{overflow-x:auto}.flourish .ln{width:50px}}
+
+.bg-swoosh{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-swoosh i{position:absolute;border:1.5px solid transparent;border-radius:50%;opacity:.28;display:block}
+.bg-swoosh i:nth-child(1){width:900px;height:900px;top:-560px;left:-360px;border-top-color:var(--gold-dk);border-right-color:var(--gold-dk);transform:rotate(25deg)}
+.bg-swoosh i:nth-child(2){width:640px;height:640px;top:-420px;right:-260px;border-bottom-color:var(--gold-dk);transform:rotate(-20deg)}
+.bg-swoosh i:nth-child(3){width:1000px;height:1000px;bottom:-680px;left:-320px;border-top-color:var(--gold-dk);transform:rotate(10deg)}
+.diamonds{display:flex;justify-content:center;gap:170px;margin:8px 0 14px}
+.diamonds i{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);display:block;opacity:.85}
 </style>
 </head>
 <body>
+<div class="bg-swoosh"><i></i><i></i><i></i></div>
 <nav><div class="w">
- <a class="lg" href="#top"><i><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></i><span><b>Sukhan</b><small>STUDIO</small></span></a>
- <a class="l" href="#how">How it works</a><a class="l" href="#faq">FAQ</a>
+ <a class="brand" href="#top">
+  <span class="mic-badge"><span class="bars bl"><i></i><i></i><i></i></span><svg class="i" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z"/><path d="M6 11a6 6 0 0012 0h-1.6a4.4 4.4 0 01-8.8 0z"/><rect x="11.3" y="17" width="1.4" height="3" rx=".7"/></svg><span class="bars br"><i></i><i></i><i></i></span></span>
+  <span><span class="bt">Sukhan-e-Awaz</span><small>TEXT TO SPEECH</small></span>
+ </a>
+ <div class="navlinks">
+  <a href="#top" class="on">Home</a>
+  <a href="#studio">Studio</a>
+  <a href="#how">Voices</a>
+  <a href="#how">Languages</a>
+  <a href="#faq">About</a>
+ </div>
+ <a class="pill" href="#studio"><span class="mic-badge"><span class="bars bl"><i></i><i></i><i></i></span><svg class="i" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z"/><path d="M6 11a6 6 0 0012 0h-1.6a4.4 4.4 0 01-8.8 0z"/><rect x="11.3" y="17" width="1.4" height="3" rx=".7"/></svg><span class="bars br"><i></i><i></i><i></i></span></span><span class="bt">Sukhan-e-Awaz</span></a>
  <button class="tg" id="tg" type="button">Light mode</button>
 </div></nav>
 
 <div class="w" id="top">
 <section class="hero">
- <div>
-  <span class="eyebrow">Urdu · Hindi · English</span>
-  <h1 class="serif">Give your words<br><em>a voice worth hearing.</em></h1>
-  <p>Text likhein, apni pasandeeda awaz chunein, sunein aur MP3 download karein.</p>
-  <div class="bt"><a href="#studio">Start creating</a><a href="#how">Learn how it works</a></div>
-  <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p>
- </div>
- <div class="orb" id="orb" aria-hidden="true"><div class="core"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><span class="vr" id="vr">Voice ready</span></div>
-</section>
-
-<section class="fc">
- <div><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
- <div><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
- <div><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
- <div><b>MP3 download</b><span>Audio apne device mein save karein</span></div>
+ <div class="flourish"><span class="ln"></span><span class="mic-badge"><span class="bars bl"><i></i><i></i><i></i></span><svg class="i" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z"/><path d="M6 11a6 6 0 0012 0h-1.6a4.4 4.4 0 01-8.8 0z"/><rect x="11.3" y="17" width="1.4" height="3" rx=".7"/></svg><span class="bars br"><i></i><i></i><i></i></span></span><span class="ln"></span></div>
+ <h1 class="serif">Sukhan-e-Awaz</h1>
+ <div class="diamonds"><i></i><i></i></div>
+ <p class="tagline">Text to Speech <i>•</i> Your Words, Our Voice</p>
+ <p>Convert your text into natural, human-like speech with multiple voices, languages and custom settings. Fast, easy and free.</p>
 </section>
 
 <div class="app" id="studio">
- <aside class="card">
-  <div class="ey">Workspace</div><h2 class="serif">Voice settings</h2>
-  <label for="lang" style="margin-top:0">Language</label><select id="lang"></select>
-  <label>Voice type</label>
-  <div class="seg" id="seg"><button data-g="all" class="on" type="button">All</button><button data-g="f" type="button">Female</button><button data-g="m" type="button">Male</button></div>
-  <label for="q">Search voice</label><input type="text" id="q" placeholder="Voice name search...">
-  <label for="voice">Voice</label><select id="voice"></select>
-  <button class="gb" id="prev" type="button">&#9654; Preview voice</button>
-  <p class="hn" id="vn"></p>
-  <div class="rg"><span>Speed</span><b id="sv">100%</b></div>
-  <input type="range" id="spd" min="50" max="200" step="5" value="100" aria-label="Speed">
-  <div class="sc"><span>Slow</span><span>Normal</span><span>Fast</span></div>
-  <div class="rg"><span>Pitch</span><b id="pvv">100%</b></div>
-  <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
-  <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
+ <div class="card studio-card">
+  <div class="tabs" id="tabs">
+   <button class="tab on" data-p="p1" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Text to Speech</button>
+   <button class="tab" data-p="p2" type="button"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>Voice Settings</button>
+   <button class="tab" data-p="p3" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h4M10 6h10M4 12h10M16 12h4M4 18h7M13 18h7"/><circle cx="8" cy="6" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="11" cy="18" r="1.6"/></svg>Advanced Options</button>
+  </div>
+  <div class="tab-body">
 
-  <label for="prov" style="margin-top:24px">MP3 provider</label>
-  <select id="prov"><option value="el">ElevenLabs (default, key chahiye)</option><option value="se">StreamElements (free backup)</option></select>
-  <p class="hn">Agar chuni hui service fail ho jaye to app khud doosri service se MP3 banane ki koshish karega.</p>
+   <div class="pane on" id="p1">
+    <div class="ta-wrap">
+     <textarea id="txt" dir="auto" maxlength="10000" placeholder="Type or paste your text here..." aria-label="Script"></textarea>
+     <div class="taFoot"><span><span id="cc">0</span>/5000</span><span><button class="sm" id="cl" type="button" style="padding:5px 12px"><svg class="i" viewBox="0 0 24 24" width="13" height="13"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/></svg> Clear</button></span></div>
+    </div>
+    <p class="hn"><span id="st">0 chars / 0 words / 0 lines</span> · Ctrl + Enter se generate karein.</p>
 
-  <div class="note" id="elBlock"><b>ElevenLabs</b><br>API key sirf aapke browser mein save hoti hai.
-   <input type="password" id="key" placeholder="API key" autocomplete="off" style="margin-top:10px">
-   <div class="row"><button class="sm" id="ks" type="button">Save key</button><button class="sm" id="kc" type="button">Remove</button></div>
-   <label for="ev">MP3 voice</label><select id="ev"><option value="">Pehle API key save karein</option></select>
-   <label for="em">MP3 model</label>
-   <select id="em"><option value="eleven_v3">Eleven v3 (sab languages, Urdu)</option><option value="eleven_multilingual_v2">Multilingual v2 (stable)</option></select>
-   <p class="hn">Speed slider MP3 par sirf Multilingual v2 mein chalta hai.</p>
+    <div class="row3">
+     <div class="chip"><label><svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 10-16 0"/><circle cx="12" cy="7" r="4"/></svg>Voice</label><select id="voice"></select></div>
+     <div class="chip"><label><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18"/></svg>Language</label><select id="lang"></select></div>
+     <div class="chip"><label><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Speed <b id="sv" style="margin-left:auto;color:var(--gold)">100%</b></label>
+      <input type="range" id="spd" min="50" max="200" step="5" value="100" aria-label="Speed">
+     </div>
+    </div>
+
+    <button class="gobtn" id="go" type="button">&#9654; Generate Speech</button>
+    <div class="subrow">
+     <button class="sm" id="cp" type="button" style="flex:1">Copy text</button>
+     <button class="sm" id="dlBtn" type="button" style="flex:1">&#8595; Download MP3</button>
+     <button class="sm" id="ps" type="button" style="flex:1">Pause</button>
+     <button class="sm" id="sp" type="button" style="flex:1">&#9632; Stop</button>
+    </div>
+    <div class="stt" aria-live="polite"><span id="ms">Ready. Text likhein aur Generate Speech dabayein.</span><div class="pb"><i id="pg"></i></div></div>
+   </div>
+
+   <div class="pane" id="p2">
+    <label style="margin-top:0">Voice type</label>
+    <div class="seg" id="seg"><button data-g="all" class="on" type="button">All</button><button data-g="f" type="button">Female</button><button data-g="m" type="button">Male</button></div>
+    <label for="q">Search voice</label><input type="text" id="q" placeholder="Voice name search..." style="margin-bottom:18px">
+    <button class="gb" id="prev" type="button">&#9654; Preview voice</button>
+    <p class="hn" id="vn"></p>
+
+    <div class="rg" style="margin-top:20px"><span>Pitch</span><b id="pvv">100%</b></div>
+    <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
+    <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
+
+    <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
+   </div>
+
+   <div class="pane" id="p3">
+    <label style="margin-top:0">MP3 provider</label>
+    <select id="prov"><option value="el">ElevenLabs (default, key chahiye)</option><option value="se">StreamElements (free backup)</option></select>
+    <p class="hn">Agar chuni hui service fail ho jaye to app khud doosri service se MP3 banane ki koshish karega.</p>
+
+    <div class="note" id="elBlock"><b>ElevenLabs</b><br>API key sirf aapke browser mein save hoti hai.
+     <input type="password" id="key" placeholder="API key" autocomplete="off" style="margin-top:10px">
+     <div class="subrow"><button class="sm" id="ks" type="button">Save key</button><button class="sm" id="kc" type="button">Remove</button></div>
+     <label for="ev" style="margin-top:14px">MP3 voice</label><select id="ev"><option value="">Pehle API key save karein</option></select>
+     <label for="em">MP3 model</label>
+     <select id="em"><option value="eleven_v3">Eleven v3 (sab languages, Urdu)</option><option value="eleven_multilingual_v2">Multilingual v2 (stable)</option></select>
+     <p class="hn">Speed slider MP3 par sirf Multilingual v2 mein chalta hai.</p>
+    </div>
+
+    <div class="note" id="seBlock"><b>StreamElements — Free</b><br>Koi API key ya signup nahi chahiye.
+     <label for="evse" style="margin-top:14px">MP3 voice</label><select id="evse"></select>
+     <p class="hn">Urdu ke liye dedicated voice available nahi. Behtareen quality ke liye ElevenLabs behtar hai.</p>
+    </div>
+   </div>
+
   </div>
 
-  <div class="note" id="seBlock"><b>StreamElements — Free</b><br>Koi API key ya signup nahi chahiye.
-   <label for="evse">MP3 voice</label><select id="evse"></select>
-   <p class="hn">Urdu ke liye dedicated voice available nahi. Behtareen quality ke liye ElevenLabs behtar hai.</p>
-  </div>
-  <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
- </aside>
-
- <div>
-  <div class="card">
-   <div class="hd"><div><div class="ey">Your content</div><h2 class="serif">Write your script</h2></div><span class="ct" id="st">0 chars / 0 words / 0 lines</span></div>
-   <textarea id="txt" dir="auto" maxlength="10000" placeholder="Yahan apna text likhein ya paste karein..." aria-label="Script"></textarea>
-   <p class="hn"><span id="cc">0</span> / 10,000 · Ctrl + Enter se generate karein.</p>
-   <div class="row"><button class="sm" id="cp" type="button">Copy text</button><button class="sm" id="cl" type="button">Clear</button></div>
-  </div>
-  <div class="act">
-   <button class="go" id="go" type="button">Generate audio</button>
-   <button class="sm" id="dlBtn" type="button">&#8595; Download MP3</button>
-   <button class="sm" id="ps" type="button">Pause</button>
-   <button class="sm" id="sp" type="button">&#9632; Stop</button>
-  </div>
-  <div class="stt" aria-live="polite"><span id="ms">Ready. Text likhein aur Generate audio dabayein.</span><div class="pb"><i id="pg"></i></div></div>
-  <div class="card">
+  <div class="sesswrap">
    <div class="hd"><div><div class="ey">Your sessions</div><h2 class="serif">Generated audio</h2></div><span class="ct" id="n">0 items</span></div>
    <div id="ses"></div>
   </div>
  </div>
+
+ <aside class="side">
+  <div class="feat">
+   <div class="fitem"><i><svg class="i" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></i><div><b>Multiple Voices</b><span>Choose from various natural sounding voices</span></div></div>
+   <div class="fitem"><i><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18"/></svg></i><div><b>Multi-Language</b><span>Support for multiple languages and accents</span></div></div>
+   <div class="fitem"><i><svg class="i" viewBox="0 0 24 24"><path d="M4 21v-6M4 11V3M12 21v-9M12 8V3M20 21v-4M20 13V3M1 15h6M9 8h6M17 17h6"/></svg></i><div><b>Customizable</b><span>Adjust speed, pitch and more</span></div></div>
+   <div class="fitem"><i><svg class="i" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.6 6.9L22 10l-5.6 4.6L18 22l-6-3.6L6 22l1.6-7.4L2 10l7.4-1.1z"/></svg></i><div><b>High Quality</b><span>Clear, natural and realistic audio</span></div></div>
+   <div class="fitem"><i><svg class="i" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 000-7.9z"/></svg></i><div><b>Free to Use</b><span>No signup required, start now instantly</span></div></div>
+  </div>
+  <div class="highlight">
+   <svg class="i" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
+   <p>Turn your text into beautiful voice</p>
+  </div>
+ </aside>
 </div>
 
 <section class="sec" id="how"><div class="ey">Simple workflow</div><h2 class="serif">How it works</h2><p>Kuch simple steps mein apne text ko sunne ke liye tayyar karein.</p>
  <div class="g2">
   <div class="it"><i>01</i><b>Text likhein</b><span>Script type karein, paste karein ya TXT file import karein.</span></div>
   <div class="it"><i>02</i><b>Voice choose karein</b><span>Language, voice type, speed aur pitch set karein.</span></div>
-  <div class="it"><i>03</i><b>Audio generate karein</b><span>Preview ke baad Generate audio button dabayein.</span></div>
+  <div class="it"><i>03</i><b>Audio generate karein</b><span>Preview ke baad Generate Speech button dabayein.</span></div>
   <div class="it"><i>04</i><b>Listen ya download</b><span>Browser mein sunein ya Download MP3 se file save karein.</span></div>
  </div>
 </section>
@@ -236,11 +353,19 @@ footer a.f:hover{color:var(--gold)}
 </div>
 
 <footer><div class="w">
- <div><a class="lg" href="#top"><i><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></i><span><b>Sukhan</b><small>STUDIO</small></span></a><span><a class="f" href="#studio">Studio</a><a class="f" href="#how">How it works</a><a class="f" href="#faq">FAQ</a></span></div>
- <p>Urdu, Hindi aur English ke liye luxury voice studio. &copy; 2026 Sukhan Studio.</p>
+ <a class="brand" href="#top"><span class="mic-badge"><span class="bars bl"><i></i><i></i><i></i></span><svg class="i" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z"/><path d="M6 11a6 6 0 0012 0h-1.6a4.4 4.4 0 01-8.8 0z"/><rect x="11.3" y="17" width="1.4" height="3" rx=".7"/></svg><span class="bars br"><i></i><i></i><i></i></span></span><span><span class="bt">Sukhan-e-Awaz</span></span></a>
+ <div class="flinks"><a class="f" href="#studio">Studio</a><a class="f" href="#how">How it works</a><a class="f" href="#faq">FAQ</a></div>
+ <p>Made with <span>&#9825;</span> for creators, students and dreamers</p>
 </div></footer>
 
 <script>
+/* ---------- Tabs (visual only) ---------- */
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab');if(!b)return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id===b.dataset.p));
+});
+
 const $=i=>document.getElementById(i),S=window.speechSynthesis;
 let V=[],EV=[],Q=[],ix=0,tk=0,state='idle',hist=[],gen='all';
 const norm=l=>(l||'').replace('_','-');
@@ -261,7 +386,6 @@ function loadV(){
   $('lang').innerHTML=ls.map(l=>`<option value="${l}">${nm(l)}</option>`).join('');
   const nav=norm(navigator.language||'en-US'),bs=x=>x.split('-')[0];
   $('lang').value=ls.includes(cur)?cur:(ls.includes('ur-PK')?'ur-PK':ls.includes(nav)?nav:(ls.find(l=>bs(l)===bs(nav))||ls[0]));
-  $('vr').textContent=V.length+' voices ready';
   fillV();
 }
 function fillV(){
@@ -276,7 +400,7 @@ function fillV(){
 const cur=()=>V.find(v=>v.name===$('voice').value&&norm(v.lang)===$('lang').value);
 function chunk(t,n=200){const o=[];(t.match(/[^.!?۔।؟\n]+[.!?۔।؟]*/g)||[t]).forEach(s=>{s=s.trim();while(s.length>n){let c=s.lastIndexOf(' ',n);if(c<n/4)c=n;o.push(s.slice(0,c));s=s.slice(c).trim()}if(s)o.push(s)});return o}
 function pack(t,n){const o=[];let c='';chunk(t,n).forEach(s=>{if(c&&(c+' '+s).length>n){o.push(c);c=s}else c=c?c+' '+s:s});if(c)o.push(c);return o}
-function setS(s){state=s;$('ps').textContent=s==='paused'?'Resume':'Pause';$('orb').classList.toggle('live',s==='playing')}
+function setS(s){state=s;$('ps').textContent=s==='paused'?'Resume':'Pause'}
 function nxt(my){
   if(my!==tk)return;
   if(ix>=Q.length){setS('idle');$('pg').style.width='100%';say('Playback complete.');return}
@@ -366,7 +490,7 @@ async function mp3SE(text){
 const isSE=()=>$('prov').value==='se';
 $('prov').onchange=()=>{if(isSE())fillSE();else if(ku())loadEV();else fillEV()};
 
-function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
+function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-e-awaz-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
 async function makeMp3(t){
   const primary=isSE()?'se':'el';
   try{
