@@ -168,6 +168,15 @@ footer a.f:hover{color:var(--gold)}
    <label for="evse">Download voice</label><select id="evse"></select>
    <p class="hn">Abhi sirf English voices high quality hain. Urdu/Hindi ke liye "Generate audio" (upar) se browser playback behtar rahega.</p>
   </div>
+
+  <div class="note" id="cloudBlock"><b>Cloud voices — 100+ languages, free</b><br>Zyada languages aur natural voices (Urdu, Hindi, Arabic, aur bohat sari aur) ke liye. Ek chhota free backend chahiye (neeche link) — koi key nahi.
+   <label for="beUrl">Backend URL</label><input type="text" id="beUrl" placeholder="https://your-worker.workers.dev">
+   <button class="gb" id="cLoad" type="button">Load languages</button>
+   <label for="cLang">Language</label><select id="cLang"><option value="">Pehle backend load karein</option></select>
+   <label for="cVoice">Cloud voice</label><select id="cVoice"></select>
+   <p class="hn">Backend deploy karne ki free guide neeche di gayi file mein hai.</p>
+  </div>
+
   <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
  </aside>
 
@@ -180,7 +189,8 @@ footer a.f:hover{color:var(--gold)}
   </div>
   <div class="act">
    <button class="go" id="go" type="button">Generate audio</button>
-   <button class="sm" id="dlBtn" type="button">&#8595; Download audio</button>
+   <button class="sm" id="dlBtn" type="button">&#8595; Download (On-device)</button>
+   <button class="sm" id="dlCloud" type="button">&#8595; Download (Cloud voice)</button>
    <button class="sm" id="ps" type="button">Pause</button>
    <button class="sm" id="sp" type="button">&#9632; Stop</button>
   </div>
@@ -351,14 +361,14 @@ async function mp3SE(text){
   return URL.createObjectURL(encodeWav(merged,sr));
 }
 
-function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.wav';document.body.appendChild(a);a.click();a.remove()}
+function dlf(url,ext){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.'+(ext||'wav');document.body.appendChild(a);a.click();a.remove()}
 $('dlBtn').onclick=async()=>{
   const t=$('txt').value.trim();
   if(!t){say('Pehle text likhein ya paste karein.');return}
   $('dlBtn').disabled=true;
   try{
     const url=await mp3SE(t);
-    hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);
+    hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url,'wav');
     say('Audio tayyar hai. Download shuru ho gaya.');
   }catch(e){
     if(e.message==='NOVOICE')say('Download voice select karein.');
@@ -368,6 +378,59 @@ $('dlBtn').onclick=async()=>{
 };
 fillSE();
 
+/* Cloud voices — free backend (see tts-worker.js) proxying Microsoft's
+   public Edge Read Aloud voice service. 100+ languages, many voices per
+   language, no API key anywhere. Backend URL is saved in this browser. */
+let CLOUD_VOICES=[];
+function grpCloud(){
+  const byLoc={};
+  CLOUD_VOICES.forEach(v=>{(byLoc[v.locale]=byLoc[v.locale]||{name:v.localeName||v.locale,items:[]}).items.push(v)});
+  const locs=Object.keys(byLoc).sort((a,b)=>(byLoc[a].name).localeCompare(byLoc[b].name));
+  $('cLang').innerHTML=locs.map(l=>`<option value="${esc(l)}">${esc(byLoc[l].name)}</option>`).join('');
+  fillCVoice();
+}
+function fillCVoice(){
+  const loc=$('cLang').value;
+  let items=CLOUD_VOICES.filter(v=>v.locale===loc);
+  if(gen==='f')items=items.filter(v=>/female/i.test(v.gender||''));
+  if(gen==='m')items=items.filter(v=>/male/i.test(v.gender||'')&&!/female/i.test(v.gender||''));
+  $('cVoice').innerHTML=items.map(v=>`<option value="${esc(v.name)}">${esc(v.friendly||v.name)}</option>`).join('')||'<option value="">Koi voice nahi</option>';
+}
+$('cLang').onchange=fillCVoice;
+$('cLoad').onclick=async()=>{
+  const be=$('beUrl').value.trim().replace(/\/$/,'');
+  if(!be){say('Pehle backend URL daalein (tts-worker.js deploy karke).');return}
+  try{
+    localStorage.setItem('sk-be',be);
+    say('Cloud languages load ho rahi hain...');
+    const r=await fetch(be+'/voices');
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    CLOUD_VOICES=await r.json();
+    grpCloud();
+    const langCount=new Set(CLOUD_VOICES.map(v=>v.locale)).size;
+    say(CLOUD_VOICES.length+' cloud voices, '+langCount+' languages mil gayi.');
+  }catch(e){say('Backend se connect nahi ho saka: '+e.message+'. URL check karein.')}
+};
+$('dlCloud').onclick=async()=>{
+  const t=$('txt').value.trim();
+  const be=$('beUrl').value.trim().replace(/\/$/,'');
+  const voice=$('cVoice').value;
+  if(!t){say('Pehle text likhein ya paste karein.');return}
+  if(!be||!voice){say('Backend URL load karein aur cloud voice select karein.');return}
+  $('dlCloud').disabled=true;say('Cloud se audio ban rahi hai...');$('pg').style.width='20%';
+  try{
+    const rate=Number($('spd').value)-100,pitch=Number($('pit').value)-100;
+    const r=await fetch(be+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,voice,rate,pitch})});
+    if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.error||('HTTP '+r.status))}
+    const blob=await r.blob(),url=URL.createObjectURL(blob);
+    $('pg').style.width='100%';
+    hist.unshift({t,l:voice,d:dt(),url});rs();dlf(url,'mp3');
+    say('Audio tayyar hai. Download shuru ho gaya.');
+  }catch(e){say('Audio nahi ban saki: '+e.message)}
+  $('dlCloud').disabled=false;
+};
+try{const sb=localStorage.getItem('sk-be');if(sb)$('beUrl').value=sb}catch(e){}
+
 function rs(){
   $('ses').innerHTML=hist.map((h,i)=>`<div class="ses"><p dir="auto">${esc(h.t.slice(0,140))}${h.t.length>140?'...':''}</p><div class="m"><span>${esc(h.l)}${h.url?' · MP3':''}</span><span>${h.d}</span></div>${h.url?`<audio controls src="${h.url}"></audio>`:''}<div class="b">${h.url?`<button class="sm" data-a="d" data-i="${i}">Download</button>`:`<button class="sm" data-a="p" data-i="${i}">Play</button>`}<button class="sm" data-a="c" data-i="${i}">Copy</button><button class="sm" data-a="r" data-i="${i}">Remove</button></div></div>`).join('')||'<p class="empty">Abhi koi audio generate nahi hui.</p>';
   $('n').textContent=hist.length+' item'+(hist.length==1?'':'s');
@@ -376,7 +439,7 @@ async function copy(t,ok){try{await navigator.clipboard.writeText(t);say(ok)}cat
 function stats(){const t=$('txt').value;$('cc').textContent=t.length.toLocaleString();$('st').textContent=`${t.length} chars / ${(t.trim().match(/\S+/g)||[]).length} words / ${t?t.split('\n').length:0} lines`}
 
 $('lang').onchange=fillV;$('q').oninput=fillV;
-$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV();fillSE()};
+$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV();fillSE();if(CLOUD_VOICES.length)fillCVoice()};
 $('spd').oninput=()=>$('sv').textContent=$('spd').value+'%';
 $('pit').oninput=()=>$('pvv').textContent=$('pit').value+'%';
 $('txt').oninput=stats;
@@ -387,7 +450,7 @@ $('prev').onclick=()=>play(PV[$('lang').value.split('-')[0]]||PV.en,false);
 $('cp').onclick=()=>copy($('txt').value,'Text copy ho gaya.');
 $('cl').onclick=()=>{$('txt').value='';stats();$('txt').focus()};
 $('txt').addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='Enter')$('go').click()});
-$('ses').onclick=e=>{const b=e.target.closest('button');if(!b)return;const h=hist[+b.dataset.i],a=b.dataset.a;if(a==='p')play(h.t,false);if(a==='d')dlf(h.url);if(a==='c')copy(h.t,'Text copy ho gaya.');if(a==='r'){if(h.url)URL.revokeObjectURL(h.url);hist.splice(+b.dataset.i,1);rs()}};
+$('ses').onclick=e=>{const b=e.target.closest('button');if(!b)return;const h=hist[+b.dataset.i],a=b.dataset.a;if(a==='p')play(h.t,false);if(a==='d')dlf(h.url,(h.url&&h.url.includes('mp3'))?'mp3':'wav');if(a==='c')copy(h.t,'Text copy ho gaya.');if(a==='r'){if(h.url)URL.revokeObjectURL(h.url);hist.splice(+b.dataset.i,1);rs()}};
 $('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('txt').value=String(r.result).slice(0,10000);stats();say('File import ho gayi: '+f.name)};r.readAsText(f);e.target.value=''};
 $('tg').onclick=()=>{const d=document.documentElement,lt=d.dataset.t==='light';d.dataset.t=lt?'':'light';$('tg').textContent=lt?'Light mode':'Dark mode';try{localStorage.setItem('sk-t',lt?'':'light')}catch(e){}};
 try{if(localStorage.getItem('sk-t')==='light'){document.documentElement.dataset.t='light';$('tg').textContent='Dark mode'}}catch(e){}
