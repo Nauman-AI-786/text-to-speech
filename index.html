@@ -133,9 +133,9 @@ footer a.f:hover{color:var(--gold)}
  <div>
   <span class="eyebrow">Urdu · Hindi · English</span>
   <h1 class="serif">Give your words<br><em>a voice worth hearing.</em></h1>
-  <p>Text likhein, apni pasandeeda awaz chunein, sunein aur MP3 download karein.</p>
+  <p>Text likhein, apni pasandeeda awaz chunein, sunein aur MP3 download karein — bilkul free, koi key ya signup nahi.</p>
   <div class="bt"><a href="#studio">Start creating</a><a href="#how">Learn how it works</a></div>
-  <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p>
+  <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ek free service (StreamElements) ko bheja jata hai.</p>
  </div>
  <div class="orb" id="orb" aria-hidden="true"><div class="core"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><span class="vr" id="vr">Voice ready</span></div>
 </section>
@@ -144,7 +144,7 @@ footer a.f:hover{color:var(--gold)}
  <div><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
  <div><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
  <div><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
- <div><b>MP3 download</b><span>Audio apne device mein save karein</span></div>
+ <div><b>MP3 download</b><span>Bilkul free, koi key nahi chahiye</span></div>
 </section>
 
 <div class="app" id="studio">
@@ -164,22 +164,9 @@ footer a.f:hover{color:var(--gold)}
   <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
   <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
 
-  <label for="prov" style="margin-top:24px">MP3 provider</label>
-  <select id="prov"><option value="el">ElevenLabs (default, key chahiye)</option><option value="se">StreamElements (free backup)</option></select>
-  <p class="hn">Agar chuni hui service fail ho jaye to app khud doosri service se MP3 banane ki koshish karega.</p>
-
-  <div class="note" id="elBlock"><b>ElevenLabs</b><br>API key sirf aapke browser mein save hoti hai.
-   <input type="password" id="key" placeholder="API key" autocomplete="off" style="margin-top:10px">
-   <div class="row"><button class="sm" id="ks" type="button">Save key</button><button class="sm" id="kc" type="button">Remove</button></div>
-   <label for="ev">MP3 voice</label><select id="ev"><option value="">Pehle API key save karein</option></select>
-   <label for="em">MP3 model</label>
-   <select id="em"><option value="eleven_v3">Eleven v3 (sab languages, Urdu)</option><option value="eleven_multilingual_v2">Multilingual v2 (stable)</option></select>
-   <p class="hn">Speed slider MP3 par sirf Multilingual v2 mein chalta hai.</p>
-  </div>
-
-  <div class="note" id="seBlock"><b>StreamElements — Free</b><br>Koi API key ya signup nahi chahiye.
+  <div class="note" id="seBlock"><b>MP3 download — 100% Free</b><br>Koi API key ya signup nahi chahiye. Har kisi ke liye seedha kaam karta hai.
    <label for="evse">MP3 voice</label><select id="evse"></select>
-   <p class="hn">Urdu ke liye dedicated voice available nahi. Behtareen quality ke liye ElevenLabs behtar hai.</p>
+   <p class="hn">Urdu ke liye dedicated voice available nahi — Hindi/English ke liye best quality milti hai.</p>
   </div>
   <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
  </aside>
@@ -210,7 +197,7 @@ footer a.f:hover{color:var(--gold)}
   <div class="it"><i>01</i><b>Text likhein</b><span>Script type karein, paste karein ya TXT file import karein.</span></div>
   <div class="it"><i>02</i><b>Voice choose karein</b><span>Language, voice type, speed aur pitch set karein.</span></div>
   <div class="it"><i>03</i><b>Audio generate karein</b><span>Preview ke baad Generate audio button dabayein.</span></div>
-  <div class="it"><i>04</i><b>Listen ya download</b><span>Browser mein sunein ya Download MP3 se file save karein.</span></div>
+  <div class="it"><i>04</i><b>Listen ya download</b><span>Browser mein sunein ya Download MP3 se file save karein — free, bina key ke.</span></div>
  </div>
 </section>
 
@@ -227,8 +214,9 @@ footer a.f:hover{color:var(--gold)}
  <div class="g2">
   <details><summary>Kya yeh tool Urdu text ko read kar sakta hai?</summary><p>Haan, agar aapke device par Urdu voice maujood ho. Language list mein Urdu select karein.</p></details>
   <details><summary>Urdu voice list mein nazar na aaye to?</summary><p>Chrome ya Edge use karein. Android par Google Text-to-speech mein Urdu voice install karein, phir page refresh karein.</p></details>
-  <details><summary>Kya MP3 download ho sakti hai?</summary><p>Haan. Download MP3 ElevenLabs ki API key se audio banata hai, ya free StreamElements se.</p></details>
-  <details><summary>Kya mera text private rehta hai?</summary><p>Browser playback mein text aapke device par rehta hai. MP3 banate waqt text ElevenLabs ko bheja jata hai.</p></details>
+  <details><summary>Kya MP3 download ke liye key chahiye?</summary><p>Nahi. Download MP3 bilkul free hai, kisi bhi key ya signup ke bagair — jo bhi link kholega wo seedha download kar sakega.</p></details>
+  <details><summary>Agar MP3 banane mein error aaye to?</summary><p>Kabhi kabhi free service kuch der ke liye busy ho sakti hai. "Download MP3" dobara dabayein; app khud ek dobara koshish karta hai.</p></details>
+  <details><summary>Kya mera text private rehta hai?</summary><p>Browser playback mein text aapke device par rehta hai. MP3 banate waqt text free TTS service ko bheja jata hai.</p></details>
  </div>
 </section>
 
@@ -242,7 +230,7 @@ footer a.f:hover{color:var(--gold)}
 
 <script>
 const $=i=>document.getElementById(i),S=window.speechSynthesis;
-let V=[],EV=[],Q=[],ix=0,tk=0,state='idle',hist=[],gen='all';
+let V=[],Q=[],ix=0,tk=0,state='idle',hist=[],gen='all';
 const norm=l=>(l||'').replace('_','-');
 const nm=c=>{try{return new Intl.DisplayNames(['en'],{type:'language'}).of(c).replace(' (',' · ').replace(')','')}catch(e){return c}};
 const FEM=/female|woman|zira|hazel|susan|samantha|victoria|karen|tessa|moira|fiona|veena|heera|kalpana|uzma|aria|jenny|sara|salma|helena|paulina|monica|lekha|amelie/i;
@@ -252,8 +240,6 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const say=m=>$('ms').textContent=m;
 const dt=()=>new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
 const PV={ur:'السلام علیکم، یہ آواز کا نمونہ ہے۔',hi:'नमस्ते, यह आवाज़ का नमूना है।',en:'Hello, this is a voice preview.'};
-const ku=()=>{try{return localStorage.getItem('sk-ek')||''}catch(e){return ''}};
-const errm=j=>{const d=j&&j.detail;return typeof d==='string'?d:(d&&(d.message||d.status))||'API error'};
 
 function loadV(){
   V=S.getVoices();if(!V.length)return;
@@ -296,43 +282,7 @@ function play(text,record){
   nxt(my);
 }
 
-/* ElevenLabs */
-const DEF=[['EXAVITQu4vr4xnSDxMaL','Sarah'],['JBFqnCBsd6RMkjVDRZzb','George'],['Xb7hH8MSUJpSbSDYk0k2','Alice'],['nPczCjzI2devNBz1zQrb','Brian'],['cgSgspJ2msm6clMCkdW9','Jessica'],['onwK4e9ZLuTAKqWW03F9','Daniel']].map(a=>({voice_id:a[0],name:a[1]}));
-async function loadEV(){
-  const k=ku();
-  if(!k){EV=[];$('ev').innerHTML='<option value="">Pehle API key save karein</option>';return}
-  try{
-    const r=await fetch('https://api.elevenlabs.io/v1/voices',{headers:{'xi-api-key':k}});
-    const j=await r.json();if(!r.ok)throw new Error(errm(j));
-    EV=j.voices||[];say(EV.length+' MP3 voices mil gayi.');
-  }catch(e){EV=[];say('Voices list nahi mili ('+e.message+'). Default voices lag di gayi hain.')}
-  if(!EV.length)EV=DEF;
-  fillEV();
-}
-function fillEV(){
-  let list=EV;
-  if(gen!=='all'){const g=gen==='f'?'female':'male',f=EV.filter(v=>v.labels&&v.labels.gender===g);if(f.length)list=f}
-  const cv=$('ev').value;
-  $('ev').innerHTML=list.map(v=>`<option value="${esc(v.voice_id)}">${esc(v.name)}${v.labels&&v.labels.accent?' · '+esc(v.labels.accent):''}</option>`).join('')||'<option value="">Koi voice nahi mili</option>';
-  if(list.some(v=>v.voice_id===cv))$('ev').value=cv;
-}
-async function mp3(text){
-  const k=ku();if(!k)throw new Error('NOKEY');
-  const vid=$('ev').value;if(!vid)throw new Error('NOVOICE');
-  const m=$('em').value,parts=pack(text,m==='eleven_v3'?2500:4000),bl=[];
-  for(let i=0;i<parts.length;i++){
-    say('MP3 ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
-    const body={text:parts[i],model_id:m};
-    if(m!=='eleven_v3')body.voice_settings={speed:Math.min(1.2,Math.max(.7,$('spd').value/100))};
-    const r=await fetch('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(vid)+'?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':k,'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!r.ok){let j={};try{j=await r.json()}catch(e){}throw new Error(errm(j)+' ('+r.status+')')}
-    bl.push(await r.blob());
-  }
-  $('pg').style.width='100%';
-  return URL.createObjectURL(new Blob(bl,{type:'audio/mpeg'}));
-}
-
-/* StreamElements — free */
+/* StreamElements — free, no key, only provider */
 const SEV=[
   ['Joanna','Joanna · English (US)','f'],['Matthew','Matthew · English (US)','m'],
   ['Ivy','Ivy · English (US)','f'],['Justin','Justin · English (US)','m'],
@@ -351,57 +301,46 @@ function fillSE(){
   $('evse').innerHTML=list.map(v=>`<option value="${esc(v.voice_id)}">${esc(v.name)}</option>`).join('');
   if(list.some(v=>v.voice_id===cv))$('evse').value=cv;
 }
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+async function seOne(voice,text,attempt){
+  const r=await fetch('https://api.streamelements.com/kappa/v2/speech?voice='+encodeURIComponent(voice)+'&text='+encodeURIComponent(text),{cache:'no-store'});
+  if(!r.ok){
+    // Retry once on transient errors (401/403/429/5xx) before giving up on this chunk
+    if(attempt<2&&[401,403,429,500,502,503,504].includes(r.status)){
+      await wait(900);
+      return seOne(voice,text,attempt+1);
+    }
+    throw new Error('STATUS_'+r.status);
+  }
+  return r.blob();
+}
 async function mp3SE(text){
   const voice=$('evse').value;if(!voice)throw new Error('NOVOICE');
   const parts=pack(text,450),bl=[];
   for(let i=0;i<parts.length;i++){
-    say('Free MP3 ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
-    const r=await fetch('https://api.streamelements.com/kappa/v2/speech?voice='+encodeURIComponent(voice)+'&text='+encodeURIComponent(parts[i]));
-    if(!r.ok)throw new Error('StreamElements error ('+r.status+')');
-    bl.push(await r.blob());
+    say('MP3 ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
+    bl.push(await seOne(voice,parts[i],1));
   }
   $('pg').style.width='100%';
   return URL.createObjectURL(new Blob(bl,{type:'audio/mpeg'}));
 }
-const isSE=()=>$('prov').value==='se';
-$('prov').onchange=()=>{if(isSE())fillSE();else if(ku())loadEV();else fillEV()};
 
 function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
-async function makeMp3(t){
-  const primary=isSE()?'se':'el';
-  try{
-    const url=primary==='se'?await mp3SE(t):await mp3(t);
-    return {url,fallback:false};
-  }catch(e1){
-    if(primary==='el'&&e1.message==='NOKEY'){
-      say('ElevenLabs key nahi mili, free StreamElements try kar rahe hain...');
-    }else{
-      say((primary==='el'?'ElevenLabs':'StreamElements')+' se MP3 nahi ban saki, backup service try kar rahe hain...');
-    }
-    try{
-      const url=primary==='se'?await mp3(t):await mp3SE(t);
-      return {url,fallback:true};
-    }catch(e2){
-      throw e1.message!=='NOKEY'?e1:e2;
-    }
-  }
-}
 $('dlBtn').onclick=async()=>{
   const t=$('txt').value.trim();
   if(!t){say('Pehle text likhein ya paste karein.');return}
   $('dlBtn').disabled=true;
   try{
-    const{url,fallback}=await makeMp3(t);
+    const url=await mp3SE(t);
     hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);
-    say(fallback?'MP3 tayyar hai (backup service se). Download shuru ho gaya.':'MP3 tayyar hai. Download shuru ho gaya.');
+    say('MP3 tayyar hai. Download shuru ho gaya.');
   }catch(e){
-    say(e.message==='NOKEY'?'MP3 ke liye ElevenLabs API key save karein, ya StreamElements provider chunein.':e.message==='NOVOICE'?'MP3 voice select karein.':'MP3 nahi ban saki: '+e.message);
+    if(e.message==='NOVOICE')say('MP3 voice select karein.');
+    else if(e.message&&e.message.startsWith('STATUS_'))say('Free MP3 service abhi thodi busy hai ('+e.message.replace('STATUS_','error ')+'). Thodi der baad "Download MP3" dobara try karein.');
+    else say('MP3 nahi ban saki: '+e.message);
   }
   $('dlBtn').disabled=false;
 };
-$('ks').onclick=()=>{const v=$('key').value.trim();if(!v){say('Key khali hai.');return}try{localStorage.setItem('sk-ek',v);$('key').value='';$('key').placeholder='Key saved';say('API key save ho gayi.');loadEV()}catch(e){say('Key save nahi ho saki.')}};
-$('kc').onclick=()=>{try{localStorage.removeItem('sk-ek')}catch(e){}$('key').value='';$('key').placeholder='API key';loadEV();say('API key hata di gayi.')};
-if(ku()){$('key').placeholder='Key saved';loadEV()}
 fillSE();
 
 function rs(){
@@ -412,7 +351,7 @@ async function copy(t,ok){try{await navigator.clipboard.writeText(t);say(ok)}cat
 function stats(){const t=$('txt').value;$('cc').textContent=t.length.toLocaleString();$('st').textContent=`${t.length} chars / ${(t.trim().match(/\S+/g)||[]).length} words / ${t?t.split('\n').length:0} lines`}
 
 $('lang').onchange=fillV;$('q').oninput=fillV;
-$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV();if(isSE())fillSE();else fillEV()};
+$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fillV();fillSE()};
 $('spd').oninput=()=>$('sv').textContent=$('spd').value+'%';
 $('pit').oninput=()=>$('pvv').textContent=$('pit').value+'%';
 $('txt').oninput=stats;
