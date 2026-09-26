@@ -170,7 +170,7 @@ footer a.f:hover{color:var(--gold)}
   </div>
 
   <div class="note" id="cloudBlock"><b>Cloud voices — 100+ languages, free</b><br>Zyada languages aur natural voices (Urdu, Hindi, Arabic, aur bohat sari aur) ke liye. Ek chhota free backend chahiye (neeche link) — koi key nahi.
-   <label for="beUrl">Backend URL</label><input type="text" id="beUrl" placeholder="https://your-worker.workers.dev">
+   <label for="beUrl">Backend URL</label><input type="text" id="beUrl" placeholder="https://your-worker.workers.dev" value="https://polished-dust-37b4.naumanrafique98.workers.dev">
    <button class="gb" id="cLoad" type="button">Load languages</button>
    <label for="cLang">Language</label><select id="cLang"><option value="">Pehle backend load karein</option></select>
    <label for="cVoice">Cloud voice</label><select id="cVoice"></select>
@@ -295,6 +295,7 @@ function play(text,record){
 /* On-device AI voice (Kokoro, via transformers.js/WASM) — runs 100% inside the
    browser. After the one-time model download it never contacts any server
    again, so it can never return a 401 / be blocked / go down. */
+const DEFAULT_CLOUD_BACKEND='https://polished-dust-37b4.naumanrafique98.workers.dev';
 const KOKORO_MODEL='onnx-community/Kokoro-82M-v1.0-ONNX';
 const KOKORO_VOICES=[
   ['af_heart','Heart','f'],['af_bella','Bella','f'],['af_nova','Nova','f'],['af_sarah','Sarah','f'],
@@ -430,6 +431,7 @@ $('dlCloud').onclick=async()=>{
   $('dlCloud').disabled=false;
 };
 try{const sb=localStorage.getItem('sk-be');if(sb)$('beUrl').value=sb}catch(e){}
+if($('beUrl').value.trim())$('cLoad').click();
 
 function rs(){
   $('ses').innerHTML=hist.map((h,i)=>`<div class="ses"><p dir="auto">${esc(h.t.slice(0,140))}${h.t.length>140?'...':''}</p><div class="m"><span>${esc(h.l)}${h.url?' · MP3':''}</span><span>${h.d}</span></div>${h.url?`<audio controls src="${h.url}"></audio>`:''}<div class="b">${h.url?`<button class="sm" data-a="d" data-i="${i}">Download</button>`:`<button class="sm" data-a="p" data-i="${i}">Play</button>`}<button class="sm" data-a="c" data-i="${i}">Copy</button><button class="sm" data-a="r" data-i="${i}">Remove</button></div></div>`).join('')||'<p class="empty">Abhi koi audio generate nahi hui.</p>';
