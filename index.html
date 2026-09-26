@@ -135,7 +135,7 @@ footer a.f:hover{color:var(--gold)}
   <h1 class="serif">Give your words<br><em>a voice worth hearing.</em></h1>
   <p>Text likhein, apni pasandeeda awaz chunein, sunein aur MP3 download karein — bilkul free, koi key ya signup nahi.</p>
   <div class="bt"><a href="#studio">Start creating</a><a href="#how">Learn how it works</a></div>
-  <p class="pv">Privacy note: sensitive information enter na karein. Browser playback aapke device par hi hota hai. MP3 banate waqt text ek free service (StreamElements) ko bheja jata hai.</p>
+  <p class="pv">Privacy note: Playback aur audio download — dono seedha aapke browser ke andar hote hain. Text kabhi kisi server ko nahi bheja jata.</p>
  </div>
  <div class="orb" id="orb" aria-hidden="true"><div class="core"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div><span class="vr" id="vr">Voice ready</span></div>
 </section>
@@ -144,7 +144,7 @@ footer a.f:hover{color:var(--gold)}
  <div><b>Multiple languages</b><span>Urdu, Hindi, English aur baqi sab</span></div>
  <div><b>Voice preview</b><span>Generate se pehle voice check karein</span></div>
  <div><b>Speed &amp; pitch</b><span>Apni listening ke mutabiq adjust karein</span></div>
- <div><b>MP3 download</b><span>Bilkul free, koi key nahi chahiye</span></div>
+ <div><b>Audio download</b><span>On-device AI, bilkul free, koi key nahi</span></div>
 </section>
 
 <div class="app" id="studio">
@@ -164,9 +164,9 @@ footer a.f:hover{color:var(--gold)}
   <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
   <div class="sc"><span>Low</span><span>Natural</span><span>High</span></div>
 
-  <div class="note" id="seBlock"><b>MP3 download — 100% Free</b><br>Koi API key ya signup nahi chahiye. Har kisi ke liye seedha kaam karta hai.
-   <label for="evse">MP3 voice</label><select id="evse"></select>
-   <p class="hn">Urdu ke liye dedicated voice available nahi — Hindi/English ke liye best quality milti hai.</p>
+  <div class="note" id="seBlock"><b>On-device AI voice — 100% Free</b><br>Koi API, key ya internet ke bagair — pehli dafa istemal par ek chhota voice model (~85MB) load hota hai, uske baad hamesha offline kaam karta hai.
+   <label for="evse">Download voice</label><select id="evse"></select>
+   <p class="hn">Abhi sirf English voices high quality hain. Urdu/Hindi ke liye "Generate audio" (upar) se browser playback behtar rahega.</p>
   </div>
   <label class="im" for="file">&#8593; Import .txt file</label><input type="file" id="file" accept=".txt,text/plain" hidden>
  </aside>
@@ -180,7 +180,7 @@ footer a.f:hover{color:var(--gold)}
   </div>
   <div class="act">
    <button class="go" id="go" type="button">Generate audio</button>
-   <button class="sm" id="dlBtn" type="button">&#8595; Download MP3</button>
+   <button class="sm" id="dlBtn" type="button">&#8595; Download audio</button>
    <button class="sm" id="ps" type="button">Pause</button>
    <button class="sm" id="sp" type="button">&#9632; Stop</button>
   </div>
@@ -214,9 +214,9 @@ footer a.f:hover{color:var(--gold)}
  <div class="g2">
   <details><summary>Kya yeh tool Urdu text ko read kar sakta hai?</summary><p>Haan, agar aapke device par Urdu voice maujood ho. Language list mein Urdu select karein.</p></details>
   <details><summary>Urdu voice list mein nazar na aaye to?</summary><p>Chrome ya Edge use karein. Android par Google Text-to-speech mein Urdu voice install karein, phir page refresh karein.</p></details>
-  <details><summary>Kya MP3 download ke liye key chahiye?</summary><p>Nahi. Download MP3 bilkul free hai, kisi bhi key ya signup ke bagair — jo bhi link kholega wo seedha download kar sakega.</p></details>
-  <details><summary>Agar MP3 banane mein error aaye to?</summary><p>Kabhi kabhi free service kuch der ke liye busy ho sakti hai. "Download MP3" dobara dabayein; app khud ek dobara koshish karta hai.</p></details>
-  <details><summary>Kya mera text private rehta hai?</summary><p>Browser playback mein text aapke device par rehta hai. MP3 banate waqt text free TTS service ko bheja jata hai.</p></details>
+  <details><summary>Kya download ke liye key chahiye?</summary><p>Nahi. Audio download bilkul free hai, kisi bhi key, signup ya server ke bagair — awaz seedha aapke browser ke andar AI model se banti hai.</p></details>
+  <details><summary>Pehli dafa download mein time kyun lagta hai?</summary><p>Pehli baar ek chhota voice model (~85MB) load hota hai. Uske baad wo aapke browser mein save rehta hai aur agli baar turant, bina internet ke bhi, kaam karta hai.</p></details>
+  <details><summary>Kya mera text private rehta hai?</summary><p>Haan, hamesha. Playback ho ya download, text kabhi kisi server ko nahi bheja jata — sab kuch aapke device par hota hai.</p></details>
  </div>
 </section>
 
@@ -282,50 +282,76 @@ function play(text,record){
   nxt(my);
 }
 
-/* StreamElements — free, no key, only provider */
-const SEV=[
-  ['Joanna','Joanna · English (US)','f'],['Matthew','Matthew · English (US)','m'],
-  ['Ivy','Ivy · English (US)','f'],['Justin','Justin · English (US)','m'],
-  ['Kendra','Kendra · English (US)','f'],['Kimberly','Kimberly · English (US)','f'],
-  ['Salli','Salli · English (US)','f'],['Joey','Joey · English (US)','m'],
-  ['Brian','Brian · English (UK)','m'],['Amy','Amy · English (UK)','f'],
-  ['Emma','Emma · English (UK)','f'],['Russell','Russell · English (AU)','m'],
-  ['Nicole','Nicole · English (AU)','f'],['Aditi','Aditi · Hindi','f'],
-  ['Raveena','Raveena · English (India)','f'],['Mizuki','Mizuki · Japanese','f'],
-  ['Zhiyu','Zhiyu · Chinese','f'],['Filiz','Filiz · Turkish','f']
+/* On-device AI voice (Kokoro, via transformers.js/WASM) — runs 100% inside the
+   browser. After the one-time model download it never contacts any server
+   again, so it can never return a 401 / be blocked / go down. */
+const KOKORO_MODEL='onnx-community/Kokoro-82M-v1.0-ONNX';
+const KOKORO_VOICES=[
+  ['af_heart','Heart','f'],['af_bella','Bella','f'],['af_nova','Nova','f'],['af_sarah','Sarah','f'],
+  ['af_sky','Sky','f'],['af_nicole','Nicole','f'],['af_aoede','Aoede','f'],['af_kore','Kore','f'],
+  ['am_adam','Adam','m'],['am_michael','Michael','m'],['am_echo','Echo','m'],['am_liam','Liam','m'],
+  ['am_onyx','Onyx','m'],['am_eric','Eric','m'],
+  ['bf_emma','Emma (UK)','f'],['bf_alice','Alice (UK)','f'],['bf_lily','Lily (UK)','f'],
+  ['bm_george','George (UK)','m'],['bm_daniel','Daniel (UK)','m'],['bm_fable','Fable (UK)','m']
 ].map(a=>({voice_id:a[0],name:a[1],gender:a[2]}));
 function fillSE(){
-  let list=SEV;
-  if(gen!=='all'){const f=SEV.filter(v=>v.gender===(gen==='f'?'f':'m'));if(f.length)list=f}
+  let list=KOKORO_VOICES;
+  if(gen!=='all'){const f=KOKORO_VOICES.filter(v=>v.gender===(gen==='f'?'f':'m'));if(f.length)list=f}
   const cv=$('evse').value;
   $('evse').innerHTML=list.map(v=>`<option value="${esc(v.voice_id)}">${esc(v.name)}</option>`).join('');
   if(list.some(v=>v.voice_id===cv))$('evse').value=cv;
 }
-function wait(ms){return new Promise(r=>setTimeout(r,ms))}
-async function seOne(voice,text,attempt){
-  const r=await fetch('https://api.streamelements.com/kappa/v2/speech?voice='+encodeURIComponent(voice)+'&text='+encodeURIComponent(text),{cache:'no-store'});
-  if(!r.ok){
-    // Retry once on transient errors (401/403/429/5xx) before giving up on this chunk
-    if(attempt<2&&[401,403,429,500,502,503,504].includes(r.status)){
-      await wait(900);
-      return seOne(voice,text,attempt+1);
+
+let enginePromise=null;
+function loadEngine(){
+  if(enginePromise)return enginePromise;
+  const files={};
+  const onProg=p=>{
+    if(p&&p.status==='progress'&&p.file){
+      files[p.file]={loaded:p.loaded||0,total:p.total||1};
+      let loaded=0,total=0;
+      for(const k in files){loaded+=files[k].loaded;total+=files[k].total}
+      const pct=total?Math.min(99,Math.round(loaded/total*100)):0;
+      say('Voice model pehli dafa load ho raha hai... '+pct+'% (~85MB, sirf ek dafa)');
+      $('pg').style.width=pct+'%';
     }
-    throw new Error('STATUS_'+r.status);
-  }
-  return r.blob();
-}
-async function mp3SE(text){
-  const voice=$('evse').value;if(!voice)throw new Error('NOVOICE');
-  const parts=pack(text,450),bl=[];
-  for(let i=0;i<parts.length;i++){
-    say('MP3 ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
-    bl.push(await seOne(voice,parts[i],1));
-  }
-  $('pg').style.width='100%';
-  return URL.createObjectURL(new Blob(bl,{type:'audio/mpeg'}));
+  };
+  enginePromise=(async()=>{
+    const {KokoroTTS}=await import('https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm');
+    return KokoroTTS.from_pretrained(KOKORO_MODEL,{dtype:'q8',device:'wasm',progress_callback:onProg});
+  })();
+  return enginePromise;
 }
 
-function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.mp3';document.body.appendChild(a);a.click();a.remove()}
+function encodeWav(samples,sampleRate){
+  const len=samples.length,buf=new ArrayBuffer(44+len*2),v=new DataView(buf);
+  const ws=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+  ws(0,'RIFF');v.setUint32(4,36+len*2,true);ws(8,'WAVE');ws(12,'fmt ');
+  v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,sampleRate,true);v.setUint32(28,sampleRate*2,true);
+  v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,len*2,true);
+  let off=44;
+  for(let i=0;i<len;i++,off+=2){const s=Math.max(-1,Math.min(1,samples[i]));v.setInt16(off,s<0?s*0x8000:s*0x7fff,true)}
+  return new Blob([buf],{type:'audio/wav'});
+}
+
+async function mp3SE(text){
+  const voice=$('evse').value;if(!voice)throw new Error('NOVOICE');
+  const tts=await loadEngine();
+  const parts=pack(text,350);
+  const chunks=[];let sr=24000;
+  for(let i=0;i<parts.length;i++){
+    say('Audio ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
+    const out=await tts.generate(parts[i],{voice});
+    chunks.push(out.audio);sr=out.sampling_rate||sr;
+  }
+  $('pg').style.width='100%';
+  const total=chunks.reduce((s,c)=>s+c.length,0),merged=new Float32Array(total);
+  let off=0;chunks.forEach(c=>{merged.set(c,off);off+=c.length});
+  return URL.createObjectURL(encodeWav(merged,sr));
+}
+
+function dlf(url){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.wav';document.body.appendChild(a);a.click();a.remove()}
 $('dlBtn').onclick=async()=>{
   const t=$('txt').value.trim();
   if(!t){say('Pehle text likhein ya paste karein.');return}
@@ -333,11 +359,10 @@ $('dlBtn').onclick=async()=>{
   try{
     const url=await mp3SE(t);
     hist.unshift({t,l:nm($('lang').value),d:dt(),url});rs();dlf(url);
-    say('MP3 tayyar hai. Download shuru ho gaya.');
+    say('Audio tayyar hai. Download shuru ho gaya.');
   }catch(e){
-    if(e.message==='NOVOICE')say('MP3 voice select karein.');
-    else if(e.message&&e.message.startsWith('STATUS_'))say('Free MP3 service abhi thodi busy hai ('+e.message.replace('STATUS_','error ')+'). Thodi der baad "Download MP3" dobara try karein.');
-    else say('MP3 nahi ban saki: '+e.message);
+    if(e.message==='NOVOICE')say('Download voice select karein.');
+    else say('Audio nahi ban saki: '+e.message+'. Is browser mein WebAssembly support hona zaroori hai (Chrome/Edge behtar rahenge).');
   }
   $('dlBtn').disabled=false;
 };
