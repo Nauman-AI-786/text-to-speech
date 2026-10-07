@@ -1,364 +1,608 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sukhan-e-Awaz | Free Urdu, Hindi & English Text to Speech</title>
-<meta name="description" content="Urdu, Hindi aur English text ko awaz mein badlein aur MP3 download karein. Free, signup ke bagair.">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0b1020">
-<link rel="canonical" href="https://nauman-ai-786.github.io/text-to-speech/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nauman-ai-786.github.io/text-to-speech/">
-<meta property="og:title" content="Sukhan-e-Awaz | Free Urdu, Hindi & English Text to Speech">
-<meta property="og:description" content="Urdu, Hindi aur English text ko awaz mein badlein aur MP3 download karein.">
-<meta property="og:site_name" content="Sukhan-e-Awaz">
-<meta name="twitter:card" content="summary">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sukhan-e-Awaz","url":"https://nauman-ai-786.github.io/text-to-speech/","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web Browser)","inLanguage":["ur","hi","en"],"description":"Urdu, Hindi aur English text ko awaz mein badalne aur MP3 download karne ka free tool.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap">
-<style>
-:root{--bg:#0b1020;--panel:#121a30;--panel2:#1a2440;--line:rgba(232,196,140,.16);--tx:#f4eee2;--mu:#a3a9bf;--gold:#e8c48c;--ink:#0b1020;--gg:linear-gradient(135deg,#fff6df,#eccb93 40%,#c98a4e 70%,#8a5a2e)}
-[data-t=light]{--bg:#f7f3ea;--panel:#fffdf7;--panel2:#f0eadb;--line:rgba(120,90,40,.2);--tx:#1d2338;--mu:#5f6378;--gold:#8a6432;--ink:#fffdf7;--gg:linear-gradient(135deg,#f4dba8,#e0a86a 45%,#a86a37 80%,#8a5a2e)}
-*{box-sizing:border-box;margin:0}
-body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);background:var(--bg);line-height:1.6;min-height:100vh}
-.serif{font-family:'Cormorant Garamond',Georgia,serif}
-.w{max-width:1060px;margin:0 auto;padding:0 20px}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-nav{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
-nav .w{display:flex;align-items:center;gap:18px;height:60px}
-.lg{margin-right:auto;text-decoration:none;font:600 1.15rem Cinzel,serif;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
-nav a.l{color:var(--mu);text-decoration:none;font-size:.85rem}
-.tg{border:1px solid var(--gold);background:none;color:var(--gold);border-radius:99px;padding:7px 15px;font:600 .75rem Manrope;cursor:pointer}
-.hero{padding:34px 0 22px}
-.hero h1{font:500 clamp(2.1rem,6vw,3.4rem)/1.12 'Cormorant Garamond',serif;margin-bottom:10px}
-.hero h1 em{background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ur{font:400 1.15rem/2.2 'Noto Nastaliq Urdu',serif;color:var(--gold)}
-.hero p:last-child{color:var(--mu);max-width:56ch}
-.app{display:grid;grid-template-columns:330px 1fr;gap:18px;align-items:start}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
-h2{font:600 1.45rem/1.2 'Cormorant Garamond',serif;margin-bottom:10px}
-label{display:block;font:600 .76rem Manrope;margin:14px 0 6px;color:var(--mu)}
-select,input[type=text],textarea{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:11px;font:500 .92rem Manrope}
-select option{background:var(--panel);color:var(--tx)}
-textarea{min-height:220px;resize:vertical;line-height:1.8;font:400 1.02rem Manrope}
-.seg{display:flex;background:var(--panel2);border-radius:12px;padding:4px;border:1px solid var(--line)}
-.seg button{flex:1;border:0;background:none;color:var(--mu);padding:9px 4px;border-radius:9px;font:600 .74rem Manrope;cursor:pointer}
-.seg .on{background:var(--gg);color:var(--ink)}
-.sm,.gb{border:1px solid var(--line);background:var(--panel2);color:var(--tx);border-radius:99px;padding:9px 15px;font:600 .78rem Manrope;cursor:pointer}
-.sm:hover,.gb:hover{border-color:var(--gold);color:var(--gold)}
-.sm:disabled,.gb:disabled,.go:disabled{opacity:.55;cursor:wait}
-.gb{width:100%;margin-top:12px}
-.hn{font-size:.78rem;color:var(--mu);margin-top:8px}
-.rg{display:flex;justify-content:space-between;font:600 .78rem Manrope;margin:14px 0 6px;color:var(--mu)}
-.rg b{color:var(--gold)}
-input[type=range]{width:100%;accent-color:var(--gold)}
-details.o{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-summary{cursor:pointer;font:600 .85rem Manrope;color:var(--gold)}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
-.row .ct{margin-left:auto;font-size:.75rem;color:var(--mu)}
-.im{border:1px dashed var(--gold);color:var(--gold);border-radius:99px;padding:9px 15px;font:600 .78rem Manrope;cursor:pointer}
-.act{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.go{flex:1;min-width:200px;border:0;border-radius:99px;background:var(--gg);color:var(--ink);padding:16px;font:700 1rem Manrope;cursor:pointer}
-.pc{display:none}
-.stt{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:14px;font-size:.88rem;margin-bottom:16px}
-.pb{height:3px;background:var(--line);margin-top:10px;border-radius:3px;overflow:hidden}
-.pb i{display:block;height:100%;width:0;background:var(--gg);transition:width .3s}
-.ses{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
-.ses p{font:400 1.05rem/1.6 'Cormorant Garamond',serif}
-.ses .m{display:flex;justify-content:space-between;gap:8px;font-size:.72rem;color:var(--mu);margin:8px 0}
-.ses .b{display:flex;gap:8px;margin-top:10px}.ses .sm{flex:1;padding:8px 4px}
-.ses audio{width:100%;height:38px}
-.empty{color:var(--mu);font-size:.88rem}
-.sec{padding:24px;margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:20px}
-details.q{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:10px}
-details.q summary{color:var(--tx);list-style:none;display:flex;justify-content:space-between;gap:10px}
-details.q summary::after{content:"+";color:var(--gold)}
-details.q[open] summary::after{content:"−"}
-details.q p{font-size:.88rem;color:var(--mu);margin-top:8px}
-footer{margin-top:34px;border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area-inset-bottom,0));font-size:.8rem;color:var(--mu)}
-@media(max-width:860px){.app{grid-template-columns:1fr}}
-@media(hover:none){.dk{display:none}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-</head>
-<body>
-<nav><div class="w"><a class="lg" href="#top">Sukhan-e-Awaz</a><a class="l" href="#faq">FAQ</a><button class="tg" id="tg" type="button">Light mode</button></div></nav>
-
-<div class="w" id="top">
-<section class="hero">
- <h1>Apne text ko <em>awaz</em> dein</h1>
- <p class="ur" lang="ur" dir="rtl">متن لکھیں، آواز سنیں، MP3 ڈاؤن لوڈ کریں۔</p>
- <p>Urdu, Hindi aur English. Free hai, signup ya key nahi chahiye.</p>
-</section>
-
-<div class="app" id="studio">
- <aside class="card">
-  <h2>1. Awaz chunein</h2>
-  <div class="seg" id="eng" role="group" aria-label="Voice type">
-   <button data-e="cloud" class="on" type="button">Natural</button><button data-e="browser" type="button">Browser</button><button data-e="offline" type="button">Offline</button>
+<!doctype html>
+<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20261007-04-b4189fb","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo Black":"YACgEZulLoA,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Baloo 2":"YAHO2IcQUcM,0","Barlow Condensed":"YAFdJljEuFc,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Cinzel":"YACgEeV8bIQ,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Figtree":"YAHO2b-mV7A,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Fredoka":"YACgEZml080,0","Georgia":"YAGzXkO0pEM,0","Hanken Grotesk":"YAHO2VB9G0I,0","Helvetica":"YAFcf7zkXN0,0","IBM Plex Mono":"YAFdJkmvhGI,0","IBM Plex Sans":"YAFdJgT0SHI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Italiana":"YAHO2Toik_w,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Karla":"YAHO2V2NSXM,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Noto Sans JP":"YAFdJiHXlcI,0","Noto Sans KR":"YAGsojZj-RQ,0","Nunito Sans":"YAFdtQJYB9w,1","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Outfit":"YAHO2nVlg14,0","Pacifico":"YADLjORQ1u4,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAHO2gdhi18,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Sarabun":"YAFdJssSnME,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Space Grotesk":"YAHO2sjPCSM,0","Space Mono":"YADW1-vpsoc,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0"}}');</script><script src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js" integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sukhan-e-Awaz v2 — Voice Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:wght@500;600;700&amp;family=Noto+Nastaliq+Urdu:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#101b29;--surface:#192737;--surface2:#203144;--line:#35485a;--text:#f6f2e9;--muted:#b9c5cd;--gold:#e9c995;--gold-ink:#17212c;--danger:#ffb3a8;--soft-gold:rgba(233,201,149,.10)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:86px}
+    body{margin:0;width:100%;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
+    body.light{--bg:#f4f0e9;--surface:#fffdf8;--surface2:#ede9e1;--line:#c8c4bb;--text:#172737;--muted:#435363;--gold:#8b5c22;--gold-ink:#fffaf1;--danger:#a12c28;--soft-gold:rgba(139,92,34,.09)}
+    button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.52;cursor:not-allowed;transform:none!important}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    [hidden]{display:none!important}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .app-shell{width:100%;min-height:100%;background:radial-gradient(circle at 80% 0%,var(--soft-gold),transparent 33%),var(--bg)}
+    .page-wrap{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:var(--bg)}
+    .top-inner{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand-link{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);border-radius:9px}
+    .brand-mark{width:40px;height:40px;flex:none;color:var(--gold)}
+    .brand-copy{display:flex;align-items:baseline;gap:7px;min-width:0;white-space:nowrap}
+    .brand-first,.brand-last{font-family:Fraunces,serif;font-size:1.24rem;letter-spacing:-.045em}
+    .brand-first{font-weight:600}.brand-last{font-weight:500;font-style:italic;color:var(--gold)}
+    .brand-v2{align-self:center;margin-left:2px;padding:3px 6px;border:1px solid var(--line);border-radius:5px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.08em}
+    .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);align-items:center;gap:35px;padding:44px 0 39px}
+    .eyebrow{color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h1{max-width:700px;margin:11px 0 14px;font-family:Fraunces,serif;font-weight:600;font-size:clamp(2.35rem,4.6vw,4rem);letter-spacing:-.052em;line-height:1.13}
+    .hero-description{max-width:650px;color:var(--muted);line-height:1.75}
+    .urdu-tagline{display:inline-block;margin:8px 0 0;color:var(--gold);font-family:"Noto Nastaliq Urdu",serif;line-height:2.2}
+    .hero-art{width:min(100%,350px);margin-inline:auto;color:var(--gold);filter:drop-shadow(0 16px 23px rgba(0,0,0,.10))}
+    .art-line{stroke:var(--line)}.art-gold{stroke:var(--gold)}.art-fill{fill:var(--surface)}.art-secondary{fill:var(--surface2)}.art-ink{fill:var(--bg)}
+    .studio{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(310px,.86fr);gap:18px;align-items:start;padding-bottom:40px}
+    .stack{display:grid;gap:18px;min-width:0}
+    .panel{min-width:0;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 15px 35px rgba(0,0,0,.085)}
+    .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:19px}
+    .step{color:var(--gold);font-size:.75rem;font-weight:700;letter-spacing:.13em}
+    h2{margin:0;font-family:Fraunces,serif;font-size:1.38rem;font-weight:600;letter-spacing:-.025em}
+    h3{margin:0 0 9px;font-family:Fraunces,serif;font-size:1.1rem;font-weight:600}
+    .help{margin:11px 0 0;color:var(--muted);font-size:.82rem;line-height:1.65}
+    .seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:5px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+    .mode-button{min-width:0;display:flex;justify-content:center;align-items:center;gap:8px;padding:11px 5px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-weight:700;transition:background .2s,color .2s}
+    .mode-button svg{width:17px;height:17px;flex:none}
+    .mode-button[aria-pressed=true]{background:var(--gold);color:var(--gold-ink)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px 13px}
+    label{display:block;margin-bottom:7px;font-size:.82rem;font-weight:700}
+    .field{width:100%;min-width:0;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
+    .field::placeholder{color:var(--muted);opacity:.85}
+    select.field{appearance:auto}
+    textarea.field{min-height:225px;resize:vertical;line-height:1.8}
+    textarea.urdu{font-family:"Noto Nastaliq Urdu",serif;line-height:2.8}
+    .row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .tools{display:flex;flex-wrap:wrap;gap:8px}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:39px;padding:9px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface2);color:var(--text);font-size:.83rem;font-weight:700;text-decoration:none;transition:transform .2s,border-color .2s}
+    .button:hover:not(:disabled){transform:translateY(-2px);border-color:var(--gold)}
+    .button.primary{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+    .button.ghost{background:transparent}.button.danger{color:var(--danger)}
+    .wide{width:100%;min-height:50px;font-size:.95rem}
+    .button-wave{display:flex;align-items:center;gap:2px;height:17px}
+    .button-wave i,.mini-wave i,.signal i{display:block;width:2px;border-radius:5px;background:currentColor}
+    .button-wave i:nth-child(1),.button-wave i:nth-child(5){height:5px}.button-wave i:nth-child(2),.button-wave i:nth-child(4){height:11px}.button-wave i:nth-child(3){height:16px}
+    .counter{color:var(--muted);font-size:.78rem}.counter.over{color:var(--danger)}
+    .notice{padding:12px 13px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:.79rem;line-height:1.65}
+    .settings{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 18px}
+    .chip{padding:6px 9px;border:1px solid var(--line);border-radius:30px;background:var(--surface2);color:var(--muted);font-size:.72rem}
+    .range-row{display:flex;justify-content:space-between;align-items:center}
+    .range-row output{color:var(--gold);font-size:.84rem;font-weight:700}
+    input[type=range]{width:100%;margin:5px 0 18px;accent-color:var(--gold)}
+    .status{min-height:26px;margin:13px 0 0;color:var(--gold);font-size:.84rem;line-height:1.5}.status.error{color:var(--danger)}
+    .progress{height:5px;margin-top:14px;overflow:hidden;border-radius:10px;background:var(--surface2)}
+    .progress span{display:block;width:32%;height:100%;border-radius:10px;background:var(--gold);animation:travel 1.3s ease-in-out infinite alternate}
+    .signal{display:inline-flex;align-items:center;gap:3px;height:16px;margin-right:8px;vertical-align:middle;color:var(--gold)}
+    .signal i{height:5px;animation:signal 1s ease-in-out infinite alternate}.signal i:nth-child(2){height:12px;animation-delay:.18s}.signal i:nth-child(3){height:8px;animation-delay:.36s}
+    @keyframes travel{to{transform:translateX(215%)}}@keyframes signal{to{transform:scaleY(.45);opacity:.55}}
+    .entry{margin-top:11px;padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--surface2)}
+    .entry-heading{display:flex;align-items:center;gap:10px}
+    .mini-wave{display:flex;align-items:center;gap:2px;min-width:29px;height:22px;color:var(--gold)}
+    .mini-wave i:nth-child(1),.mini-wave i:nth-child(5){height:5px}.mini-wave i:nth-child(2),.mini-wave i:nth-child(4){height:12px}.mini-wave i:nth-child(3){height:19px}
+    .entry-title{min-width:0;overflow-wrap:anywhere;font-weight:700}
+    .entry-meta{margin:6px 0 10px;color:var(--muted);font-size:.75rem}
+    .entry-preview{max-height:70px;margin-bottom:10px;overflow:auto;overflow-wrap:anywhere;white-space:pre-wrap;color:var(--muted);font-size:.82rem}
+    .entry audio{width:100%;height:42px;margin-bottom:10px}
+    .entry-actions{display:flex;flex-wrap:wrap;gap:7px}
+    .details{padding:25px 0 44px;border-top:1px solid var(--line)}
+    .faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:17px}
+    .faq-grid article{padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}
+    .faq-grid p{margin:0;color:var(--muted);font-size:.83rem;line-height:1.7}
+    footer{padding:22px 0 calc(22px + env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .footer-brand{display:inline-flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-family:Fraunces,serif;font-size:.94rem}
+    .footer-brand svg{width:25px;height:25px;color:var(--gold)}
+    @media(max-width:850px){.studio{grid-template-columns:1fr}.hero{gap:15px}}
+    @media(max-width:600px){.page-wrap{width:calc(100% - 28px)}.top-inner{min-height:65px}.brand-mark{width:33px;height:33px}.brand-first,.brand-last{font-size:1rem}.brand-copy{gap:4px}.hero{grid-template-columns:1fr;padding:30px 0 26px}.hero-art{width:min(58%,205px);margin:2px auto 0}.panel{padding:18px;border-radius:15px}.grid2,.faq-grid{grid-template-columns:1fr}.theme-text{display:none}.button.theme-button{padding:8px 10px}}
+    @media(max-width:360px){.brand-first,.brand-last{font-size:.88rem}.brand-link{gap:5px}.mode-button{gap:4px;font-size:.76rem}.mode-button svg{width:14px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/6c2ecc939521f244.data_sdk.js" type="text/javascript" integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="></script>
+  <script src="/_sdk/076b13200873adb1.editing_sdk.js" type="text/javascript" integrity="sha512-ZtNtm8+39bIBEM+BqVFLF2DGJcZDSJkgYAfQa13MND+siMeCmOpG2FoU1Iv6fGQyEH3Y1nIM5T9xiJG2Bq/ozw=="></script>
+  <script src="/_sdk/ab4336f91e694f96.resizing_sdk.js" type="text/javascript" integrity="sha512-cxmeUrBrNlwwLr+tEu/iwM5F3boeK4qDMoH3QjUPqJptkO5NkaDVhQvyIHIn+3EflI5/uubWzkSA78B1tCswgA=="></script>
+ </head>
+ <body data-template-id="__page-root" style="background: rgb(16, 27, 41);">
+  <div class="app-shell" id="top">
+   <header class="topbar">
+    <div class="page-wrap top-inner"><a class="brand-link" href="#top" aria-label="Sukhan-e-Awaz, page ke top par jayein">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" role="img" aria-label="Microphone aur sound waves logo" xmlns="http://www.w3.org/2000/svg">
+       <title>Sukhan-e-Awaz logo</title><rect x="1" y="1" width="46" height="46" rx="12" stroke="currentColor" stroke-opacity=".55"></rect><rect x="20" y="10" width="8" height="19" rx="4" stroke="currentColor" stroke-width="2"></rect><path d="M16 23a8 8 0 0 0 16 0M24 31v6m-6 0h12M11 19c-2 3-2 7 0 10m26-10c2 3 2 7 0 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg><span class="brand-copy"><span data-template-id="brand-first" class="canva-text brand-first" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 16px;">Sukhan-e-</span><span data-template-id="brand-last" class="canva-text brand-last" style="color: rgb(233, 201, 149); font-weight: 500; font-style: italic; font-size: 16px;">Awaz</span><span data-template-id="version-label" class="canva-tag brand-v2" style="color: rgb(233, 201, 149); font-weight: 400; font-style: normal; font-size: 16px;">v2</span></span> </a> <button id="themeBtn" type="button" class="button ghost theme-button" aria-label="Theme badlein" aria-pressed="false">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+       <circle cx="12" cy="12" r="4"></circle><path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path>
+      </svg><span data-template-id="theme-label" class="canva-text theme-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Theme badlein</span></button>
+    </div>
+   </header>
+   <main class="page-wrap">
+    <section class="hero" aria-labelledby="heroTitle">
+     <div><span data-template-id="hero-badge" class="canva-tag eyebrow" style="color: rgb(233, 201, 149); font-weight: 400; font-style: normal; font-size: 16px;">Aap ka voice studio</span>
+      <h1 id="heroTitle" data-template-id="hero-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 32px;">Alfaaz ko awaaz dein.</h1>
+      <p data-template-id="hero-description" class="canva-text hero-description" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Urdu, Hindi aur English text se awaaz banayein. Apni voice chunein, lehja set karein, aur natija yahin sunein.</p>
+      <p data-template-id="urdu-tagline" class="canva-text urdu-tagline" lang="ur" dir="rtl" style="color: rgb(233, 201, 149); font-weight: 400; font-style: normal; font-size: 16px;">لفظوں سے آواز تک</p>
+     </div>
+     <svg class="hero-art" viewBox="0 0 360 290" fill="none" role="img" aria-label="Studio microphone surrounded by balanced sound waves" xmlns="http://www.w3.org/2000/svg">
+      <title>Audio studio microphone illustration</title><rect x="17" y="17" width="326" height="256" rx="25" class="art-fill" stroke="currentColor" stroke-opacity=".34"></rect> <path d="M42 55h72M246 55h72M42 235h72M246 235h72" class="art-line" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="180" cy="145" r="101" class="art-line" stroke-width="1.5"></circle> <circle cx="180" cy="145" r="81" class="art-gold" stroke-opacity=".5" stroke-width="1.5"></circle> <circle cx="180" cy="145" r="63" class="art-secondary" stroke="currentColor" stroke-opacity=".24"></circle> <path d="M95 128v34m-10-25v16m-10-9v3m20-19v34m170-34v34m10-25v16m10-9v3m-20-19v34" class="art-gold" stroke-width="3" stroke-linecap="round"></path> <path d="M111 121v48m-10-36v24m148-36v48m10-36v24" class="art-gold" stroke-opacity=".65" stroke-width="3" stroke-linecap="round"></path> <rect x="163" y="92" width="34" height="79" rx="17" class="art-ink" stroke="currentColor" stroke-width="2.5"></rect> <path d="M169 110h22m-22 10h22m-22 10h22" class="art-gold" stroke-opacity=".75" stroke-width="1.5"></path> <path d="M151 147a29 29 0 0 0 58 0M180 176v21m-20 0h40" class="art-gold" stroke-width="3" stroke-linecap="round"></path> <path d="M132 107a57 57 0 0 0 0 76m96-76a57 57 0 0 1 0 76M121 95a72 72 0 0 0 0 100m118-100a72 72 0 0 1 0 100" class="art-gold" stroke-opacity=".52" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="59" cy="55" r="3" fill="currentColor"></circle><circle cx="301" cy="235" r="3" fill="currentColor"></circle>
+     </svg>
+    </section>
+    <div class="studio">
+     <div class="stack">
+      <section data-template-id="source-panel" class="canva-panel panel" aria-labelledby="sourceTitle" style="background: rgb(25, 39, 55);">
+       <div class="section-head">
+        <span class="step">01</span>
+        <h2 id="sourceTitle" data-template-id="source-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Voice source</h2>
+       </div>
+       <div class="seg" role="group" aria-label="Voice source"><button id="naturalBtn" class="mode-button" type="button" aria-pressed="true">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 16a4 4 0 0 1 .7-7.9A6.5 6.5 0 0 1 18 9a3.5 3.5 0 0 1 .5 7H18"></path><path d="M8 17v2m4-5v6m4-4v3"></path>
+         </svg><span data-template-id="natural-label" class="canva-text" style="font-weight: 700; font-style: normal; font-size: 16px;">Natural</span></button> <button id="browserBtn" class="mode-button" type="button" aria-pressed="false">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="13" height="15" rx="2"></rect><path d="M7 22h5m7-13a5 5 0 0 1 0 6m2-9a9 9 0 0 1 0 12"></path>
+         </svg><span data-template-id="browser-label" class="canva-text" style="font-weight: 700; font-style: normal; font-size: 16px;">Browser</span></button> <button id="offlineBtn" class="mode-button" type="button" aria-pressed="false">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5l-8-3Z"></path><path d="m13 7-4 6h3l-1 4 4-6h-3l1-4Z"></path>
+         </svg><span data-template-id="offline-label" class="canva-text" style="font-weight: 700; font-style: normal; font-size: 16px;">Offline</span></button>
+       </div>
+       <p id="modeHelp" class="help" aria-live="polite">Natural: server se MP3 banti hai aur download ho sakti hai.</p>
+       <details style="margin-top:17px">
+        <summary style="cursor:pointer;color:var(--gold);font-size:.82rem;font-weight:700">Backend URL setting</summary>
+        <div style="padding-top:12px">
+         <label for="backendUrl" data-template-id="backend-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Natural backend URL</label>
+         <div class="row">
+          <input id="backendUrl" type="url" class="field" style="flex:1;min-width:190px" spellcheck="false" aria-describedby="backendHint"><button id="saveBackend" type="button" data-template-id="backend-save" class="canva-button button" style="background: rgb(32, 49, 68); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Save</button><button id="resetBackend" type="button" data-template-id="backend-reset" class="canva-button button ghost" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Reset</button>
+         </div>
+         <p id="backendHint" class="help">URL is browser mein save hota hai. Default backend reset se wapas aata hai.</p>
+        </div>
+       </details>
+      </section>
+      <section data-template-id="voice-panel" class="canva-panel panel" aria-labelledby="voiceTitle" style="background: rgb(25, 39, 55);">
+       <div class="section-head">
+        <span class="step">02</span>
+        <h2 id="voiceTitle" data-template-id="voice-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Language aur voice</h2>
+       </div>
+       <div class="grid2">
+        <div>
+         <label for="language" data-template-id="language-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Language</label><select id="language" class="field"></select>
+        </div>
+        <div>
+         <label for="voice" data-template-id="voice-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Voice</label><select id="voice" class="field"></select>
+        </div>
+        <div>
+         <label for="voiceSearch" data-template-id="search-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Voice dhoondein</label><input id="voiceSearch" data-template-id="search-placeholder" class="canva-input field" type="search" autocomplete="off" placeholder="Naam ya locale search karein" style="background: rgb(16, 27, 41); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">
+        </div>
+        <div>
+         <label for="gender" data-template-id="gender-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Gender filter</label><select id="gender" class="field"><option value="all">Sab voices</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other / unknown</option></select>
+        </div>
+       </div>
+       <p id="voiceNotice" class="help" role="status"></p>
+      </section>
+      <section data-template-id="editor-panel" class="canva-panel panel" aria-labelledby="editorTitle" style="background: rgb(25, 39, 55);">
+       <div class="section-head">
+        <span class="step">03</span>
+        <h2 id="editorTitle" data-template-id="editor-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Apna text likhein</h2>
+       </div><label for="textInput" data-template-id="editor-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Awaaz ke liye text</label> <textarea id="textInput" data-template-id="editor-placeholder" class="canva-input field" maxlength="10000" dir="auto" placeholder="Yahan apna text likhein…" style="background: rgb(16, 27, 41); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Yahan apna text likhein…</textarea>
+       <div class="row" style="margin-top:10px">
+        <span id="count" class="counter" aria-live="polite">0 / 10,000 characters · 0 words</span><span id="direction" class="counter">Direction: auto</span>
+       </div>
+       <p id="detectNotice" class="help" aria-live="polite"></p>
+       <div class="tools" style="margin-top:16px">
+        <button id="sampleBtn" type="button" data-template-id="sample-label" class="canva-button button" style="background: rgb(32, 49, 68); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Sample text</button><button id="copyBtn" type="button" data-template-id="copy-label" class="canva-button button ghost" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Copy</button><button id="clearBtn" type="button" data-template-id="clear-label" class="canva-button button ghost" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Clear</button><button id="importBtn" type="button" data-template-id="import-label" class="canva-button button ghost" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">.txt import</button><input id="fileInput" class="sr-only" type="file" accept=".txt,text/plain" aria-label="Text file chunein">
+       </div>
+      </section>
+     </div>
+     <div class="stack">
+      <section data-template-id="generate-panel" class="canva-panel panel" aria-labelledby="generateTitle" style="background: rgb(25, 39, 55);">
+       <div class="section-head">
+        <span class="step">04</span>
+        <h2 id="generateTitle" data-template-id="generate-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Awaaz banayein</h2>
+       </div>
+       <div class="range-row">
+        <label for="rate" data-template-id="rate-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Speed</label><output id="rateValue" for="rate">1.0×</output>
+       </div><input id="rate" type="range" min="0.5" max="2" step="0.1" value="1">
+       <div class="range-row">
+        <label for="pitch" data-template-id="pitch-label" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Pitch</label><output id="pitchValue" for="pitch">1.0</output>
+       </div><input id="pitch" type="range" min="0.5" max="2" step="0.1" value="1">
+       <p class="help" style="margin:0">Live settings</p>
+       <div id="settings" class="settings" aria-live="polite"></div><button id="generateBtn" type="button" class="button primary wide"><span class="button-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span data-template-id="generate-button-label" class="canva-text" style="color: rgb(23, 33, 44); font-weight: 700; font-style: normal; font-size: 16px;">Generate audio</span></button>
+       <div class="tools" style="margin-top:10px">
+        <button id="pauseBtn" type="button" data-template-id="pause-button" class="canva-button button" disabled="" style="background: rgb(32, 49, 68); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Pause</button><button id="resumeBtn" type="button" data-template-id="resume-button" class="canva-button button" disabled="" style="background: rgb(32, 49, 68); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Resume</button><button id="stopBtn" type="button" data-template-id="stop-button" class="canva-button button" disabled="" style="background: rgb(32, 49, 68); color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Stop</button>
+       </div>
+       <div id="progress" class="progress" role="progressbar" aria-label="Audio generation progress" aria-valuetext="Audio tayyar ho rahi hai" hidden="">
+        <span></span>
+       </div>
+       <p class="status" role="status" aria-live="polite"><span id="statusSignal" class="signal" hidden="" aria-hidden="true"><i></i><i></i><i></i></span><span id="status">Tayyar — text likhein aur voice chunein.</span></p>
+       <div data-template-id="privacy-note" class="canva-text notice" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Privacy: Natural text backend ko bhejta hai. Browser device ki speech service use karta hai; us ki processing device/browser par depend karti hai. Offline Kokoro model pehli dafa download hota hai, phir generation browser mein hoti hai.</div>
+      </section>
+      <section data-template-id="results-panel" class="canva-panel panel" aria-labelledby="resultsTitle" style="background: rgb(25, 39, 55);">
+       <div class="row section-head">
+        <div style="display:flex;gap:12px;align-items:baseline">
+         <span class="step">05</span>
+         <h2 id="resultsTitle" data-template-id="results-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Audio results</h2>
+        </div><button id="clearHistory" type="button" data-template-id="clear-history-label" class="canva-button button ghost danger" hidden="" style="color: rgb(255, 179, 168); font-weight: 400; font-style: normal; font-size: 16px;">History clear</button>
+       </div>
+       <p id="emptyHistory" data-template-id="empty-history" class="canva-text help" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Abhi koi audio nahi. Pehli awaaz banayein — natija yahan nazar aayega.</p>
+       <div id="history" aria-live="polite"></div>
+      </section>
+     </div>
+    </div>
+    <section class="details" aria-labelledby="faqTitle">
+     <h2 id="faqTitle" data-template-id="faq-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 24px;">Madad aur privacy</h2>
+     <div class="faq-grid">
+      <article>
+       <h3 data-template-id="faq-one-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 19px;">MP3 kaise milegi?</h3>
+       <p data-template-id="faq-one-body" class="canva-text" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Natural mode mein audio bane to result card par Download dabayein. Browser speech ka MP3 file available nahi hota.</p>
+      </article>
+      <article>
+       <h3 data-template-id="faq-two-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 19px;">Offline mein kaunsi zubaan?</h3>
+       <p data-template-id="faq-two-body" class="canva-text" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Kokoro offline mode sirf English ke liye hai. Pehli baar model download ke liye internet chahiye; baad mein availability browser cache par depend karti hai.</p>
+      </article>
+      <article>
+       <h3 data-template-id="faq-three-title" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 600; font-style: normal; font-size: 19px;">Text kahan jata hai?</h3>
+       <p data-template-id="faq-three-body" class="canva-text" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">Natural request selected backend ko jati hai. Browser mode ki processing browser/device par depend karti hai. Is page ki history tab band hone par khatam hoti hai.</p>
+      </article>
+     </div>
+    </section>
+   </main>
+   <footer>
+    <div class="page-wrap footer-inner"><a href="#top" class="footer-brand" aria-label="Sukhan-e-Awaz, page ke top par jayein">
+      <svg viewBox="0 0 48 48" fill="none" role="img" aria-label="Microphone aur sound waves logo" xmlns="http://www.w3.org/2000/svg">
+       <title>Sukhan-e-Awaz logo</title><rect x="1" y="1" width="46" height="46" rx="12" stroke="currentColor" stroke-opacity=".6"></rect><rect x="20" y="10" width="8" height="19" rx="4" stroke="currentColor" stroke-width="2"></rect><path d="M16 23a8 8 0 0 0 16 0M24 31v6m-6 0h12M11 19c-2 3-2 7 0 10m26-10c2 3 2 7 0 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg><span data-template-id="footer-brand" class="canva-text" style="color: rgb(246, 242, 233); font-weight: 400; font-style: normal; font-size: 16px;">Sukhan-e-Awaz</span></a> <span data-template-id="footer-text" class="canva-text" style="color: rgb(185, 197, 205); font-weight: 400; font-style: normal; font-size: 16px;">v2 · Alfaaz se awaaz tak.</span>
+    </div>
+   </footer>
   </div>
-  <p class="hn" id="eh"></p>
-  <label for="lang">Language</label><select id="lang"></select>
-  <label for="voice">Voice</label><select id="voice"></select>
-  <button class="gb" id="prev" type="button">&#9654; Preview voice</button>
-  <details class="o"><summary>Aur options (speed, pitch, search)</summary>
-   <label>Voice type</label>
-   <div class="seg" id="seg"><button data-g="all" class="on" type="button">All</button><button data-g="f" type="button">Female</button><button data-g="m" type="button">Male</button></div>
-   <label for="q">Voice search</label><input type="text" id="q" placeholder="Voice ka naam...">
-   <div class="rg"><span>Speed</span><b id="sv">100%</b></div>
-   <input type="range" id="spd" min="50" max="200" step="5" value="100" aria-label="Speed">
-   <div class="rg"><span>Pitch</span><b id="pvv">100%</b></div>
-   <input type="range" id="pit" min="50" max="200" step="5" value="100" aria-label="Pitch">
-   <label for="be">Backend URL (sirf Natural tab ke liye)</label><input type="text" id="be">
-   <button class="gb" id="cLoad" type="button">Voices dobara load karein</button>
-  </details>
- </aside>
-
- <div>
-  <div class="card">
-   <h2>2. Text likhein</h2>
-   <textarea id="txt" dir="auto" maxlength="10000" placeholder="Yahan apna text likhein ya paste karein..." aria-label="Text"></textarea>
-   <div class="row">
-    <button class="sm" id="smp" type="button">Sample text</button>
-    <label class="im" for="file" style="margin:0">Import .txt</label><input type="file" id="file" accept=".txt,text/plain" hidden>
-    <button class="sm" id="cp" type="button">Copy</button><button class="sm" id="cl" type="button">Clear</button>
-    <span class="ct" id="st">0 / 10,000</span>
-   </div>
-   <p class="hn dk">Ctrl + Enter dabane se bhi audio ban jati hai.</p>
-  </div>
-  <div class="act">
-   <button class="go" id="go" type="button">Generate audio</button>
-   <button class="sm pc" id="ps" type="button">Pause</button>
-   <button class="sm pc" id="sp" type="button">&#9632; Stop</button>
-  </div>
-  <div class="stt" aria-live="polite"><span id="ms">Voices load ho rahi hain...</span><div class="pb"><i id="pg"></i></div></div>
-  <div class="card">
-   <h2>3. Aapki audio <span class="hn" id="n" style="font:400 .8rem Manrope"></span></h2>
-   <div id="ses"></div>
-  </div>
- </div>
-</div>
-
-<section class="sec" id="faq"><h2>Aksar pooche gaye sawal</h2>
- <details class="q"><summary>Urdu ya Hindi ki MP3 kaise banaun?</summary><p>"Natural" tab chunein, Language mein Urdu ya Hindi rakhein, text likhein aur Generate audio dabayein. Audio ban kar neeche aa jati hai, wahan se Download karein. Text Urdu ya Hindi mein ho to language khud badal jati hai.</p></details>
- <details class="q"><summary>Browser tab mein download kyun nahi hota?</summary><p>Browser tab aapke device ki awaz se live sunata hai, file nahi banata. Download ke liye Natural ya Offline tab use karein. Browser tab mein Urdu sunne ke liye device par Urdu voice honi chahiye (Chrome/Edge; Android par Google Text-to-speech mein Urdu install karein).</p></details>
- <details class="q"><summary>Offline tab kya hai?</summary><p>Ye sirf English ke liye hai. Pehli baar ek chhota voice model (~85MB) download hota hai, uske baad internet ke bagair chalta hai. Is se WAV file banti hai.</p></details>
- <details class="q"><summary>Kya mera text private rehta hai?</summary><p>Offline tab mein text device se bahar nahi jata. Browser tab mein bhi aam taur par nahi, lekin Chrome ki kuch "Google" voices online ho sakti hain. Natural tab mein text awaz banane ke liye is site ke backend server ko bheja jata hai, is liye passwords ya private documents na likhein.</p></details>
-</section>
-</div>
-<footer><div class="w">Urdu, Hindi aur English ke liye free voice studio. &copy; 2026 Sukhan-e-Awaz. Yeh tool voice testing aur content preparation ke liye hai.</div></footer>
-
-<script>
-const $=i=>document.getElementById(i),S=window.speechSynthesis;
-const BE0='https://polished-dust-37b4.naumanrafique98.workers.dev';
-let eng='cloud',gen='all',CV=[],BV=[],hist=[],Q=[],ix=0,tk=0,st='idle',pa=null,EP=null;
-const norm=l=>(l||'').replace('_','-');
-const nm=c=>{try{return new Intl.DisplayNames(['en'],{type:'language'}).of(c).replace(' (',' · ').replace(')','')}catch(e){return c}};
-const FEM=/female|woman|zira|hazel|susan|samantha|victoria|karen|tessa|moira|fiona|veena|heera|kalpana|uzma|aria|jenny|sara|salma|helena|paulina|monica|lekha|amelie/i;
-const MAL=/male|\bman\b|david|mark|george|james|richard|daniel|alex|hemant|ravi|asad|salman|guy|fred|thomas|jorge|diego/i;
-const isF=n=>FEM.test(n),isM=n=>!FEM.test(n)&&MAL.test(n);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const say=m=>$('ms').textContent=m;
-const dt=()=>new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
-const tf=(u,o,ms)=>{const c=new AbortController();setTimeout(()=>c.abort(),ms);return fetch(u,{...o,signal:c.signal})};
-const em=e=>e.name==='AbortError'?'time out ho gaya':e.message;
-const PV={ur:'السلام علیکم، یہ آواز کا نمونہ ہے۔',hi:'नमस्ते, यह आवाज़ का नमूना है।',en:'Hello, this is a voice preview.'};
-const SM={ur:'السلام علیکم! یہ ایک نمونہ متن ہے۔ آپ یہاں اپنا متن لکھ کر اسے آواز میں بدل سکتے ہیں۔',hi:'नमस्ते! यह एक नमूना पाठ है। आप यहाँ अपना पाठ लिखकर उसे आवाज़ में बदल सकते हैं।',en:'Hello! This is a sample text. Write your own text here and turn it into speech.'};
-const HINT={cloud:'Natural awaz, 100+ languages (Urdu/Hindi bhi). MP3 banti hai jo download hoti hai. Text backend server ko jata hai.',browser:'Aapke device ki awaz, foran sunein. Download nahi hota. Urdu ke liye device par Urdu voice honi chahiye.',offline:'Sirf English. Pehli baar ~85MB model download hota hai, phir offline. WAV file banti hai. Text device se bahar nahi jata.'};
-const KV=[['af_heart','Heart','f'],['af_bella','Bella','f'],['af_nova','Nova','f'],['af_sarah','Sarah','f'],['af_sky','Sky','f'],['af_nicole','Nicole','f'],['af_aoede','Aoede','f'],['af_kore','Kore','f'],['am_adam','Adam','m'],['am_michael','Michael','m'],['am_echo','Echo','m'],['am_liam','Liam','m'],['am_onyx','Onyx','m'],['am_eric','Eric','m'],['bf_emma','Emma (UK)','f'],['bf_alice','Alice (UK)','f'],['bf_lily','Lily (UK)','f'],['bm_george','George (UK)','m'],['bm_daniel','Daniel (UK)','m'],['bm_fable','Fable (UK)','m']].map(a=>({id:a[0],n:a[1],g:a[2]}));
-
-/* ---- language / voice lists ---- */
-function groups(){
-  if(eng==='offline')return [['en','English']];
-  if(eng==='browser')return [...new Set(BV.map(v=>norm(v.lang)))].sort((a,b)=>nm(a).localeCompare(nm(b))).map(l=>[l,nm(l)]);
-  const m={};CV.forEach(v=>m[v.locale]=v.localeName||v.locale);
-  return Object.keys(m).sort((a,b)=>m[a].localeCompare(m[b])).map(l=>[l,m[l]]);
-}
-function vlist(l){
-  let r;
-  if(eng==='offline')r=KV;
-  else if(eng==='browser')r=BV.filter(v=>norm(v.lang)===l).map(v=>({id:v.name,n:v.name,g:isF(v.name)?'f':isM(v.name)?'m':''}));
-  else r=CV.filter(v=>v.locale===l).map(v=>({id:v.name,n:v.friendly||v.name,g:/female/i.test(v.gender||'')?'f':/male/i.test(v.gender||'')?'m':''}));
-  let f=gen==='all'?r:r.filter(v=>v.g===gen);
-  if(!f.length)f=r;
-  const q=$('q').value.toLowerCase();
-  return q?f.filter(v=>v.n.toLowerCase().includes(q)):f;
-}
-function fv(){
-  const l=vlist($('lang').value);
-  $('voice').innerHTML=l.map(v=>`<option value="${esc(v.id)}">${esc(v.n)}</option>`).join('')||'<option value="">Koi voice nahi mili</option>';
-}
-function fill(){
-  const g=groups(),old=$('lang').value,ks=g.map(x=>x[0]),nav=norm(navigator.language||'en-US');
-  $('lang').innerHTML=g.map(x=>`<option value="${esc(x[0])}">${esc(x[1])}</option>`).join('')||'<option value="">Koi language nahi mili</option>';
-  $('lang').value=ks.includes(old)?old:ks.includes('ur-PK')?'ur-PK':ks.includes(nav)?nav:(ks.find(k=>k.split('-')[0]===nav.split('-')[0])||ks[0]||'');
-  $('lang').disabled=eng==='offline';
-  fv();
-}
-function setEng(e){
-  eng=e;[...$('eng').children].forEach(b=>b.classList.toggle('on',b.dataset.e===e));
-  $('eh').textContent=HINT[e];
-  document.querySelectorAll('.pc').forEach(b=>b.style.display=e==='browser'?'inline-block':'none');
-  fill();
-}
-function auto(t){
-  const m=/[\u0600-\u06FF]/.test(t)?'ur':/[\u0900-\u097F]/.test(t)?'hi':null;
-  if(!m||eng==='offline')return;
-  const b=$('lang').value.split('-')[0];
-  if(b===m||(m==='ur'&&['ar','fa'].includes(b)))return;
-  const o=[...$('lang').options].find(x=>x.value.split('-')[0]===m);
-  if(o){$('lang').value=o.value;fv()}
-}
-
-/* ---- browser voices ---- */
-function loadBV(){
-  if(!S)return;
-  BV=S.getVoices();
-  if(eng==='browser')fill();
-}
-const cv=()=>BV.find(v=>v.name===$('voice').value&&norm(v.lang)===$('lang').value);
-function chunk(t,n=200){const o=[];(t.match(/[^.!?۔।؟\n]+[.!?۔।؟]*/g)||[t]).forEach(s=>{s=s.trim();while(s.length>n){let c=s.lastIndexOf(' ',n);if(c<n/4)c=n;o.push(s.slice(0,c));s=s.slice(c).trim()}if(s)o.push(s)});return o}
-function pack(t,n){const o=[];let c='';chunk(t,n).forEach(s=>{if(c&&(c+' '+s).length>n){o.push(c);c=s}else c=c?c+' '+s:s});if(c)o.push(c);return o}
-function setS(s){st=s;$('ps').textContent=s==='paused'?'Resume':'Pause'}
-function nxt(my){
-  if(my!==tk)return;
-  if(ix>=Q.length){setS('idle');$('pg').style.width='100%';say('Playback complete.');return}
-  const u=new SpeechSynthesisUtterance(Q[ix]),v=cv();
-  if(v){u.voice=v;u.lang=v.lang}else u.lang=$('lang').value;
-  u.rate=$('spd').value/100;u.pitch=Math.min(2,$('pit').value/100);
-  u.onstart=()=>{if(my===tk){say('Chal rahi hai: '+Q[ix].slice(0,70)+(Q[ix].length>70?'...':''));$('pg').style.width=(ix/Q.length*100)+'%'}};
-  u.onend=()=>{if(my===tk){ix++;nxt(my)}};
-  u.onerror=e=>{if(my===tk&&e.error!=='canceled'&&e.error!=='interrupted'){setS('idle');say('Yeh voice play nahi ho saki. Koi aur voice ya "Natural" tab try karein.')}};
-  S.speak(u);
-}
-function speak(text,record){
-  if(!S){say('Is browser mein speech support nahi hai. Chrome ya Edge use karein.');return}
-  if(pa)pa.pause();
-  S.cancel();Q=chunk(text);ix=0;const my=++tk;setS('playing');$('pg').style.width='0';
-  if(record){hist.unshift({t:text,l:$('voice').value||nm($('lang').value)});rs()}
-  setTimeout(()=>nxt(my),80);
-}
-
-/* ---- cloud voices ---- */
-async function loadCloud(){
-  const be=$('be').value.trim().replace(/\/$/,'');
-  if(!be){say('Backend URL khali hai.');return}
-  say('Natural voices load ho rahi hain...');
-  try{
-    const r=await tf(be+'/voices',{},20000);
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    CV=await r.json();
-    try{localStorage.setItem('sk-be',be)}catch(e){}
-    say(CV.length+' natural voices mil gayi. Text likhein aur Generate audio dabayein.');
-    if(eng==='cloud')fill();
-  }catch(e){
-    say('Natural voices load nahi hui ('+em(e)+'). Browser tab use karein ya Backend URL check karein.');
-    if(eng==='cloud'&&!CV.length)setEng('browser');
+  <script type="module">
+  const DEFAULT_BACKEND = "https://polished-dust-37b4.naumanrafique98.workers.dev";
+  const STORAGE_KEY = "sukhanBackendUrl";
+  const $ = id => document.getElementById(id);
+  const synth = window.speechSynthesis;
+  const state = {
+    mode:"natural", naturalVoices:[], browserVoices:[], naturalLoaded:false,
+    loading:false, generation:0, controller:null, activeAudio:null,
+    utterance:null, speechToken:0, kokoro:null, kokoroPromise:null,
+    entries:[], selected:{natural:"",browser:"",offline:""}
+  };
+  const samples = {
+    ur:"خوش آمدید! یہ سخنِ آواز ہے۔ اپنے الفاظ کو خوبصورت آواز میں سنیں۔",
+    hi:"नमस्ते! अपने शब्दों को आवाज़ दें और अपनी पसंद की आवाज़ में सुनें।",
+    en:"Welcome to Sukhan-e-Awaz. Give your words a voice and listen to the result."
+  };
+  const languageNames = {ur:"Urdu",hi:"Hindi",en:"English",ar:"Arabic",bn:"Bengali",pa:"Punjabi",fa:"Persian",fr:"French",de:"German",es:"Spanish",pt:"Portuguese",tr:"Turkish",ja:"Japanese",zh:"Chinese"};
+  const base = code => String(code || "").split(/[-_]/)[0].toLowerCase();
+  const languageName = code => {
+    if (!code) return "Unknown";
+    const normalized = String(code).replace("_","-");
+    try {
+      const name = new Intl.DisplayNames(["en"],{type:"language"}).of(normalized);
+      return name && name !== normalized ? name : (languageNames[base(code)] || normalized);
+    } catch { return languageNames[base(code)] || normalized; }
+  };
+  const localeLabel = code => `${languageName(code)} (${code})`;
+  const safeStorage = {
+    get() { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } },
+    set(value) { try { localStorage.setItem(STORAGE_KEY,value); return true; } catch { return false; } },
+    remove() { try { localStorage.removeItem(STORAGE_KEY); return true; } catch { return false; } }
+  };
+  let backend = safeStorage.get() || DEFAULT_BACKEND;
+  const status = (message,error=false) => {
+    $("status").textContent=message;
+    $("status").parentElement.classList.toggle("error",error);
+  };
+  const notice = message => { $("voiceNotice").textContent=message; };
+  function validBackend(value) {
+    try { const url = new URL(value); return url.protocol === "https:" ? url.origin + url.pathname.replace(/\/+$/,"") : null; }
+    catch { return null; }
   }
-}
-async function gC(t){
-  const be=$('be').value.trim().replace(/\/$/,'');
-  say('Audio ban rahi hai...');$('pg').style.width='30%';
-  const r=await tf(be+'/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,voice:$('voice').value,rate:$('spd').value-100,pitch:$('pit').value-100,locale:$('lang').value})},90000);
-  if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.error||'HTTP '+r.status)}
-  return {url:URL.createObjectURL(await r.blob()),ext:'mp3'};
-}
-
-/* ---- offline AI voice (Kokoro, English only) ---- */
-function loadEngine(){
-  if(EP)return EP;
-  const f={};
-  const onP=p=>{if(p&&p.status==='progress'&&p.file){f[p.file]={l:p.loaded||0,t:p.total||1};let l=0,t=0;for(const k in f){l+=f[k].l;t+=f[k].t}const c=Math.min(99,Math.round(l/t*100));say('Voice model pehli dafa load ho raha hai... '+c+'% (~85MB, sirf ek dafa)');$('pg').style.width=c+'%'}};
-  EP=(async()=>{const {KokoroTTS}=await import('https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm');return KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm',progress_callback:onP})})().catch(e=>{EP=null;throw e});
-  return EP;
-}
-function wav(s,sr){
-  const n=s.length,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,x)=>{for(let i=0;i<x.length;i++)v.setUint8(o+i,x.charCodeAt(i))};
-  w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
-  let o=44;for(let i=0;i<n;i++,o+=2){const x=Math.max(-1,Math.min(1,s[i]));v.setInt16(o,x<0?x*0x8000:x*0x7fff,true)}
-  return new Blob([b],{type:'audio/wav'});
-}
-async function gO(t){
-  const voice=$('voice').value,tts=await loadEngine(),parts=pack(t,350),ch=[];let sr=24000;
-  for(let i=0;i<parts.length;i++){
-    say('Audio ban rahi hai... '+(i+1)+'/'+parts.length);$('pg').style.width=(i/parts.length*100)+'%';
-    const o=await tts.generate(parts[i],{voice,speed:$('spd').value/100});ch.push(o.audio);sr=o.sampling_rate||sr;
+  function setLoading(on) {
+    state.loading=on;
+    $("generateBtn").disabled=on;
+    $("progress").hidden=!on;
+    $("statusSignal").hidden=!on;
+    $("generateBtn").setAttribute("aria-busy",String(on));
+    updateControls();
   }
-  const m=new Float32Array(ch.reduce((s,c)=>s+c.length,0));let off=0;ch.forEach(c=>{m.set(c,off);off+=c.length});
-  return {url:URL.createObjectURL(wav(m,sr)),ext:'wav'};
-}
-
-/* ---- actions ---- */
-const busy=b=>{['go','prev'].forEach(i=>$(i).disabled=b);$('go').textContent=b?'Intezar karein...':'Generate audio'};
-function errMsg(e){return eng==='offline'?em(e)+'. Offline AI ke liye WebAssembly zaroori hai (Chrome/Edge behtar hain).':em(e)}
-$('go').onclick=async()=>{
-  const t=$('txt').value.trim();
-  if(!t){say('Pehle text likhein, ya "Sample text" dabayein.');return}
-  if(eng==='offline'&&/[^\u0000-\u024F\s\d\p{P}]/u.test(t)){say('Offline AI sirf English ke liye hai. Urdu/Hindi ke liye "Natural" tab chunein.');return}
-  auto(t);
-  if(!$('voice').value){say('Pehle voice chunein.');return}
-  if(eng==='browser'){speak(t,true);return}
-  busy(true);
-  try{
-    const r=eng==='cloud'?await gC(t):await gO(t);
-    hist.unshift({t,l:$('voice').selectedOptions[0].textContent,url:r.url,ext:r.ext});rs();
-    $('pg').style.width='100%';say('Audio tayyar hai. Neeche suniye ya Download karein.');
-    const a=document.querySelector('#ses audio');if(a)a.play().catch(()=>{});
-  }catch(e){say('Audio nahi ban saki: '+errMsg(e));$('pg').style.width='0'}
-  busy(false);
-};
-$('prev').onclick=async()=>{
-  if(!$('voice').value){say('Pehle voice chunein.');return}
-  const t=PV[$('lang').value.split('-')[0]]||PV.en;
-  if(eng==='browser'){speak(t,false);return}
-  busy(true);
-  try{
-    const r=eng==='cloud'?await gC(t):await gO(t);
-    $('pg').style.width='0';say('Preview chal raha hai.');
-    if(pa)pa.pause();pa=new Audio(r.url);pa.onended=()=>URL.revokeObjectURL(r.url);await pa.play().catch(()=>{});
-  }catch(e){say('Preview nahi chal saka: '+errMsg(e))}
-  busy(false);
-};
-$('sp').onclick=()=>{tk++;S&&S.cancel();setS('idle');$('pg').style.width='0';say('Ruk gaya.')};
-$('ps').onclick=()=>{if(!S)return;if(st==='playing'){S.pause();setS('paused');say('Paused.')}else if(st==='paused'){S.resume();setS('playing');say('Resumed.')}};
-
-function dlf(url,ext){const a=document.createElement('a');a.href=url;a.download='sukhan-'+Date.now()+'.'+ext;document.body.appendChild(a);a.click();a.remove()}
-function rs(){
-  $('ses').innerHTML=hist.map((h,i)=>`<div class="ses"><p dir="auto">${esc(h.t.slice(0,140))}${h.t.length>140?'...':''}</p><div class="m"><span>${esc(h.l)}${h.ext?' · '+h.ext.toUpperCase():''}</span></div>${h.url?`<audio controls src="${h.url}"></audio>`:''}<div class="b">${h.url?`<button class="sm" data-a="d" data-i="${i}">Download</button>`:`<button class="sm" data-a="p" data-i="${i}">Dobara sunein</button>`}<button class="sm" data-a="c" data-i="${i}">Copy text</button><button class="sm" data-a="r" data-i="${i}">Hatayein</button></div></div>`).join('')||'<p class="empty">Abhi koi audio nahi. Text likh kar Generate audio dabayein.</p>';
-  $('n').textContent=hist.length?'('+hist.length+')':'';
-}
-$('ses').onclick=e=>{
-  const b=e.target.closest('button');if(!b)return;
-  const i=+b.dataset.i,h=hist[i],a=b.dataset.a;
-  if(a==='d')dlf(h.url,h.ext);
-  if(a==='p'){$('txt').value=h.t;speak(h.t,false)}
-  if(a==='c')copy(h.t);
-  if(a==='r'){if(h.url)URL.revokeObjectURL(h.url);hist.splice(i,1);rs()}
-};
-async function copy(t){try{await navigator.clipboard.writeText(t);say('Text copy ho gaya.')}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');say('Text copy ho gaya.')}catch(x){say('Copy nahi ho saka.')}a.remove()}}
-function stats(){const t=$('txt').value;$('st').textContent=t.length.toLocaleString()+' / 10,000 · '+(t.trim().match(/\S+/g)||[]).length+' words'}
-
-/* ---- wiring ---- */
-$('eng').onclick=e=>{const b=e.target.closest('button');if(!b)return;setEng(b.dataset.e);if(b.dataset.e==='cloud'&&!CV.length)loadCloud()};
-$('seg').onclick=e=>{const b=e.target.closest('button');if(!b)return;gen=b.dataset.g;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));fv()};
-$('lang').onchange=fv;$('q').oninput=fv;$('cLoad').onclick=loadCloud;
-$('spd').oninput=()=>$('sv').textContent=$('spd').value+'%';
-$('pit').oninput=()=>$('pvv').textContent=$('pit').value+'%';
-$('txt').oninput=stats;
-$('smp').onclick=()=>{$('txt').value=SM[$('lang').value.split('-')[0]]||SM.en;stats();say('Sample text daal diya gaya. Ab Generate audio dabayein.')};
-$('cp').onclick=()=>copy($('txt').value);
-$('cl').onclick=()=>{$('txt').value='';stats();$('txt').focus()};
-$('txt').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')$('go').click()});
-$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const s=String(r.result);$('txt').value=s.slice(0,10000);stats();say(s.length>10000?'File import ho gayi, lekin sirf pehle 10,000 characters liye gaye: '+f.name:'File import ho gayi: '+f.name)};r.readAsText(f);e.target.value=''};
-$('tg').onclick=()=>{const d=document.documentElement,l=d.dataset.t==='light';d.dataset.t=l?'':'light';$('tg').textContent=l?'Light mode':'Dark mode';try{localStorage.setItem('sk-t',l?'':'light')}catch(e){}};
-try{if(localStorage.getItem('sk-t')==='light'){document.documentElement.dataset.t='light';$('tg').textContent='Dark mode'}}catch(e){}
-try{$('be').value=localStorage.getItem('sk-be')||BE0}catch(e){$('be').value=BE0}
-window.addEventListener('beforeunload',()=>{S&&S.cancel()});
-stats();rs();setEng('cloud');
-if(S){loadBV();S.onvoiceschanged=loadBV;setTimeout(loadBV,600)}
-loadCloud();
+  function updateControls() {
+    const playing = state.mode==="browser" ? !!(synth && synth.speaking) : !!state.activeAudio;
+    $("pauseBtn").disabled=!playing || (state.mode==="browser" ? !!synth?.paused : !!state.activeAudio?.paused);
+    $("resumeBtn").disabled=!playing || (state.mode==="browser" ? !synth?.paused : !state.activeAudio?.paused);
+    $("stopBtn").disabled=!playing && !state.loading;
+  }
+  function voicesForMode() {
+    if (state.mode==="natural") return state.naturalVoices;
+    if (state.mode==="browser") return state.browserVoices;
+    return [{id:"af_heart",name:"Heart",locale:"en-US",gender:"female"},{id:"am_adam",name:"Adam",locale:"en-US",gender:"male"}];
+  }
+  function normalizedNatural(raw,index) {
+    if (typeof raw==="string") return {id:raw,name:raw,locale:"",gender:"",index};
+    if (!raw || typeof raw!=="object") return null;
+    const id = raw.id ?? raw.voice ?? raw.name;
+    if (id == null || String(id)==="") return null;
+    return {id:String(id),name:String(raw.friendly || raw.name || id),locale:String(raw.locale || raw.lang || ""),localeName:String(raw.localeName || ""),gender:String(raw.gender || ""),index};
+  }
+  function option(select,value,text) {
+    const el=document.createElement("option"); el.value=value; el.textContent=text; select.append(el);
+  }
+  function selectedVoice() { return voicesForMode().find(v=>v.id===$("voice").value); }
+  function refreshLanguages() {
+    const select=$("language"), previous=select.value;
+    const all=voicesForMode();
+    const locales=[...new Set(all.map(v=>v.locale).filter(Boolean))];
+    locales.sort((a,b)=>{
+      const rank=x=>base(x)==="ur"?0:base(x)==="hi"?1:base(x)==="en"?2:3;
+      return rank(a)-rank(b) || localeLabel(a).localeCompare(localeLabel(b));
+    });
+    select.replaceChildren();
+    if (state.mode==="natural" && all.some(v=>!v.locale)) option(select,"","Other / locale unknown");
+    locales.forEach(code=>option(select,code,localeLabel(code)));
+    if (!select.options.length) option(select,"","Koi language available nahi");
+    const preferred = locales.find(x=>base(x)==="ur") || locales.find(x=>base(x)==="hi") || locales.find(x=>base(x)==="en");
+    select.value=[...select.options].some(x=>x.value===previous) ? previous : (preferred || select.options[0].value);
+    refreshVoices();
+  }
+  function refreshVoices() {
+    const select=$("voice"), locale=$("language").value, query=$("voiceSearch").value.trim().toLowerCase(), gender=$("gender").value;
+    const previous=state.selected[state.mode] || select.value;
+    const matches=voicesForMode().filter(v=>{
+      const genderValue=(v.gender||"").toLowerCase();
+      const genderMatch=gender==="all" || (gender==="other" ? !["male","female"].includes(genderValue) : genderValue===gender);
+      return v.locale===locale && genderMatch && `${v.name} ${v.id} ${v.gender} ${v.locale} ${v.localeName||""}`.toLowerCase().includes(query);
+    });
+    select.replaceChildren();
+    matches.forEach(v=>option(select,v.id,`${v.name}${v.gender?" · "+v.gender:""}`));
+    if (!matches.length) option(select,"","Koi matching voice nahi");
+    if (matches.some(v=>v.id===previous)) select.value=previous;
+    select.disabled=!matches.length;
+    if (!matches.length) notice(state.mode==="browser" ? "Is language/filter ke liye device voice nahi mili. Doosri language ya filter chunein." : "Is language/filter ke liye voice nahi mili.");
+    else notice(`${matches.length} voice${matches.length===1?"":"s"} available.`);
+    updateDirection(); updateSettings();
+  }
+  function updateDirection() {
+    const text=$("textInput"), locale=$("language").value;
+    text.classList.toggle("urdu",base(locale)==="ur");
+    text.dir=base(locale)==="ur"?"rtl":"auto";
+    $("direction").textContent=`Direction: ${text.dir.toUpperCase()}`;
+    const value=text.value;
+    const detected=/[\u0600-\u06FF]/.test(value) ? "Urdu/Arabic script" : /[\u0900-\u097F]/.test(value) ? "Hindi script" : "";
+    $("detectNotice").textContent=detected && base(locale)!==(detected==="Hindi script"?"hi":"ur")
+      ? `${detected} mila hai. Behtar natije ke liye matching language chunein.` : "Mixed text apni direction khud adjust karta hai.";
+  }
+  function updateCount() {
+    const text=$("textInput").value, words=text.trim()?text.trim().split(/\s+/u).length:0;
+    $("count").textContent=`${text.length.toLocaleString()} / 10,000 characters · ${words.toLocaleString()} words`;
+    $("count").classList.toggle("over",text.length>=10000);
+    updateDirection();
+  }
+  function updateSettings() {
+    const items=[state.mode==="natural"?"Natural":state.mode==="browser"?"Browser":"Offline",localeLabel($("language").value||"en-US"),selectedVoice()?.name || "Voice pending",`${$("rate").value}× speed`,`${$("pitch").value} pitch`];
+    $("settings").replaceChildren(...items.map(text=>{ const el=document.createElement("span");el.className="chip";el.textContent=text;return el; }));
+    $("rateValue").textContent=`${Number($("rate").value).toFixed(1)}×`;
+    $("pitchValue").textContent=Number($("pitch").value).toFixed(1);
+  }
+  async function fetchWithTimeout(url,options={},ms=30000) {
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),ms);
+    state.controller=controller;
+    try { return await fetch(url,{...options,signal:controller.signal}); }
+    finally { clearTimeout(timer); if(state.controller===controller) state.controller=null; }
+  }
+  async function loadNatural() {
+    const token=++state.generation;
+    notice("Natural voices load ho rahi hain…");
+    try {
+      const response=await fetchWithTimeout(`${backend}/voices`,{},15000);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const body=await response.json();
+      const list=Array.isArray(body)?body:Array.isArray(body?.voices)?body.voices:null;
+      if (!list) throw new Error("Voice list ka format samajh nahi aaya");
+      if(token!==state.generation || state.mode!=="natural") return;
+      state.naturalVoices=list.map(normalizedNatural).filter(Boolean);
+      state.naturalLoaded=true; refreshLanguages();
+      if (!state.naturalVoices.length) notice("Backend ne koi voice return nahi ki. URL check karein ya Browser mode azmayein.");
+    } catch(error) {
+      if(token!==state.generation || state.mode!=="natural") return;
+      state.naturalVoices=[];state.naturalLoaded=false;refreshLanguages();
+      notice(`Natural voices load nahi huin: ${error.name==="AbortError"?"request timeout":error.message}. Backend URL check karein ya Browser mode chunein.`);
+    }
+  }
+  function loadBrowserVoices() {
+    if (!synth) { state.browserVoices=[]; if(state.mode==="browser") { refreshLanguages();notice("Is browser mein SpeechSynthesis available nahi."); } return; }
+    const found=synth.getVoices();
+    state.browserVoices=found.map((v,i)=>({id:String(i),name:v.name,locale:v.lang||"",gender:"",native:v}));
+    if(state.mode==="browser") refreshLanguages();
+  }
+  function stopPlayback() {
+    if(state.activeAudio) { state.activeAudio.pause();state.activeAudio.currentTime=0;state.activeAudio=null; }
+    if(synth) { state.speechToken++;synth.cancel(); }
+    updateControls();
+  }
+  function cancelWork() {
+    ++state.generation;
+    state.controller?.abort();
+    state.controller=null;
+    stopPlayback();
+    setLoading(false);
+  }
+  function setMode(mode) {
+    if(state.mode!==mode) cancelWork();
+    state.mode=mode;
+    ["natural","browser","offline"].forEach(x=>$(x+"Btn").setAttribute("aria-pressed",String(x===mode)));
+    $("modeHelp").textContent=mode==="natural"?"Natural: server se MP3 banti hai aur download ho sakti hai.":mode==="browser"?"Browser: device voice se turant sunayein; MP3 download available nahi.":"Offline: Kokoro English-only model; pehli load ke liye internet chahiye.";
+    $("voiceSearch").value="";$("gender").value="all";
+    if(mode==="browser") loadBrowserVoices();
+    else { refreshLanguages();if(mode==="natural"&&!state.naturalLoaded) loadNatural(); }
+    updateControls();
+  }
+  function addEntry(data) {
+    const entry={...data,id:crypto.randomUUID?.() || String(Date.now()+Math.random())};
+    state.entries.unshift(entry);
+    const card=document.createElement("article"); card.className="entry"; card.dataset.id=entry.id;
+    const heading=document.createElement("div");heading.className="entry-heading";
+    const wave=document.createElement("span");wave.className="mini-wave";wave.setAttribute("aria-hidden","true");
+    for(let i=0;i<5;i++)wave.append(document.createElement("i"));
+    const title=document.createElement("div");title.className="entry-title";title.textContent=entry.text.slice(0,65)+(entry.text.length>65?"…":"");
+    heading.append(wave,title);
+    const meta=document.createElement("div");meta.className="entry-meta";
+    meta.textContent=`${entry.type} · ${entry.voiceName} · ${localeLabel(entry.locale)} · ${new Date().toLocaleString()}`;
+    const preview=document.createElement("div");preview.className="entry-preview";preview.dir="auto";preview.textContent=entry.text;
+    const actions=document.createElement("div");actions.className="entry-actions";
+    function action(label,fn,extra="") { const b=document.createElement("button");b.type="button";b.className=`button ${extra}`;b.textContent=label;b.addEventListener("click",fn);actions.append(b); }
+    if(entry.url) {
+      const audio=document.createElement("audio");audio.controls=true;audio.preload="metadata";audio.src=entry.url;
+      audio.addEventListener("play",()=>{ if(state.activeAudio && state.activeAudio!==audio) state.activeAudio.pause();if(synth) {state.speechToken++;synth.cancel();}state.activeAudio=audio;updateControls(); });
+      audio.addEventListener("pause",updateControls);
+      audio.addEventListener("ended",()=>{if(state.activeAudio===audio) state.activeAudio=null;updateControls();});
+      card.append(heading,meta,preview,audio);
+      action("Play",async()=>{try {await audio.play();}catch {status("Autoplay block hui. Audio player par Play dabayein.",true);}});
+      action("Download",()=>{const a=document.createElement("a");a.href=entry.url;a.download=`sukhan-e-awaz-${entry.id}.${entry.type.includes("WAV")?"wav":"mp3"}`;a.click();});
+    } else {
+      card.append(heading,meta,preview);
+      action("Replay",()=>speakBrowser(entry));
+    }
+    action("Copy text",()=>copyText(entry.text));
+    action("Remove",()=>removeEntry(entry.id),"danger");
+    card.append(actions);$("history").prepend(card);
+    $("emptyHistory").hidden=true;$("clearHistory").hidden=false;
+    if(state.entries.length>25) removeEntry(state.entries[state.entries.length-1].id);
+  }
+  function removeEntry(id) {
+    const i=state.entries.findIndex(e=>e.id===id);if(i<0)return;
+    const [entry]=state.entries.splice(i,1);
+    const card=[...$("history").children].find(el=>el.dataset.id===id);
+    if(card?.contains(state.activeAudio)) stopPlayback();
+    card?.remove();
+    if(entry.url) URL.revokeObjectURL(entry.url);
+    $("emptyHistory").hidden=!!state.entries.length;
+    $("clearHistory").hidden=!state.entries.length;
+  }
+  async function copyText(value) {
+    try { await navigator.clipboard.writeText(value);status("Text copy ho gaya."); }
+    catch { status("Copy nahi ho saka. Text select karke manually copy karein.",true); }
+  }
+  function speakBrowser(entry) {
+    if(!synth || !window.SpeechSynthesisUtterance) return status("SpeechSynthesis is browser mein available nahi.",true);
+    const voice=entry.native || state.browserVoices.find(v=>v.id===entry.voiceId)?.native;
+    if(!voice) return status("Saved device voice ab available nahi. Nayi voice chunein.",true);
+    stopPlayback();
+    const token=++state.speechToken, utterance=new SpeechSynthesisUtterance(entry.text);
+    utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=entry.rate;utterance.pitch=entry.pitch;
+    utterance.onstart=()=>{if(token===state.speechToken){status("Browser voice chal rahi hai.");updateControls();}};
+    utterance.onend=()=>{if(token===state.speechToken){state.utterance=null;status("Playback mukammal.");updateControls();}};
+    utterance.onerror=e=>{if(token===state.speechToken){state.utterance=null;status(`Browser speech nahi chal saki: ${e.error||"unknown error"}.`,true);updateControls();}};
+    state.utterance=utterance;
+    synth.speak(utterance);
+    setTimeout(updateControls,150);
+  }
+  async function naturalGenerate(entry,token) {
+    const response=await fetchWithTimeout(`${backend}/tts`,{
+      method:"POST",headers:{"Content-Type":"application/json","Accept":"audio/mpeg"},
+      body:JSON.stringify({text:entry.text,voice:entry.voiceId,rate:entry.rate,pitch:entry.pitch,locale:entry.locale})
+    },90000);
+    if (!response.ok) {
+      let detail="";
+      try { const body=await response.json();detail=body.error||body.message||""; } catch {}
+      throw new Error(`Backend HTTP ${response.status}${detail?": "+String(detail).slice(0,180):""}`);
+    }
+    const blob=await response.blob();
+    if(!blob.size) throw new Error("Backend ne khaali audio bheji");
+    const contentType=response.headers.get("content-type")||blob.type;
+    if(contentType.includes("json") || contentType.includes("text/")) throw new Error("Backend ne MP3 ke bajaye text response bheja");
+    if(token!==state.generation) return;
+    addEntry({...entry,url:URL.createObjectURL(blob),type:"Natural MP3"});
+    status("MP3 tayyar hai. Play ya Download karein.");
+  }
+  async function getKokoro() {
+    if(state.kokoro) return state.kokoro;
+    if(!state.kokoroPromise) {
+      state.kokoroPromise=(async()=>{
+        const { KokoroTTS }=await import("https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm");
+        return KokoroTTS.from_pretrained("onnx-community/Kokoro-82M-v1.0-ONNX",{dtype:"q8",device:"wasm"});
+      })().catch(error=>{state.kokoroPromise=null;throw error;});
+    }
+    state.kokoro=await state.kokoroPromise;
+    return state.kokoro;
+  }
+  async function offlineGenerate(entry,token) {
+    status("Kokoro model load ho raha hai. Pehli baar kuch waqt lag sakta hai…");
+    const model=await getKokoro();
+    if(token!==state.generation)return;
+    status("English audio generate ho rahi hai…");
+    const audio=await model.generate(entry.text,{voice:entry.voiceId,speed:entry.rate});
+    if(token!==state.generation)return;
+    if(!audio || typeof audio.toBlob!=="function") throw new Error("Kokoro audio output available nahi");
+    const blob=await audio.toBlob();
+    if(token!==state.generation)return;
+    if(!blob?.size)throw new Error("Kokoro ne khaali audio return ki");
+    const ext=blob.type.includes("mpeg")?"mp3":blob.type.includes("wav")?"wav":"audio";
+    addEntry({...entry,url:URL.createObjectURL(blob),type:`Offline ${ext.toUpperCase()}`});
+    status("Offline audio tayyar hai. Note: Kokoro mode mein pitch control model par depend karta hai.");
+  }
+  async function generate() {
+    if(state.loading)return;
+    const text=$("textInput").value.trim(), voice=selectedVoice();
+    if(!text)return status("Pehle text likhein.",true);
+    if(text.length>10000)return status("Text 10,000 characters se zyada nahi ho sakta.",true);
+    if(!voice)return status("Is language ke liye available voice chunein.",true);
+    if(state.mode==="browser" && !synth)return status("Is browser mein speech available nahi.",true);
+    const entry={text,voiceId:voice.id,voiceName:voice.name,locale:voice.locale||$("language").value||"en-US",rate:Number($("rate").value),pitch:Number($("pitch").value),native:voice.native};
+    if(state.mode==="browser") {
+      addEntry({...entry,type:"Browser speech"});
+      speakBrowser(entry);return;
+    }
+    stopPlayback();
+    const token=++state.generation;
+    setLoading(true);status(state.mode==="natural"?"Natural MP3 ban rahi hai…":"Offline model tayyar ho raha hai…");
+    try { if(state.mode==="natural")await naturalGenerate(entry,token);else await offlineGenerate(entry,token); }
+    catch(error) {
+      if(token===state.generation)status(error.name==="AbortError"?"Request timeout ya stop ho gayi. Dobara try karein.":`Audio nahi ban saki: ${error.message}. ${state.mode==="natural"?"Backend URL aur connection check karein.": "English text aur connection check karein."}`,true);
+    } finally {if(token===state.generation)setLoading(false);}
+  }
+  ["natural","browser","offline"].forEach(mode=>$(mode+"Btn").addEventListener("click",()=>setMode(mode)));
+  $("language").addEventListener("change",refreshVoices);
+  $("voice").addEventListener("change",()=>{state.selected[state.mode]=$("voice").value;updateSettings();});
+  $("voiceSearch").addEventListener("input",refreshVoices);
+  $("gender").addEventListener("change",refreshVoices);
+  ["rate","pitch"].forEach(id=>$(id).addEventListener("input",updateSettings));
+  $("textInput").addEventListener("input",updateCount);
+  $("sampleBtn").addEventListener("click",()=>{const lang=base($("language").value);$("textInput").value=samples[lang]||samples.en;updateCount();status("Sample text editor mein aa gaya.");});
+  $("copyBtn").addEventListener("click",()=>{if($("textInput").value)copyText($("textInput").value);else status("Copy ke liye text nahi hai.",true);});
+  $("clearBtn").addEventListener("click",()=>{$("textInput").value="";updateCount();$("textInput").focus();status("Editor clear ho gaya.");});
+  $("importBtn").addEventListener("click",()=>$("fileInput").click());
+  $("fileInput").addEventListener("change",async e=>{
+    const file=e.target.files?.[0];if(!file)return;
+    if(file.size>65536){status(".txt file 64 KB se chhoti rakhein.",true);e.target.value="";return;}
+    try {const text=await file.text();if(text.length>10000){status("File mein 10,000 se zyada characters hain.",true);return;}$("textInput").value=text;updateCount();status("Text import ho gaya.");}
+    catch {status("File read nahi ho saki.",true);}
+    finally {e.target.value="";}
+  });
+  $("generateBtn").addEventListener("click",generate);
+  $("pauseBtn").addEventListener("click",()=>{if(state.mode==="browser")synth?.pause();else state.activeAudio?.pause();updateControls();});
+  $("resumeBtn").addEventListener("click",async()=>{if(state.mode==="browser")synth?.resume();else try{await state.activeAudio?.play();}catch{status("Playback start nahi hui. Player par Play dabayein.",true);}updateControls();});
+  $("stopBtn").addEventListener("click",()=>{cancelWork();status("Playback ya generation rok di gayi.");});
+  $("clearHistory").addEventListener("click",()=>{for(const entry of [...state.entries])removeEntry(entry.id);status("Session history clear ho gayi.");});
+  $("saveBackend").addEventListener("click",()=>{
+    const value=validBackend($("backendUrl").value.trim());
+    if(!value)return status("Valid HTTPS backend URL dein.",true);
+    backend=value;
+    if(!safeStorage.set(value))status("Backend is session mein set hai, lekin browser mein save nahi ho saka.",true);
+    else status("Backend URL save ho gaya.");
+    state.naturalLoaded=false;
+    if(state.mode==="natural")loadNatural();
+  });
+  $("resetBackend").addEventListener("click",()=>{
+    backend=DEFAULT_BACKEND;$("backendUrl").value=backend;
+    if(!safeStorage.remove())status("Default backend set hai, lekin saved preference remove nahi ho saki.",true);
+    else status("Default backend wapas set ho gaya.");
+    state.naturalLoaded=false;if(state.mode==="natural")loadNatural();
+  });
+  $("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("light");$("themeBtn").setAttribute("aria-pressed",String(document.body.classList.contains("light")));});
+  document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();generate();}});
+  if(synth) {
+    synth.addEventListener?.("voiceschanged",loadBrowserVoices);
+    [100,500,1500].forEach(delay=>setTimeout(loadBrowserVoices,delay));
+  }
+  window.addEventListener("beforeunload",()=>{state.controller?.abort();stopPlayback();state.entries.forEach(entry=>{if(entry.url)URL.revokeObjectURL(entry.url);});});
+  $("backendUrl").value=backend;
+  updateCount();refreshLanguages();updateSettings();loadNatural();
 </script>
-</body>
-</html>
+ 
+</body></html>
