@@ -321,7 +321,8 @@ if(!SR){$("micBtn").disabled=true;$("micHelp").textContent="Is browser mein bolk
 else $("micHelp").textContent="Mic dabayein aur boliye. Bolne ki language wahi hogi jo aap ne upar Language mein chuni hai.";
 window.addEventListener("beforeunload",()=>{S.rec?.stop();S.ctrl?.abort();stopPlayback()});
 const CVKEY="sukhanChangerUrl";
-let cvBackend=(()=>{try{return localStorage.getItem(CVKEY)||""}catch{return""}})();
+const CV_DEFAULT="https://sukhan-changer.naumanrafique98.workers.dev";
+let cvBackend=(()=>{try{return localStorage.getItem(CVKEY)||""}catch{return""}})()||CV_DEFAULT;
 let cvMedia=null,cvChunks=[],cvRecording=false;
 const cvStatus=(m,e=false)=>{$("cvStatus").textContent=m;$("cvStatus").classList.toggle("error",e)};
 async function cvLoad(){
@@ -366,6 +367,7 @@ async function cvToggle(){
       await cvConvert(blob);
     };
     mr.start();cvRecording=true;
+    setTimeout(()=>{if(cvRecording&&cvMedia===mr)mr.stop()},60000);
     $("cvRec").textContent="⏹ Stop karein";$("cvRec").classList.add("rec");
     cvStatus("Record ho raha hai… boliye, phir Stop dabayein.");
   }catch{cvStatus("Mic ki ijazat nahi mili. Browser settings mein allow karein.",true)}
