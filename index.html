@@ -164,23 +164,23 @@ function toggleMic(){
   if(S.listening){S.rec?.stop();return}
   stopPlayback();
   const r=new SR();S.rec=r;
-  r.lang=recLang();r.continuous=true;r.interimResults=true;
-  const start=$("textInput").value.trim();let finalT="",heard=false;
+  r.lang=recLang();r.continuous=false;r.interimResults=true;
+  const start=$("textInput").value.trim();let finalT="",heard=false,cur="";
   r.onstart=()=>{S.listening=true;setMic();status(`Sun raha hoon (${r.lang})… boliye.`)};
   r.onresult=e=>{
-    let interim="";
-    for(let i=e.resultIndex;i<e.results.length;i++){
-      const t=e.results[i][0].transcript;
-      if(e.results[i].isFinal)finalT+=t+" ";else interim+=t;
-    }
+    const last=e.results[e.results.length-1];
+    cur=last[0].transcript.trim();
+    if(last.isFinal)finalT=cur;
     heard=true;
-    $("textInput").value=((start?start+" ":"")+finalT+interim).trimStart();
+    $("textInput").value=((start?start+" ":"")+cur).trim();
     count();
   };
   r.onerror=e=>{status(e.error==="not-allowed"?"Mic ki ijazat nahi mili. Browser settings mein mic allow karein.":e.error==="no-speech"?"Koi awaaz nahi suni. Dobara koshish karein.":`Mic error: ${e.error}`,true)};
   r.onend=()=>{
     S.listening=false;setMic();
-    $("textInput").value=((start?start+" ":"")+finalT).trim()||$("textInput").value;count();
+    const done=finalT||cur;
+    if(done)$("textInput").value=((start?start+" ":"")+done).trim();
+    count();
     if(heard&&$("autoConvert").checked&&$("textInput").value.trim())generate();
     else if(heard)status("Text likh diya gaya.");
   };
